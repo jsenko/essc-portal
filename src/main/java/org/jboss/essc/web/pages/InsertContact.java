@@ -34,19 +34,16 @@ import org.jboss.essc.web.model.Contact;
 public class InsertContact extends WebPage {
     
     private Form<Contact> insertForm;
-    
     private String name;
-    
     private String email;
     
-    @Inject
-    private ContactDao contactDao;
+    @Inject private ContactDao contactDao;
 
     
     public InsertContact() {
         add(new FeedbackPanel("feedback"));
 
-        insertForm = new Form<Contact>("insertForm") {
+        this.insertForm = new Form<Contact>("insertForm") {
 
             @Override
             protected void onSubmit() {
@@ -55,11 +52,9 @@ public class InsertContact extends WebPage {
             }
         };
 
-        insertForm.add(new RequiredTextField<String>("name",
-                new PropertyModel<String>(this, "name")));
-        insertForm.add(new RequiredTextField<String>("email", new PropertyModel<String>(this,
-                "email")));
-        add(insertForm);
+        this.insertForm.add(new RequiredTextField<String>("name", new PropertyModel<String>(this, "name")));
+        this.insertForm.add(new RequiredTextField<String>("email", new PropertyModel<String>(this, "email")));
+        add(this.insertForm);
     }
 
     
