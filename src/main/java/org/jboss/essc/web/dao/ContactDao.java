@@ -6,7 +6,7 @@ import org.jboss.essc.web.model.Contact;
 
 /**
  *
- * @author Filippo Diotalevi
+ * @author Ondrej Zizka
  */
 @Local
 public interface ContactDao {

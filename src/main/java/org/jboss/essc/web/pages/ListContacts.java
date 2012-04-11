@@ -13,7 +13,7 @@ import org.jboss.essc.web.model.Contact;
 /**
  * Dynamic behavior for the ListContact page
  * 
- * @author Filippo Diotalevi
+ * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
 public class ListContacts extends WebPage {

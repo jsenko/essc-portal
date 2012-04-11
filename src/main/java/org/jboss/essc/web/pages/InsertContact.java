@@ -28,7 +28,7 @@ import org.jboss.essc.web.model.Contact;
 
 /**
  *
- * @author Filippo Diotalevi
+ * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
 public class InsertContact extends WebPage {

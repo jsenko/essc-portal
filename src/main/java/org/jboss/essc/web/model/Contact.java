@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Filippo Diotalevi
+ * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
 @Entity
