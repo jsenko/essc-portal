@@ -238,8 +238,8 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
             <artifactId>shrinkwrap-descriptors-impl</artifactId>
-            <scope>runtime</scope>
             <type>jar</type>
+            <version>1.1.0-alpha-1</version>
         </dependency>
 
         
