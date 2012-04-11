@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>org.jboss.essc</groupId>
-    <artifactId>wicket-openshift-test</artifactId>
+    <artifactId>essc-portal</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     
-    <name>OpenShift Wicket test</name>
+    <name>ESSC Team's Product Portal</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
