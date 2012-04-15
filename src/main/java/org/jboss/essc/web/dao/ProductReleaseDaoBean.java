@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.essc.web.model.Contact;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 
@@ -22,28 +21,32 @@ public class ProductReleaseDaoBean {
 
     @SuppressWarnings("unchecked")
     public List<ProductRelease> getProductReleases_orderName(int limit) {
-        return this.em.createQuery("SELECT p FROM Product p ORDER BY p.line.name").getResultList();
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.line.name").getResultList();
+    }
+
+    public List<ProductRelease> getProductReleasesOfLine(ProductLine line) {
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line=? ORDER BY pr.line.name").setParameter(1, line).getResultList();
     }
 
     /**
-     * Get Contact by ID.
+     * Get ProductRelease by ID.
      */
     public ProductRelease getProductRelease(Long id) {
         return this.em.find(ProductRelease.class, id);
     }
 
     /**
-     * Add a new Contact.
+     * Add a new ProductRelease.
      */
-    public void addProductRelease(ProductLine line, String version) {
+    public void addProductRelease( ProductLine line, String version) {
         this.em.merge( new ProductRelease( null, line, version ) );
     }
 
     /**
-     * Remove a Contact.
+     * Remove a ProductRelease.
      */
-    public void remove(Contact modelObject) {
-        Contact managed = this.em.merge(modelObject);
+    public void remove(ProductRelease pr) {
+        ProductRelease managed = this.em.merge(pr);
         this.em.remove(managed);
         this.em.flush();
     }

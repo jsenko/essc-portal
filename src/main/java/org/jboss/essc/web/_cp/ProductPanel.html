@@ -1,0 +1,33 @@
+<wicket:panel>
+    
+        <!-- Product panel -->
+		<div class="post product">
+			<h2 class="title">EAP</h2>
+			<div class="entry">
+				<table>
+                    <wicket:container id="releaseList">
+                        
+					<tr class="header"><th>Version</th><th>Planned</th><th>State</th><th>Git #</th><th>Parent</th></tr>
+					<tr>
+						<td wicket:id="version" class="version">6.0.0.ER1</td>
+						<td wicket:id="planned" class="planned">today</td>
+                        <td wicket:id="state"   class="state released">Released</td>
+						<td wicket:id="gitHash" class="gitHash"><a href="#">1c31a48</a></td>
+						<td wicket:id="parent"  class="parent"></td>
+					</tr>
+					<tr wicket:id="details">
+						<td colspan="5">
+                            <div class="">
+                                
+                            </div>
+                        </td>
+					</tr>
+                    
+                    </wicket:container>
+                    
+				</table>
+			</div>
+			<p class="meta"><a href="#" class="more">Další události...</a> &nbsp;&nbsp;&nbsp; <a href="#" class="comments">Komentáře (13)</a></p>
+		</div>
+        
+</wicket:panel>

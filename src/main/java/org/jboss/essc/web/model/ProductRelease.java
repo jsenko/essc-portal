@@ -76,14 +76,20 @@ public class ProductRelease implements Serializable {
         this.line = line;
         this.version = version;
     }
-    
-    
+
+
     
     //<editor-fold defaultstate="collapsed" desc="Get/set">
-    public String getGitHash() {        return gitHash;    }
-    public void setGitHash(String gitHash) {        this.gitHash = gitHash;    }
     public Long getId() {        return id;    }
     public void setId(Long id) {        this.id = id;    }
+    public String getVersion() { return version; }
+    public void setVersion( String version ) { this.version = version; }
+    public ProductLine getLine() { return line; }
+    public void setLine( ProductLine line ) { this.line = line; }
+    public Date getPlannedFor() { return plannedFor; }
+    public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
+    public String getGitHash() {        return gitHash;    }
+    public void setGitHash(String gitHash) {        this.gitHash = gitHash;    }
     public String getLinkBrew() {        return linkBrew;    }
     public void setLinkBrew(String linkBrew) {        this.linkBrew = linkBrew;    }
     public String getLinkGitRepo() {        return linkGitRepo;    }

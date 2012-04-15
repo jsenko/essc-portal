@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is an unmanaged datasource. It should be used for proofs of concept 
+    or testing only. It uses H2, an in memory database that ships with JBoss 
+    AS. -->
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+    
+    <!-- Bound into JNDI at this location. We reference this in META-INF/persistence.xml -->        
+    <datasource jndi-name="java:jboss/datasources/MysqlDS" use-java-context="true" pool-name="MysqlDS">
+        <connection-url>jdbc:mysql://localhost:3306/essc</connection-url>
+        <driver>mysql</driver>
+        <security>
+          <user-name>essc</user-name>
+          <password>essc</password>
+        </security>
+    </datasource>
+    
+    <drivers>
+        <driver name="h2" module="com.h2database.h2">
+            <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+        </driver>
+        <driver name="mysql" module="com.mysql.jdbc">
+            <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+        </driver>
+        <driver name="postgresql" module="org.postgresql.jdbc">
+            <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+        </driver>
+    </drivers>
+    
+</datasources>
+ 
