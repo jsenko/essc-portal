@@ -15,8 +15,8 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
         <jboss.spec.version>3.0.0.Final</jboss.spec.version>
-        <wicket.version>1.5.5</wicket.version>
-        <wicket.cdi.version>1.2</wicket.cdi.version>
+        <version.wicket>1.5.7</version.wicket>
+        <version.wicket.cdi>1.2</version.wicket.cdi>
     </properties>
     
 
@@ -120,14 +120,14 @@
             <dependency>
                 <groupId>org.apache.wicket</groupId>
                 <artifactId>wicket-core</artifactId>
-                <version>${wicket.version}</version>
+                <version>${version.wicket}</version>
             </dependency>
 
             <!-- Wicket Java EE integration. -->
             <dependency>
                 <groupId>net.ftlines.wicket-cdi</groupId>
                 <artifactId>wicket-cdi</artifactId>
-                <version>${wicket.cdi.version}</version>
+                <version>${version.wicket.cdi}</version>
             </dependency>
 
             <!-- Arquillian bill of materials, used to configure Arquillian versions -->
