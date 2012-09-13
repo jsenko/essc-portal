@@ -57,8 +57,8 @@ public class ProductRelease implements Serializable {
     private String linkMavenLocalRepo;
     
     // Info links
-    private String linkJiraResolvedInThisVersion;
     private String linkJiraFixedInThisVersion;
+    private String linkJiraFoundInThisVersion;
     
     // Build links
     private String linkMead;
@@ -96,8 +96,8 @@ public class ProductRelease implements Serializable {
     public void setLinkGitRepo(String linkGitRepo) {        this.linkGitRepo = linkGitRepo;    }
     public String getLinkJiraFixedInThisVersion() {        return linkJiraFixedInThisVersion;    }
     public void setLinkJiraFixedInThisVersion(String linkJiraFixedInThisVersion) {        this.linkJiraFixedInThisVersion = linkJiraFixedInThisVersion;    }
-    public String getLinkJiraResolvedInThisVersion() {        return linkJiraResolvedInThisVersion;    }
-    public void setLinkJiraResolvedInThisVersion(String linkJiraResolvedInThisVersion) {        this.linkJiraResolvedInThisVersion = linkJiraResolvedInThisVersion;    }
+    public String getLinkJiraFoundInThisVersion() {        return linkJiraFoundInThisVersion;    }
+    public void setLinkJiraFoundInThisVersion(String linkJiraResolvedInThisVersion) {        this.linkJiraFoundInThisVersion = linkJiraResolvedInThisVersion;    }
     public String getLinkMavenLocalRepo() {        return linkMavenLocalRepo;    }
     public void setLinkMavenLocalRepo(String linkMavenLocalRepo) {        this.linkMavenLocalRepo = linkMavenLocalRepo;    }
     public String getLinkMead() {        return linkMead;    }
