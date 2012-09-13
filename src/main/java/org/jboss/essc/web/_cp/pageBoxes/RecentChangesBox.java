@@ -16,7 +16,7 @@ import org.jboss.essc.web.model.ProductRelease;
  * 
  * @author Ondrej Zizka
  */
-public class RecentReleasesBox extends Panel {
+public class RecentChangesBox extends Panel {
 
     @Inject private ProductReleaseDaoBean dao;
     
@@ -26,7 +26,7 @@ public class RecentReleasesBox extends Panel {
     
     
     
-    public RecentReleasesBox( String id, int numReleases ) {
+    public RecentChangesBox( String id, int numReleases ) {
         super(id);
         this.setRenderBodyOnly( true );
         
@@ -40,7 +40,7 @@ public class RecentReleasesBox extends Panel {
                 ProductRelease pr = item.getModelObject();
                 item.add( new Label("project", pr.getLine().getName()));
                 item.add( new Label("version", pr.getVersion()));
-                item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
+                item.add( new Label("changed", DF.format( pr.getLastChanged() )));
                 //item.add( new Label("state", pr.getStatus().name()));
                 //item.add( new Label("gitHash", pr.getGitHash()));
                 //item.add( new Label("parent", pr.getParent().getVersion()));
@@ -50,4 +50,4 @@ public class RecentReleasesBox extends Panel {
     
     
 
-}// class
+}

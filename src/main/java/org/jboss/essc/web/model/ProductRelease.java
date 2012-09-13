@@ -40,6 +40,9 @@ public class ProductRelease implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date plannedFor;
     
+    @Temporal(TemporalType.DATE)
+    private Date lastChanged;
+    
     private Status status;
     
     private String note;
@@ -88,6 +91,8 @@ public class ProductRelease implements Serializable {
     public void setLine( ProductLine line ) { this.line = line; }
     public Date getPlannedFor() { return plannedFor; }
     public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
+    public Date getLastChanged() { return lastChanged; }
+    public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
     public String getGitHash() {        return gitHash;    }
     public void setGitHash(String gitHash) {        this.gitHash = gitHash;    }
     public String getLinkBrew() {        return linkBrew;    }
