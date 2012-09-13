@@ -3,6 +3,7 @@ package org.jboss.essc.web.pages;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.jboss.essc.web._cp.HeaderPanel;
 
 
 /**
@@ -15,6 +16,8 @@ public class BaseLayoutPage extends WebPage {
 
     // Set up the dynamic behavior for the page, widgets bound by id
     public BaseLayoutPage() {
+
+        add( new HeaderPanel("header") );
         
     }
     
@@ -25,4 +28,4 @@ public class BaseLayoutPage extends WebPage {
         response.renderCSSReference(new CssResourceReference( BaseLayoutPage.class, "default.css" ));
     }
 
-}
+}// class

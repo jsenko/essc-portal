@@ -1,7 +1,6 @@
 package org.jboss.essc.web._cp;
 
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.model.ProductLine;
 
 
 /**
@@ -9,8 +8,9 @@ import org.jboss.essc.web.model.ProductLine;
  */
 public class HeaderPanel extends Panel {
     
-    public HeaderPanel( String id, ProductLine line ) {
+    public HeaderPanel( String id ) {
         super(id);
+        this.setRenderBodyOnly(true);
     }// const
     
 }// class

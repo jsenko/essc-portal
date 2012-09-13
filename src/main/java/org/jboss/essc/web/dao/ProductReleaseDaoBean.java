@@ -24,6 +24,11 @@ public class ProductReleaseDaoBean {
         return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.line.name").getResultList();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<ProductRelease> getProductReleases_orderDateDesc(int limit) {
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.plannedFor DESC").getResultList();
+    }
+
     public List<ProductRelease> getProductReleasesOfLine(ProductLine line) {
         return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line=? ORDER BY pr.line.name").setParameter(1, line).getResultList();
     }

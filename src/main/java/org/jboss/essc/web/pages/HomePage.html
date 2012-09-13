@@ -5,48 +5,21 @@
     <title>JBoss ESSC Team Portal</title>
     <meta name="keywords" content="" />
     <meta name="description" content="ESSC team portal" />
-    <!--
-    <link href="default.css" rel="stylesheet" type="text/css" media="screen" />
-    <link rel="search" type="application/opensearchdescription+xml" title="ESSC search" href="searchbar.xml" />
-    -->
 </head>
     
 <body>
-<!-- start header  margin-left: -0.75em -->
-<div id="header">
-    <div id="logo">
-        <h1><a href="http://essc-ondra.rhcloud.com/">ESSC Team</a><span style="font-size: 56%; position: relative; left: 0.75em">portal</span> </h1>
-        <p><a href="http://essc-ondra.rhcloud.com/">Why is it so hard to find product builds?</a></p>
-    </div>
-    <div id="menu">
-        <ul>
-            <li class="active"><a href="#">Products</a></li>
-            <li><a href="#">What's this</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end header -->
 
-<!-- start page -->
 <div id="page">
     
     <wicket:extend>
 	<!-- start content -->
 	<div id="content">
 	
-	
-            <!-- Latest stuff -->
-            <div class="post stav">
-                <h2 class="title">Latest stuff</h2>
-                <p class="byline"><span>Naposledy aktualizováno <a href="#">před 3 minutami</a></span></p>
-                <div class="entry">
-                    <table style="width: 60%">
-                        <tr><th>Celkový počet událostí:</th><td>267 578</td></tr>
-                        <tr><th>Čas poslední události:</th><td>dnes v 9:18</td></tr>				
-                    </table>
-                </div>
-                <p class="meta"><a href="#" class="more">Podrobný přehled...</a> &nbsp;&nbsp;&nbsp; <a href="#" class="comments">Komentáře (13)</a></p>
-            </div>
+            <!-- Recent releases -->
+            <div wicket:id="recentReleases"/>
+
+            <!-- Recent changes -->
+            <div wicket:id="recentChanges"/>
 
             <!-- Product template -->
             <div class="post product">
@@ -151,10 +124,6 @@
     </wicket:extend>
     
 </div>
-<!-- end page -->
 
-<div id="footer">
-	<p>&copy;2012 Red Hat&nbsp;&bull;&nbsp; Runs on JBoss AS, in OpenShift.</p>
-</div>
 </body>
 </html>
