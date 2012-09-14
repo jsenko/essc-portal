@@ -1,11 +1,7 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
@@ -14,7 +10,7 @@ import javax.persistence.Id;
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-@Entity
+@Entity @Table(name="product")
 public class ProductLine implements Serializable {
 
     @Id

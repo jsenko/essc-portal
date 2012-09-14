@@ -31,6 +31,13 @@ public class ProductLineDaoBean {
     }
 
     /**
+     * Get ProductLine by name.
+     */
+    public ProductLine getProductLineByName( String name ) {
+        return this.em.createQuery("SELECT pl FROM ProductLine pl WHERE pl.name = ?", ProductLine.class).setParameter(1, name).getSingleResult();
+    }
+
+    /**
      * Add a new ProductLine.
      */
     public ProductLine addProductLine( String name) {

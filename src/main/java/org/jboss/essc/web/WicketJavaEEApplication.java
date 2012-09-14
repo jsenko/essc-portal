@@ -7,10 +7,8 @@ import net.ftlines.wicket.cdi.CdiConfiguration;
 import net.ftlines.wicket.cdi.ConversationPropagation;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.jboss.essc.web.pages.AboutPage;
-import org.jboss.essc.web.pages.AddProjectPage;
-import org.jboss.essc.web.pages.AddReleasePage;
-import org.jboss.essc.web.pages.HomePage;
+import org.apache.wicket.request.mapper.BookmarkableMapper;
+import org.jboss.essc.web.pages.*;
 
 
 /**
@@ -45,6 +43,10 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/about", AboutPage.class);
         mountPage("/addProject", AddProjectPage.class);
         mountPage("/addRelease", AddReleasePage.class);
+        
+        mountPage("/project/${name}", ProjectPage.class);
+        mountPage("/product/${name}", ProjectPage.class);
+        
     }
     
 }// class

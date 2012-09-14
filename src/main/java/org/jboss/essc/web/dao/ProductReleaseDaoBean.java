@@ -21,7 +21,9 @@ public class ProductReleaseDaoBean {
 
     @SuppressWarnings("unchecked")
     public List<ProductRelease> getProductReleases_orderName(int limit) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.line.name").getResultList();
+        //return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.line.name").getResultList();
+        //return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN ProductLine pl ORDER BY pl.name").getResultList(); // ON pr.line=pl 
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.line pl ORDER BY pl.name").getResultList(); // ON pr.line=pl 
     }
 
     @SuppressWarnings("unchecked")

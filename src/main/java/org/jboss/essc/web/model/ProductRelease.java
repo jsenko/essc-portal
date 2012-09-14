@@ -2,12 +2,7 @@ package org.jboss.essc.web.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 
 /**
@@ -26,7 +21,7 @@ import javax.persistence.TemporalType;
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-@Entity
+@Entity @Table(name="release")
 public class ProductRelease implements Serializable {
 
     @Id

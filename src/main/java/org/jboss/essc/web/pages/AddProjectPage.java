@@ -34,7 +34,6 @@ public class AddProjectPage extends BaseLayoutPage {
     public AddProjectPage(PageParameters params) {
         
         String proj = params.get("project").toOptionalString();
-        add(new Label("titleReleaseOf", proj == null ? "" : " of " + proj ));
         
         add(new FeedbackPanel("feedback"));
 
@@ -43,7 +42,7 @@ public class AddProjectPage extends BaseLayoutPage {
             @Override
             protected void onSubmit() {
                 product = prodDao.addProductLine(product);
-                setResponsePage(ProjectPage.class);
+                setResponsePage(new ProjectPage(product));
             }
         };
 

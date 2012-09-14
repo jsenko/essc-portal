@@ -21,6 +21,11 @@ public class PagesTestCase {
         wt.assertRenderedPage(BaseLayoutPage.class);
     }
 
+    // To make CDI work in tests:
+    // (12:03:03 PM) splatch: ozizka-ntb you need to set up a cdi container first to bind BeanManager and so on, without it wicket tester will fail
+    // (12:03:35 PM) splatch: ozizka-ntb you can take a look to deltaspike project, it's relatively easy to start choosen CDI provider (weld or open web beans) without any additional logic
+    // (12:04:44 PM) splatch: ozizka-ntb https://github.com/apache/camel/blob/trunk/components/camel-cdi/src/test/java/org/apache/camel/cdi/CdiTestSupport.java
+        
     @Test
     public void testHomePage(){
         WicketTester wt = new WicketTester(HomePage.class);
