@@ -16,7 +16,7 @@ public class SidebarPanel extends Panel {
     @Inject private ProductReleaseDaoBean dao;
     
     
-    public SidebarPanel( String id, ProductLine line ) {
+    public SidebarPanel( String id ) {
         super(id);
         this.setRenderBodyOnly( true );
     }// const

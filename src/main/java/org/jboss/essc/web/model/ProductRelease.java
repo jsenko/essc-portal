@@ -21,7 +21,7 @@ import javax.persistence.*;
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-@Entity @Table(name="release")
+@Entity @Table(name="`release`")
 public class ProductRelease implements Serializable {
 
     @Id
@@ -29,7 +29,11 @@ public class ProductRelease implements Serializable {
     private Long id;
     
     //@Column(unique=true)
+    @ManyToOne
+    @JoinColumn(updatable=false, nullable=false)
     private ProductLine line;
+    
+    
     private String version;
     
     @Temporal(TemporalType.DATE)

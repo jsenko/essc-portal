@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.HeaderPanel;
+import org.jboss.essc.web._cp.SidebarPanel;
 
 
 /**
@@ -18,6 +19,8 @@ public class BaseLayoutPage extends WebPage {
     public BaseLayoutPage() {
 
         add( new HeaderPanel("header") );
+        
+        add( new SidebarPanel("sidebar") );
         
     }
     
