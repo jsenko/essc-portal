@@ -7,7 +7,7 @@ import org.jboss.essc.web._cp.pageBoxes.RecentReleasesBox;
 
 
 /**
- * Dynamic behavior for the ListContact page
+ * HomePage.
  * 
  * @author Ondrej Zizka
  */
@@ -32,4 +32,4 @@ public class HomePage extends BaseLayoutPage {
         response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
     }
 
-}
+}// class

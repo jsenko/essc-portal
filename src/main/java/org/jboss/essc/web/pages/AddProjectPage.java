@@ -2,7 +2,6 @@ package org.jboss.essc.web.pages;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -10,7 +9,6 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
-import org.jboss.essc.web.model.Contact;
 import org.jboss.essc.web.model.ProductLine;
 
 /**
@@ -24,7 +22,7 @@ public class AddProjectPage extends BaseLayoutPage {
     @Inject private ProductLineDaoBean prodDao;
 
     // Components
-    private Form<Contact> insertForm;
+    private Form<ProductLine> insertForm;
 
     // Data
     private ProductLine product = new ProductLine();
@@ -37,7 +35,7 @@ public class AddProjectPage extends BaseLayoutPage {
         
         add(new FeedbackPanel("feedback"));
 
-        this.insertForm = new Form<Contact>("form") {
+        this.insertForm = new Form<ProductLine>("form") {
 
             @Override
             protected void onSubmit() {

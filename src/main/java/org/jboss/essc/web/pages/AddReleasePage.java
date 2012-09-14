@@ -13,8 +13,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
-import org.jboss.essc.web.model.Contact;
 import org.jboss.essc.web.model.ProductLine;
+import org.jboss.essc.web.model.ProductRelease;
 
 /**
  *
@@ -27,7 +27,7 @@ public class AddReleasePage extends BaseLayoutPage {
     @Inject private ProductLineDaoBean prodDao;
 
     // Components
-    private Form<Contact> insertForm;
+    private Form<ProductRelease> insertForm;
 
     // Data
     private ProductLine line;
@@ -42,7 +42,7 @@ public class AddReleasePage extends BaseLayoutPage {
         
         add(new FeedbackPanel("feedback"));
 
-        this.insertForm = new Form<Contact>("form") {
+        this.insertForm = new Form<ProductRelease>("form") {
 
             @Override
             protected void onSubmit() {

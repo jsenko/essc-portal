@@ -8,7 +8,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
-import org.jboss.essc.web.model.Contact;
 import org.jboss.essc.web.model.ProductLine;
 
 
@@ -21,7 +20,7 @@ public class ProjectDefaultsPanel extends Panel {
     @Inject private ProductLineDaoBean prodDao;
 
     // Components
-    private Form<Contact> insertForm;
+    private Form<ProductLine> insertForm;
 
     // Data
     private ProductLine product;
@@ -32,7 +31,7 @@ public class ProjectDefaultsPanel extends Panel {
         
         add(new FeedbackPanel("feedback"));
         
-        this.insertForm = new Form<Contact>("insertForm") {
+        this.insertForm = new Form<ProductLine>("insertForm") {
             @Override protected void onSubmit() {
                 product = prodDao.update(product);
             }
