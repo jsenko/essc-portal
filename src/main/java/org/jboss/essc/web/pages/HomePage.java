@@ -1,12 +1,9 @@
 package org.jboss.essc.web.pages;
 
-import javax.inject.Inject;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.request.resource.CssResourceReference;
-import org.jboss.essc.web._cp.HeaderPanel;
 import org.jboss.essc.web._cp.pageBoxes.RecentChangesBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentReleasesBox;
-import org.jboss.essc.web.dao.ContactDao;
 
 
 /**
@@ -16,10 +13,6 @@ import org.jboss.essc.web.dao.ContactDao;
  */
 @SuppressWarnings("serial")
 public class HomePage extends BaseLayoutPage {
-
-    // Inject the ContactDao using @Inject
-    @Inject
-    private ContactDao contactDao;
 
     private static final int RECENT_RELEASES_ROWS = 6;
     private static final int RECENT_CHANGES_ROWS = 6;

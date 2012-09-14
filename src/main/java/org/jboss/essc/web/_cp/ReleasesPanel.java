@@ -3,6 +3,7 @@ package org.jboss.essc.web._cp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.inject.Inject;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -24,10 +25,16 @@ public class ReleasesPanel extends Panel {
     @Inject private ProductReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
+    
+    private ProductLine line;
 
     
     public ReleasesPanel( String id, ProductLine line ) {
         super(id);
+        this.line = line;
+        
+        //add( line == null ? new WebMarkupContainer("productCol").setVisible(false) : new  )
+        add( new WebMarkupContainer("productCol").setVisible( isProductColVisible() ) );
         
         add( new ListView<ProductRelease>("releaseList", dao.getProductReleasesOfLine(line)) {
 
@@ -35,6 +42,7 @@ public class ReleasesPanel extends Panel {
             @Override
             protected void populateItem( final ListItem<ProductRelease> item) {
                 ProductRelease pr = item.getModelObject();
+                item.add( new Label("product", pr.getLine().getName()).setVisible( isProductColVisible() ) );
                 item.add( new Label("version", pr.getVersion()));
                 item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
                 item.add( new Label("state", pr.getStatus().name()));
@@ -50,7 +58,11 @@ public class ReleasesPanel extends Panel {
             }
         });
     }// const
-    
-    
 
-}
+    
+    
+    private boolean isProductColVisible() {
+        return line != null;
+    }
+
+}// class
