@@ -2,6 +2,7 @@ package org.jboss.essc.web._cp.pageBoxes;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.basic.Label;
@@ -20,11 +21,11 @@ import org.jboss.essc.web.model.ProductRelease;
  */
 public class ReleasesBox extends Panel {
 
-    @Inject private ProductReleaseDaoBean dao;
+    @Inject protected ProductReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 
-    private int numReleases = 6;
+    protected int numReleases = 6;
     
     private ProductLine forProduct;
     
@@ -52,7 +53,8 @@ public class ReleasesBox extends Panel {
                 ProductRelease pr = item.getModelObject();
                 item.add( new Label("project", pr.getLine().getName()).setVisible(ReleasesBox.this.forProduct == null) );
                 item.add( new Label("version", pr.getVersion()));
-                item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
+                Date date = pr.getPlannedFor();
+                item.add( new Label("planned", (date == null) ? "" : DF.format( date )));
                 //item.add( new Label("state", pr.getStatus().name()));
                 //item.add( new Label("gitHash", pr.getGitHash()));
                 //item.add( new Label("parent", pr.getParent().getVersion()));
@@ -65,6 +67,6 @@ public class ReleasesBox extends Panel {
         //return dao.getProductReleases_orderDateDesc(this.numReleases);
         return dao.getProductReleases_orderName(this.numReleases);
     }
-    
+        
 
 }// class

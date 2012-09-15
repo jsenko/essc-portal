@@ -28,9 +28,7 @@ public class ProjectPage extends BaseLayoutPage {
         try {
             this.product = productDao.getProductLineByName( par.get("name").toString() );
         }
-        catch( NoResultException ex ){
-            // remains null.
-        }
+        catch( NoResultException ex ){ /* remains null. */ }
         init();
     }
 
@@ -44,7 +42,7 @@ public class ProjectPage extends BaseLayoutPage {
             add( new ReleasesBox("releases", this.product, 100) );
         }
         else {
-            add( new NoItemsFoundBox("releases"));
+            add( new NoItemsFoundBox("releases", "No product specified."));
         }
     }
     

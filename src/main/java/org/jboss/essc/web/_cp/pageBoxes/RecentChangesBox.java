@@ -2,6 +2,7 @@ package org.jboss.essc.web._cp.pageBoxes;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -12,7 +13,7 @@ import org.jboss.essc.web.model.ProductRelease;
 
 
 /**
- * A list of recent releases.
+ * A list of recent changes.
  * 
  * @author Ondrej Zizka
  */
@@ -40,7 +41,8 @@ public class RecentChangesBox extends Panel {
                 ProductRelease pr = item.getModelObject();
                 item.add( new Label("project", pr.getLine().getName()));
                 item.add( new Label("version", pr.getVersion()));
-                item.add( new Label("changed", DF.format( pr.getLastChanged() )));
+                Date date = pr.getLastChanged();
+                item.add( new Label("changed", (date == null) ? "" : DF.format( date )));
                 //item.add( new Label("state", pr.getStatus().name()));
                 //item.add( new Label("gitHash", pr.getGitHash()));
                 //item.add( new Label("parent", pr.getParent().getVersion()));
@@ -50,4 +52,4 @@ public class RecentChangesBox extends Panel {
     
     
 
-}
+}// class

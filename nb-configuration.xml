@@ -16,6 +16,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-html-editor-lib.default-html-public-id>HTML5</org-netbeans-modules-html-editor-lib.default-html-public-id>
     </properties>
     <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+        <word>docs</word>
         <word>ESSC</word>
         <word>metadata</word>
         <word>xml</word>

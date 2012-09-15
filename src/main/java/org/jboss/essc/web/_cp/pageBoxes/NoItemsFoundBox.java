@@ -1,5 +1,6 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
 
@@ -10,8 +11,9 @@ import org.apache.wicket.markup.html.panel.Panel;
  */
 public class NoItemsFoundBox extends Panel {
 
-    public NoItemsFoundBox( String id ) {
+    public NoItemsFoundBox( String id, String heading ) {
         super( id );
+        add( new Label("heading", heading ));
     }
 
 }

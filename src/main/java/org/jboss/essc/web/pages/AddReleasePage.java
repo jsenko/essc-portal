@@ -1,9 +1,11 @@
 package org.jboss.essc.web.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -15,6 +17,9 @@ import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.logging.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  *
@@ -43,16 +48,17 @@ public class AddReleasePage extends BaseLayoutPage {
         add(new FeedbackPanel("feedback"));
 
         this.insertForm = new Form<ProductRelease>("form") {
-
-            @Override
-            protected void onSubmit() {
-                prodRelDao.addProductRelease( line, version );
-                setResponsePage(HomePage.class);
+            @Override protected void onSubmit() {
+                ProductRelease rel = prodRelDao.addProductRelease( line, version );
+                setResponsePage( new ReleasePage(rel) );
             }
         };
 
         this.insertForm.add(new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
-        this.insertForm.add(new DropDownChoice("line", new ProjectsLDM(), new PropertyModel<String>(this, "line")));
+        this.insertForm.add( new DropDownChoice("projectSelect", new PropertyModel<String>(this, "line"), new ProjectsLDM() )
+                .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
+        //this.insertForm.add( new DropDownChoice("projectSelect", new PropertyModel<String>(this, "line"), new ProjectsLDM() ));
+        
         add(this.insertForm);
     }
 
@@ -73,10 +79,12 @@ public class AddReleasePage extends BaseLayoutPage {
 
         @Override
         protected List<ProductLine> load() {
-            return prodDao.getProductLines_orderName(0);
+            List<ProductLine> products = prodDao.getProductLines_orderName(0);
+            //LoggerFactory.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
+            Logger.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
+            return products;
         }
     }// class
     
 
-}
-    
+}// class

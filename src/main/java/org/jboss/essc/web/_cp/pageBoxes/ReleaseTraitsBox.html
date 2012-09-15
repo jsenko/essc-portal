@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><body>
+        
+<wicket:panel>
+
+    <!-- Defaults -->
+    <div id="defaults">
+        
+        <h1>Traits of <span wicket:id="projectName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
+        
+        <div wicket:id="feedback"></div>
+        
+        <form wicket:id="form" method="post" action="#">
+            <table border="0" cellpadding="5">
+                <tr>
+                    <td>Released binaries:</td>
+                    <td><input type="text" wicket:id="releasedBinaries"/></td>
+                </tr>
+                <tr>
+                    <td>Staged binaries:</td>
+                    <td><input type="text" wicket:id="stagedBinaries"/></td>
+                </tr>
+                <tr>
+                    <td>Git tag:</td>
+                    <td><input type="text" wicket:id="git"/></td>
+                </tr>
+                <tr>
+                    <td>Released docs:</td>
+                    <td><input type="text" wicket:id="releasedDocs"/></td>
+                </tr>
+                <tr>
+                    <td>Staged docs:</td>
+                    <td><input type="text" wicket:id="stagedDocs"/></td>
+                </tr>
+                <tr>
+                    <td>Mead:</td>
+                    <td><input type="text" wicket:id="mead"/></td>
+                </tr>
+                <tr>
+                    <td>Brew:</td>
+                    <td><input type="text" wicket:id="brew"/></td>
+                </tr>
+                <tr>
+                    <td>Fixed issues:</td>
+                    <td><input type="text" wicket:id="issuesFixed"/></td>
+                </tr>
+                <tr>
+                    <td>Found issues:</td>
+                    <td><input type="text" wicket:id="issuesFound"/></td>
+                </tr>
+                
+                <wicket:remove>
+                <tr>
+                    <td>:</td>
+                    <td><input type="text" wicket:id=""/></td>
+                </tr>
+                </wicket:remove>
+                
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="Insert"/></td>
+                </tr>
+            </table>
+        </form>
+        
+    </div>
+
+</wicket:panel>
+</body></html>

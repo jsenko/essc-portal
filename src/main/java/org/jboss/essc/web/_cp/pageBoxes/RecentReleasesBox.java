@@ -1,13 +1,7 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import javax.inject.Inject;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import java.util.List;
+import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 
 
@@ -16,38 +10,19 @@ import org.jboss.essc.web.model.ProductRelease;
  * 
  * @author Ondrej Zizka
  */
-public class RecentReleasesBox extends Panel {
+public class RecentReleasesBox extends ReleasesBox {
 
-    @Inject private ProductReleaseDaoBean dao;
-    
-    private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
+    public RecentReleasesBox( String id, ProductLine forProduct, int numReleases ) {
+        super( id, forProduct, numReleases );
+    }
 
-    private int numReleases = 6;
-    
-    
-    
     public RecentReleasesBox( String id, int numReleases ) {
-        super(id);
-        this.setRenderBodyOnly( true );
-        
-        this.numReleases = numReleases;
-        
-        add( new ListView<ProductRelease>("rows", dao.getProductReleases_orderDateDesc(this.numReleases)) {
+        super( id, numReleases );
+    }
 
-            // Populate the table of contacts
-            @Override
-            protected void populateItem( final ListItem<ProductRelease> item) {
-                ProductRelease pr = item.getModelObject();
-                item.add( new Label("project", pr.getLine().getName()));
-                item.add( new Label("version", pr.getVersion()));
-                item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
-                //item.add( new Label("state", pr.getStatus().name()));
-                //item.add( new Label("gitHash", pr.getGitHash()));
-                //item.add( new Label("parent", pr.getParent().getVersion()));
-            }
-        });
-    }// const
     
+    private List<ProductRelease> getReleases(){
+        return this.dao.getProductReleases_orderDateDesc(this.numReleases);
+    }
     
-
 }// class
