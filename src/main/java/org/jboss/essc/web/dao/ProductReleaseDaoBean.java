@@ -20,9 +20,10 @@ public class ProductReleaseDaoBean {
 
 
     @SuppressWarnings("unchecked")
+    @Deprecated // Non-sense.
     public List<ProductRelease> getProductReleases_orderName(int limit) {
         //return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.product.name").getResultList();
-        //return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN ProductLine pl ORDER BY pl.name").getResultList(); // ON pr.line=pl 
+        //return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN ProductLine pl ORDER BY pl.name").getResultList();
         return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.product pl ORDER BY pl.name").getResultList();
     }
 
@@ -31,8 +32,8 @@ public class ProductReleaseDaoBean {
         return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.plannedFor DESC").getResultList();
     }
 
-    public List<ProductRelease> getProductReleasesOfLine(ProductLine line) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line=? ORDER BY pr.product.name").setParameter(1, line).getResultList();
+    public List<ProductRelease> getProductReleasesOfLine(ProductLine prod) {
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product = ? ORDER BY pr.name DESC").setParameter(1, prod).getResultList();
     }
 
     

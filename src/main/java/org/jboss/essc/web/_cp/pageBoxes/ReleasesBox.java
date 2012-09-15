@@ -64,7 +64,7 @@ public class ReleasesBox extends Panel {
     }// const
     
     
-    private List<ProductRelease> getReleases(){
+    protected List<ProductRelease> getReleases(){
         //return dao.getProductReleases_orderDateDesc(this.numReleases);
         return dao.getProductReleases_orderName(this.numReleases);
     }
