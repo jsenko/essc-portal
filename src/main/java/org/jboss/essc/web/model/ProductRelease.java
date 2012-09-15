@@ -32,9 +32,9 @@ public class ProductRelease implements Serializable {
     @ManyToOne
     @JoinColumn(updatable=false, nullable=false)
     private ProductLine line;
-    
-    
+
     private String version;
+    
     
     @Temporal(TemporalType.DATE)
     private Date plannedFor;
@@ -45,11 +45,10 @@ public class ProductRelease implements Serializable {
     private Status status;
     
     private String note;
-    private String gitHash;
-
-    /** For combined builds like AS in EAP. */
-    private ProductRelease parent;
     
+    // Source links
+    private String gitHash;
+    private String linkGitRepo;
     
     // Files links
     private String linkReleasedBinaries;
@@ -59,13 +58,12 @@ public class ProductRelease implements Serializable {
     private String linkMavenLocalRepo;
     
     // Info links
-    private String linkJiraFixedInThisVersion;
-    private String linkJiraFoundInThisVersion;
+    private String linkIssuesFixed;
+    private String linkIssuesFound;
     
     // Build links
     private String linkMead;
     private String linkBrew;
-    private String linkGitRepo;
     
 
     
@@ -83,7 +81,7 @@ public class ProductRelease implements Serializable {
     
     //<editor-fold defaultstate="collapsed" desc="Get/set">
     public Long getId() {        return id;    }
-    public void setId(Long id) {        this.id = id;    }
+    public void setId(Long id) { this.id = id;    }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
     public ProductLine getLine() { return line; }
@@ -93,33 +91,31 @@ public class ProductRelease implements Serializable {
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
     public String getGitHash() {        return gitHash;    }
-    public void setGitHash(String gitHash) {        this.gitHash = gitHash;    }
+    public void setGitHash(String gitHash) { this.gitHash = gitHash;    }
     public String getLinkBrew() {        return linkBrew;    }
-    public void setLinkBrew(String linkBrew) {        this.linkBrew = linkBrew;    }
+    public void setLinkBrew(String linkBrew) { this.linkBrew = linkBrew;    }
     public String getLinkGitRepo() {        return linkGitRepo;    }
-    public void setLinkGitRepo(String linkGitRepo) {        this.linkGitRepo = linkGitRepo;    }
-    public String getLinkJiraFixedInThisVersion() {        return linkJiraFixedInThisVersion;    }
-    public void setLinkJiraFixedInThisVersion(String linkJiraFixedInThisVersion) {        this.linkJiraFixedInThisVersion = linkJiraFixedInThisVersion;    }
-    public String getLinkJiraFoundInThisVersion() {        return linkJiraFoundInThisVersion;    }
-    public void setLinkJiraFoundInThisVersion(String linkJiraResolvedInThisVersion) {        this.linkJiraFoundInThisVersion = linkJiraResolvedInThisVersion;    }
+    public void setLinkGitRepo(String linkGitRepo) { this.linkGitRepo = linkGitRepo;    }
+    public String getLinkIssuesFixed() {        return linkIssuesFixed;    }
+    public void setLinkIssuesFixed(String linkIssuesFixed) { this.linkIssuesFixed = linkIssuesFixed;    }
+    public String getLinkIssuesFound() {        return linkIssuesFound;    }
+    public void setLinkIssuesFound(String linkIssuesFound) { this.linkIssuesFound = linkIssuesFound;    }
     public String getLinkMavenLocalRepo() {        return linkMavenLocalRepo;    }
-    public void setLinkMavenLocalRepo(String linkMavenLocalRepo) {        this.linkMavenLocalRepo = linkMavenLocalRepo;    }
+    public void setLinkMavenLocalRepo(String linkMavenLocalRepo) { this.linkMavenLocalRepo = linkMavenLocalRepo;    }
     public String getLinkMead() {        return linkMead;    }
-    public void setLinkMead(String linkMead) {        this.linkMead = linkMead;    }
+    public void setLinkMead(String linkMead) { this.linkMead = linkMead;    }
     public String getLinkReleasedBinaries() {        return linkReleasedBinaries;    }
-    public void setLinkReleasedBinaries(String linkReleasedBinaries) {        this.linkReleasedBinaries = linkReleasedBinaries;    }
+    public void setLinkReleasedBinaries(String linkReleasedBinaries) { this.linkReleasedBinaries = linkReleasedBinaries;    }
     public String getLinkReleasedDocs() {        return linkReleasedDocs;    }
-    public void setLinkReleasedDocs(String linkReleasedDocs) {        this.linkReleasedDocs = linkReleasedDocs;    }
+    public void setLinkReleasedDocs(String linkReleasedDocs) { this.linkReleasedDocs = linkReleasedDocs;    }
     public String getLinkStagedBinaries() {        return linkStagedBinaries;    }
-    public void setLinkStagedBinaries(String linkStagedBinaries) {        this.linkStagedBinaries = linkStagedBinaries;    }
+    public void setLinkStagedBinaries(String linkStagedBinaries) { this.linkStagedBinaries = linkStagedBinaries;    }
     public String getLinkStagedDocs() {        return linkStagedDocs;    }
-    public void setLinkStagedDocs(String linkStagedDocs) {        this.linkStagedDocs = linkStagedDocs;    }
+    public void setLinkStagedDocs(String linkStagedDocs) { this.linkStagedDocs = linkStagedDocs;    }
     public String getNote() {        return note;    }
-    public void setNote(String note) {        this.note = note;    }
-    public ProductRelease getParent() {        return parent;    }
-    public void setParent(ProductRelease parent) {        this.parent = parent;    }
+    public void setNote(String note) { this.note = note;    }
     public Status getStatus() {        return status;    }
-    public void setStatus(Status status) {        this.status = status;    }
+    public void setStatus(Status status) { this.status = status;    }
     //</editor-fold>
 
 

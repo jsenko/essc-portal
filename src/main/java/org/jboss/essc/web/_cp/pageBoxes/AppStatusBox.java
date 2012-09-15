@@ -13,14 +13,14 @@ import org.jboss.essc.web.model.ProductLine;
  * 
  * @author Ondrej Zizka
  */
-public class StatusBox extends Panel {
+public class AppStatusBox extends Panel {
 
     @Inject private ProductReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 
     
-    public StatusBox( String id, ProductLine line ) {
+    public AppStatusBox( String id, ProductLine line ) {
         super(id);
         
     }// const

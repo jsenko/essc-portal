@@ -3,6 +3,7 @@ package org.jboss.essc.web.pages;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
@@ -44,6 +45,10 @@ public class ReleasePage extends BaseLayoutPage {
     }
     
     private void init( String titleIfNotFound ){
+        
+        add( new Label("productName", this.release.getLine().getName()) );
+        add( new Label("version", this.release.getVersion()) );
+        
         if( this.release != null ){
             add( new ReleaseTraitsBox("traits", this.release) );
         }

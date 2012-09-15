@@ -6,7 +6,7 @@
     <!-- Defaults -->
     <div id="defaults">
         
-        <h1>Traits of <span wicket:id="projectName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
+        <h1>Traits of <span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
         
         <div wicket:id="feedback"></div>
         
@@ -21,16 +21,20 @@
                     <td><input type="text" wicket:id="stagedBinaries"/></td>
                 </tr>
                 <tr>
-                    <td>Git tag:</td>
-                    <td><input type="text" wicket:id="git"/></td>
-                </tr>
-                <tr>
                     <td>Released docs:</td>
                     <td><input type="text" wicket:id="releasedDocs"/></td>
                 </tr>
                 <tr>
                     <td>Staged docs:</td>
                     <td><input type="text" wicket:id="stagedDocs"/></td>
+                </tr>
+                <tr>
+                    <td>Git hash:</td>
+                    <td><input type="text" wicket:id="gitHash"/></td>
+                </tr>
+                <tr>
+                    <td>Git tag:</td>
+                    <td><input type="text" wicket:id="gitRepo"/></td>
                 </tr>
                 <tr>
                     <td>Mead:</td>
@@ -49,12 +53,12 @@
                     <td><input type="text" wicket:id="issuesFound"/></td>
                 </tr>
                 
-                <wicket:remove>
+                <!--
                 <tr>
                     <td>:</td>
                     <td><input type="text" wicket:id=""/></td>
                 </tr>
-                </wicket:remove>
+                -->
                 
                 <tr>
                     <td>&nbsp;</td>

@@ -62,6 +62,14 @@ public class ProductReleaseDaoBean {
     }
 
     /**
+     * Update a ProductRelease.
+     */
+    public ProductRelease update(ProductRelease pr) {
+        ProductRelease managed = this.em.merge(pr);
+        return managed;
+    }
+
+    /**
      * Remove a ProductRelease.
      */
     public void remove(ProductRelease pr) {
