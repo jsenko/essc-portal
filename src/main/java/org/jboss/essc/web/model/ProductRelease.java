@@ -31,7 +31,7 @@ public class ProductRelease implements Serializable {
     //@Column(unique=true)
     @ManyToOne
     @JoinColumn(updatable=false, nullable=false)
-    private ProductLine line;
+    private ProductLine product;
 
     private String version;
     
@@ -73,7 +73,7 @@ public class ProductRelease implements Serializable {
 
     public ProductRelease(Long id, ProductLine line, String version) {
         this.id = id;
-        this.line = line;
+        this.product = line;
         this.version = version;
     }
 
@@ -84,8 +84,8 @@ public class ProductRelease implements Serializable {
     public void setId(Long id) { this.id = id;    }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
-    public ProductLine getLine() { return line; }
-    public void setLine( ProductLine line ) { this.line = line; }
+    public ProductLine getProduct() { return product; }
+    public void setProduct( ProductLine product ) { this.product = product; }
     public Date getPlannedFor() { return plannedFor; }
     public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
     public Date getLastChanged() { return lastChanged; }
@@ -123,7 +123,7 @@ public class ProductRelease implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((line == null) ? 0 : line.hashCode());
+        result = prime * result + ((product == null) ? 0 : product.hashCode());
         result = prime * result + ((version == null) ? 0 : version.hashCode());
         return result;
     }
@@ -135,10 +135,10 @@ public class ProductRelease implements Serializable {
         if (getClass() != obj.getClass())  return false;
         ProductRelease other = (ProductRelease) obj;
         
-        if (line == null) {
-            if (other.line != null) return false;
+        if (product == null) {
+            if (other.product != null) return false;
         }
-        else if (!line.equals(other.line)) return false;
+        else if (!product.equals(other.product)) return false;
         
         if (version == null) {
             if (other.version != null) return false;

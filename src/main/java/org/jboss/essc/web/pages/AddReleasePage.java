@@ -35,29 +35,28 @@ public class AddReleasePage extends BaseLayoutPage {
     private Form<ProductRelease> insertForm;
 
     // Data
-    private ProductLine line;
+    private ProductLine product;
     private String version;
     
 
     
     public AddReleasePage(PageParameters params) {
         
-        String proj = params.get("project").toOptionalString();
+        String proj = params.get("product").toOptionalString();
         add(new Label("titleReleaseOf", proj == null ? "" : " of " + proj ));
         
         add(new FeedbackPanel("feedback"));
 
         this.insertForm = new Form<ProductRelease>("form") {
             @Override protected void onSubmit() {
-                ProductRelease rel = prodRelDao.addProductRelease( line, version );
+                ProductRelease rel = prodRelDao.addProductRelease( product, version );
                 setResponsePage( new ReleasePage(rel) );
             }
         };
 
         this.insertForm.add(new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
-        this.insertForm.add( new DropDownChoice("projectSelect", new PropertyModel<String>(this, "line"), new ProjectsLDM() )
+        this.insertForm.add( new DropDownChoice("productSelect", new PropertyModel<String>(this, "line"), new ProductsLDM() )
                 .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
-        //this.insertForm.add( new DropDownChoice("projectSelect", new PropertyModel<String>(this, "line"), new ProjectsLDM() ));
         
         add(this.insertForm);
     }
@@ -65,16 +64,16 @@ public class AddReleasePage extends BaseLayoutPage {
     
     
     
-    public ProductLine getLine() { return line; }
-    public void setLine( ProductLine line ) { this.line = line; }
+    public ProductLine getLine() { return product; }
+    public void setLine( ProductLine product ) { this.product = product; }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
 
     
-    // ProjectsLDM 
-    private class ProjectsLDM extends LoadableDetachableModel<List<ProductLine>> {
+    // ProductsLDM 
+    private class ProductsLDM extends LoadableDetachableModel<List<ProductLine>> {
 
-        public ProjectsLDM() {
+        public ProductsLDM() {
         }
 
         @Override

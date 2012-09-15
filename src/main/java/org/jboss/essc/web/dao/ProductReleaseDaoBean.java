@@ -21,9 +21,9 @@ public class ProductReleaseDaoBean {
 
     @SuppressWarnings("unchecked")
     public List<ProductRelease> getProductReleases_orderName(int limit) {
-        //return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.line.name").getResultList();
+        //return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.product.name").getResultList();
         //return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN ProductLine pl ORDER BY pl.name").getResultList(); // ON pr.line=pl 
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.line pl ORDER BY pl.name").getResultList();
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.product pl ORDER BY pl.name").getResultList();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +32,7 @@ public class ProductReleaseDaoBean {
     }
 
     public List<ProductRelease> getProductReleasesOfLine(ProductLine line) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line=? ORDER BY pr.line.name").setParameter(1, line).getResultList();
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line=? ORDER BY pr.product.name").setParameter(1, line).getResultList();
     }
 
     
@@ -47,7 +47,7 @@ public class ProductReleaseDaoBean {
      *  Get release by product name and version.
      */
     public ProductRelease getProductRelease( String prodName, String version ) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.line.name = ? AND pr.version = ?", ProductRelease.class)
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product.name = ? AND pr.version = ?", ProductRelease.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult();
@@ -57,8 +57,8 @@ public class ProductReleaseDaoBean {
     /**
      * Add a new ProductRelease.
      */
-    public ProductRelease addProductRelease( ProductLine line, String version) {
-        return this.em.merge( new ProductRelease( null, line, version ) );
+    public ProductRelease addProductRelease( ProductLine product, String version) {
+        return this.em.merge( new ProductRelease( null, product, version ) );
     }
 
     /**

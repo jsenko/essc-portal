@@ -14,7 +14,7 @@ import org.jboss.essc.web.model.ProductLine;
 /**
  * @author Ondrej Zizka
  */
-public class ProjectDefaultsPanel extends Panel {
+public class ProductDefaultsPanel extends Panel {
     
     @Inject private ProductReleaseDaoBean prodRelDao;
     @Inject private ProductLineDaoBean prodDao;
@@ -26,14 +26,14 @@ public class ProjectDefaultsPanel extends Panel {
     private ProductLine product;
 
     
-    public ProjectDefaultsPanel( String id, ProductLine line ) {
+    public ProductDefaultsPanel( String id, final ProductLine _product ) {
         super(id);
         
         add(new FeedbackPanel("feedback"));
         
         this.insertForm = new Form<ProductLine>("insertForm") {
             @Override protected void onSubmit() {
-                product = prodDao.update(product);
+                ProductDefaultsPanel.this.product = prodDao.update(_product);
             }
         };
         

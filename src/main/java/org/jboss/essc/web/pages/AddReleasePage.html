@@ -11,7 +11,7 @@
 <body>
         
     <wicket:extend>
-        <h1>Add release <wicket:container wicket:id="titleReleaseOf">of project SuperProject</wicket:container></h1>
+        <h1>Add release <wicket:container wicket:id="titleReleaseOf">of product SuperProduct</wicket:container></h1>
         
         <span wicket:id="feedback"></span>
         
@@ -19,11 +19,11 @@
         <form wicket:id="form" method="post" action="#">
             <table border="0" cellpadding="5">
                 <tr>
-                    <td width="200">Project / product line</td>
+                    <td width="200">Product line</td>
                     <td>
-                        <select wicket:id="projectSelect">
-                            <option>SuperProject</option>
-                            <option>OtherProject</option>
+                        <select wicket:id="productSelect">
+                            <option>SuperProduct</option>
+                            <option>OtherProduct</option>
                         </select>
                     </td>
                 </tr>

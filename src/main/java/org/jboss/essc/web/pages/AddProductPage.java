@@ -16,7 +16,7 @@ import org.jboss.essc.web.model.ProductLine;
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-public class AddProjectPage extends BaseLayoutPage {
+public class AddProductPage extends BaseLayoutPage {
 
     @Inject private ProductReleaseDaoBean prodRelDao;
     @Inject private ProductLineDaoBean prodDao;
@@ -29,9 +29,9 @@ public class AddProjectPage extends BaseLayoutPage {
     
 
     
-    public AddProjectPage(PageParameters params) {
+    public AddProductPage(PageParameters params) {
         
-        String proj = params.get("project").toOptionalString();
+        String proj = params.get("product").toOptionalString();
         
         add(new FeedbackPanel("feedback"));
 
@@ -40,7 +40,7 @@ public class AddProjectPage extends BaseLayoutPage {
             @Override
             protected void onSubmit() {
                 product = prodDao.addProductLine(product);
-                setResponsePage(new ProjectPage(product));
+                setResponsePage(new ProductPage(product));
             }
         };
 
@@ -54,4 +54,4 @@ public class AddProjectPage extends BaseLayoutPage {
     public ProductLine getProduct() { return product; }
     public void setProduct( ProductLine product ) { this.product = product; }
     
-}// class
+}

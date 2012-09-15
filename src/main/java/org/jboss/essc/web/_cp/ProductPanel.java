@@ -26,10 +26,10 @@ public class ProductPanel extends Panel {
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 
     
-    public ProductPanel( String id, ProductLine line ) {
+    public ProductPanel( String id, ProductLine product ) {
         super(id);
         
-        add( new ListView<ProductRelease>("releaseList", dao.getProductReleasesOfLine(line)) {
+        add( new ListView<ProductRelease>("releaseList", dao.getProductReleasesOfLine(product)) {
 
             // Populate the table of contacts
             @Override

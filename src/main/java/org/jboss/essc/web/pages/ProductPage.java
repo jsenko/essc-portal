@@ -17,14 +17,14 @@ import org.jboss.essc.web.model.ProductLine;
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-public class ProjectPage extends BaseLayoutPage {
+public class ProductPage extends BaseLayoutPage {
 
     @Inject private ProductLineDaoBean productDao;
     
     private ProductLine product;
 
     
-    public ProjectPage( PageParameters par ) {
+    public ProductPage( PageParameters par ) {
         try {
             this.product = productDao.getProductLineByName( par.get("name").toString() );
         }
@@ -32,7 +32,7 @@ public class ProjectPage extends BaseLayoutPage {
         init();
     }
 
-    public ProjectPage( ProductLine product ) {
+    public ProductPage( ProductLine product ) {
         this.product = product;
         init();
     }
@@ -54,4 +54,4 @@ public class ProjectPage extends BaseLayoutPage {
         response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
     }
 
-}// class
+}

@@ -52,7 +52,7 @@ public class ReleasesBox extends Panel {
             @Override
             protected void populateItem( final ListItem<ProductRelease> item) {
                 ProductRelease pr = item.getModelObject();
-                item.add( new Label("project", pr.getLine().getName()).setVisible(ReleasesBox.this.forProduct != null) );
+                item.add( new Label("product", pr.getProduct().getName()).setVisible(ReleasesBox.this.forProduct != null) );
                 item.add( new ReleaseLink("version", pr));
                 Date date = pr.getPlannedFor();
                 item.add( new Label("planned", (date == null) ? "" : DF.format( date )));

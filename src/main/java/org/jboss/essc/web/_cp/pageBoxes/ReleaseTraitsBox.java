@@ -9,7 +9,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
-import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 
 
@@ -34,7 +33,7 @@ public class ReleaseTraitsBox extends Panel {
         
         this.release = release;
         
-        add( new Label("productName", release.getLine().getName() ));
+        add( new Label("productName", release.getProduct().getName() ));
         add( new Label("version", release.getVersion() ));
         
         add(new FeedbackPanel("feedback"));

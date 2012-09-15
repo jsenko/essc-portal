@@ -26,23 +26,23 @@ public class ReleasesPanel extends Panel {
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
     
-    private ProductLine line;
+    private ProductLine product;
 
     
-    public ReleasesPanel( String id, ProductLine line ) {
+    public ReleasesPanel( String id, ProductLine product ) {
         super(id);
-        this.line = line;
+        this.product = product;
         
         //add( line == null ? new WebMarkupContainer("productCol").setVisible(false) : new  )
         add( new WebMarkupContainer("productCol").setVisible( isProductColVisible() ) );
         
-        add( new ListView<ProductRelease>("releaseList", dao.getProductReleasesOfLine(line)) {
+        add( new ListView<ProductRelease>("releaseList", dao.getProductReleasesOfLine(product)) {
 
             // Populate the table of contacts
             @Override
             protected void populateItem( final ListItem<ProductRelease> item) {
                 ProductRelease pr = item.getModelObject();
-                item.add( new Label("product", pr.getLine().getName()).setVisible( isProductColVisible() ) );
+                item.add( new Label("product", pr.getProduct().getName()).setVisible( isProductColVisible() ) );
                 item.add( new Label("version", pr.getVersion()));
                 item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
                 item.add( new Label("state", pr.getStatus().name()));
@@ -61,7 +61,7 @@ public class ReleasesPanel extends Panel {
     
     
     private boolean isProductColVisible() {
-        return line != null;
+        return product != null;
     }
 
 }// class

@@ -46,7 +46,7 @@ public class ReleasePage extends BaseLayoutPage {
     
     private void init( String titleIfNotFound ){
         
-        add( new Label("productName", this.release.getLine().getName()) );
+        add( new Label("productName", this.release.getProduct().getName()) );
         add( new Label("version", this.release.getVersion()) );
         
         if( this.release != null ){

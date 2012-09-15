@@ -20,7 +20,7 @@ public class AppStatusBox extends Panel {
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 
     
-    public AppStatusBox( String id, ProductLine line ) {
+    public AppStatusBox( String id, ProductLine product ) {
         super(id);
         
     }// const

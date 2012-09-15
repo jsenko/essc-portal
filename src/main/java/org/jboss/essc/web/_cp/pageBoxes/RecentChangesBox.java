@@ -39,7 +39,7 @@ public class RecentChangesBox extends Panel {
             @Override
             protected void populateItem( final ListItem<ProductRelease> item) {
                 ProductRelease pr = item.getModelObject();
-                item.add( new Label("project", pr.getLine().getName()));
+                item.add( new Label("product", pr.getProduct().getName()));
                 item.add( new Label("version", pr.getVersion()));
                 Date date = pr.getLastChanged();
                 item.add( new Label("changed", (date == null) ? "" : DF.format( date )));
