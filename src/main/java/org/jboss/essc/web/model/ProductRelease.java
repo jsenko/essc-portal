@@ -52,7 +52,7 @@ public class ProductRelease implements Serializable, IHasTraits {
     // ---- Traits ----
     
     // TODO @Embedded 
-    private ReleaseTraits traits;
+    //private ReleaseTraits traits;
     
     // Source links
     private String gitHash;
@@ -128,8 +128,8 @@ public class ProductRelease implements Serializable, IHasTraits {
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
 
-    public ReleaseTraits getTraits() { return traits; }
-    public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
+    //public ReleaseTraits getTraits() { return traits; }
+    //public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
         
     public String getGitHash() {        return gitHash;    }
     public void setGitHash(String gitHash) { this.gitHash = gitHash;    }
