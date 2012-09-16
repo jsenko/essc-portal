@@ -4,13 +4,13 @@
 <wicket:panel>
 
     <!-- Defaults -->
-    <div id="defaults">
+    <div id="defaults" class="post">
         
         <!--
         <h1>Traits of <span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
         -->
         
-        <div wicket:id="feedback"></div>
+        <div wicket:id="feedback" class="feedback">Feedback will be here</div>
         
         <form wicket:id="form" method="post" action="#">
             
@@ -25,49 +25,60 @@
             <table class="traits" border="0" cellpadding="5">
                 <tr>
                     <td>Released binaries:</td>
-                    <td><input type="text" wicket:id="releasedBinaries"/></td>
+                    <!--
+                    <td><input type="text" wicket:id="releasedBinaries" class="noBorder"/></td>
+                    -->
+                    <td><span wicket:id="releasedBinaries"/></td>
+                </tr>
+                <tr>
+                    <td>JS test:</td>
+                    <td><input type="text" class="fakeLink noBorder" style="width: 100%"
+                               onfocus="this.className='';"
+                               onblur="this.className='fakeLink noBorder';"
+                               onclick="if(isWorkingURL(this.value))  window.open(this.value, '_blank');"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>Staged binaries:</td>
-                    <td><input type="text" wicket:id="stagedBinaries"/></td>
+                    <td><span wicket:id="stagedBinaries" class="fakeLink noBorder" style="width: 100%"/></td>
                 </tr>
                 <tr>
                     <td>Released docs:</td>
-                    <td><input type="text" wicket:id="releasedDocs"/></td>
+                    <td><span wicket:id="releasedDocs"/></td>
                 </tr>
                 <tr>
                     <td>Staged docs:</td>
-                    <td><input type="text" wicket:id="stagedDocs"/></td>
+                    <td><span wicket:id="stagedDocs"/></td>
                 </tr>
                 <tr>
                     <td>Git hash:</td>
-                    <td><input type="text" wicket:id="gitHash"/></td>
+                    <td><span wicket:id="gitHash"/></td>
                 </tr>
                 <tr>
                     <td>Git tag:</td>
-                    <td><input type="text" wicket:id="gitRepo"/></td>
+                    <td><span wicket:id="gitRepo"/></td>
                 </tr>
                 <tr>
                     <td>Mead:</td>
-                    <td><input type="text" wicket:id="mead"/></td>
+                    <td><span wicket:id="mead"/></td>
                 </tr>
                 <tr>
                     <td>Brew:</td>
-                    <td><input type="text" wicket:id="brew"/></td>
+                    <td><span wicket:id="brew"/></td>
                 </tr>
                 <tr>
                     <td>Fixed issues:</td>
-                    <td><input type="text" wicket:id="issuesFixed"/></td>
+                    <td><span wicket:id="issuesFixed"/></td>
                 </tr>
                 <tr>
                     <td>Found issues:</td>
-                    <td><input type="text" wicket:id="issuesFound"/></td>
+                    <td><span wicket:id="issuesFound"/></td>
                 </tr>
                 
                 <!--
                 <tr>
                     <td>:</td>
-                    <td><input type="text" wicket:id=""/></td>
+                    <td><span wicket:id=""/></td>
                 </tr>
                 -->
                 

@@ -1,9 +1,11 @@
 /*
 Colors
 ------
-<a>: #7ACE11 (zelenĂĄ)
+<a>: #7ACE11 (zelena)
 text: #404040
 */
+
+
 
 body {
 	margin: 0;
@@ -24,18 +26,18 @@ h1, h2, h3 {
 }
 
 h1 {
-	text-transform: lowercase;
+	/*text-transform: lowercase;*/
 	letter-spacing: -1px;
-	font-size: 24px;
+	font-size: 26px;
 }
 
 h2 {
-	text-transform: lowercase;
+	/*text-transform: lowercase;*/
 	letter-spacing: -1px;
-	font-size: 24px;
+	font-size: 22px;
 }
 
-h3 { font-size: 1em; }
+h3 { font-size: 18px; }
 
 ul, ol { line-height: 200%; }
 p      { line-height: 180%; }
@@ -50,8 +52,8 @@ blockquote p, blockquote ul, blockquote ol {
 	font-style: italic;
 }
 
-a { color: #7ACE11; }
-a:hover { text-decoration: none; color: #7ACE11; }
+a       { color: #7ACE11; }
+a:hover { color: #7ACE11; text-decoration: none; }
 
 /* Header */
 
@@ -109,6 +111,9 @@ a:hover { text-decoration: none; color: #7ACE11; }
 }
 
 #menu li { display: inline; }
+
+#menu h1,
+#menu h2 { text-transform: lowercase; }
 
 #menu a {
 	display: block;
@@ -183,17 +188,19 @@ a:hover { text-decoration: none; color: #7ACE11; }
 		border-spacing: 0px;
 		empty-cells: show;
 	}
-		.post table a { color: #6ABE01; text-decoration: none; }
+		.post table.data a { color: #6ABE01; text-decoration: none; }
 		.post table th { font-weight: bold; background-color: #E3E3E3; }
 		.post table th,
 		.post table td {
-			x-background: url("images/bg04-w740.png") no-repeat bottom left;
 			text-align: left;
 			padding: 0px 0.1ex 0px 0.2ex;
+			margin: 0;
+                }
+		.post table.data td {
+			x-background: url("images/bg04-w740.png") no-repeat bottom left;
 			border-width: 2px;
 			border-style: groove;
 			border-color: white;
-			margin: 0;
 		}
 		.post.stav table th,
 		.post.stav table td {
@@ -291,3 +298,14 @@ a:hover { text-decoration: none; color: #7ACE11; }
 	color: #717171;
 }
 
+
+
+input.noBorder {
+    border: none;
+}
+
+.fakeLink { color: blue; text-decoration: underline; }
+
+
+.feedback { font-weight: bold; }
+.feedback .feedbackPanelERROR { color: red; font-weight: bold; }

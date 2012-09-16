@@ -3,17 +3,19 @@ package org.jboss.essc.web._cp.pageBoxes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.inject.Inject;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.wicket.UrlHttpRequestValidator;
 
 
 /**
@@ -36,17 +38,19 @@ public class ReleaseTraitsBox extends Panel {
         super(id);
         
         this.release = release;
-        
         //add( new Label("productName", release.getProduct().getName() ));
         //add( new Label("version", release.getVersion() ));
         
-        add(new FeedbackPanel("feedback"));
+        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel.setOutputMarkupId( true );
+        add(feedbackPanel);
         
         this.insertForm = new Form("form") {
             @Override protected void onSubmit() {
                 ReleaseTraitsBox.this.release = prodRelDao.update(release);
             }
         };
+        this.insertForm.setVersioned(false);
         add( this.insertForm );
         
         this.insertForm.add( new DropDownChoice("status",
@@ -54,17 +58,30 @@ public class ReleaseTraitsBox extends Panel {
                 new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
         ));
         
-        this.insertForm.add( new TextField("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ) );
-        this.insertForm.add( new TextField("stagedBinaries",   new PropertyModel( release, "linkStagedBinaries") ) );
-        this.insertForm.add( new TextField("releasedDocs",     new PropertyModel( release, "linkReleasedDocs") ) );
-        this.insertForm.add( new TextField("stagedDocs",       new PropertyModel( release, "linkStagedDocs") ) );
-        this.insertForm.add( new TextField("gitRepo",          new PropertyModel( release, "linkGitRepo") ) );
-        this.insertForm.add( new TextField("gitHash",          new PropertyModel( release, "gitHash") ) );
-        this.insertForm.add( new TextField("mead",             new PropertyModel( release, "linkMead") ) );
-        this.insertForm.add( new TextField("brew",             new PropertyModel( release, "linkBrew") ) );
-        this.insertForm.add( new TextField("issuesFixed",      new PropertyModel( release, "linkIssuesFixed") ) );
-        this.insertForm.add( new TextField("issuesFound",      new PropertyModel( release, "linkIssuesFound") ) );
-        //this.insertForm.add( new TextField("",            new PropertyModel( release, "link") ) );
+        UrlValidator val = new UrlValidator();
+        UrlHttpRequestValidator val2 = new UrlHttpRequestValidator();
+        
+        //this.insertForm.add( new TextField("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ){
+            @Override protected void onError( AjaxRequestTarget target ) {
+                target.add( feedbackPanel );
+                //super.onError( target ); // puts the focus back.
+            }
+            @Override protected void onSubmit( AjaxRequestTarget target ) {
+                target.add( feedbackPanel );
+                super.onSubmit( target );
+            }
+        }.add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("stagedBinaries",   new PropertyModel( release, "linkStagedBinaries") ).add(val) ); //.add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("releasedDocs",     new PropertyModel( release, "linkReleasedDocs") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("stagedDocs",       new PropertyModel( release, "linkStagedDocs") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("gitRepo",          new PropertyModel( release, "linkGitRepo") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("gitHash",          new PropertyModel( release, "gitHash") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("mead",             new PropertyModel( release, "linkMead") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("brew",             new PropertyModel( release, "linkBrew") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("issuesFixed",      new PropertyModel( release, "linkIssuesFixed") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("issuesFound",      new PropertyModel( release, "linkIssuesFound") ).add(val).add(val2) );
+        //this.insertForm.add( new AjaxEditableLabel("",            new PropertyModel( release, "link") ).add(val).add(val2) );
 
     }// const
 
