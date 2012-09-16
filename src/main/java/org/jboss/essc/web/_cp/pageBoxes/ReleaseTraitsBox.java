@@ -1,7 +1,11 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.inject.Inject;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -33,8 +37,8 @@ public class ReleaseTraitsBox extends Panel {
         
         this.release = release;
         
-        add( new Label("productName", release.getProduct().getName() ));
-        add( new Label("version", release.getVersion() ));
+        //add( new Label("productName", release.getProduct().getName() ));
+        //add( new Label("version", release.getVersion() ));
         
         add(new FeedbackPanel("feedback"));
         
@@ -44,6 +48,11 @@ public class ReleaseTraitsBox extends Panel {
             }
         };
         add( this.insertForm );
+        
+        this.insertForm.add( new DropDownChoice("status",
+                new PropertyModel( release, "status"),
+                new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
+        ));
         
         this.insertForm.add( new TextField("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ) );
         this.insertForm.add( new TextField("stagedBinaries",   new PropertyModel( release, "linkStagedBinaries") ) );

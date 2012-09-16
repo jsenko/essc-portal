@@ -27,7 +27,6 @@ public class ProductReleaseDaoBean {
         return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.product pl ORDER BY pl.name").getResultList();
     }
 
-    @SuppressWarnings("unchecked")
     public List<ProductRelease> getProductReleases_orderDateDesc(int limit) {
         return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.plannedFor DESC").getResultList();
     }

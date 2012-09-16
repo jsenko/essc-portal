@@ -6,12 +6,23 @@
     <!-- Defaults -->
     <div id="defaults">
         
+        <!--
         <h1>Traits of <span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
+        -->
         
         <div wicket:id="feedback"></div>
         
         <form wicket:id="form" method="post" action="#">
-            <table border="0" cellpadding="5">
+            
+            <table class="traits" border="0" cellpadding="5">
+                <tr>
+                    <td>Status:</td>
+                    <td><select wicket:id="status"/></td>
+                </tr>
+            </table>
+            
+            <h3>Traits</h3>
+            <table class="traits" border="0" cellpadding="5">
                 <tr>
                     <td>Released binaries:</td>
                     <td><input type="text" wicket:id="releasedBinaries"/></td>
@@ -62,7 +73,7 @@
                 
                 <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" value="Insert"/></td>
+                    <td><input type="submit" value="Save"/></td>
                 </tr>
             </table>
         </form>

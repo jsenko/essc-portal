@@ -2,19 +2,21 @@
 
             <!-- Recent releases -->
             <div class="post product">
-                <h2 class="title">Releases</h2>
+                <h2 wicket:id="heading" class="title">Releases</h2>
                 <div class="entry">
                     
                     <table>
                         <tr class="header">
-                            <th>Product</th>
+                            <th wicket:id="productTH">Product</th>
                             <th>Version</th>
-                            <th>Released</th>
+                            <th>Status</th>
+                            <th><!--date--></th>
                         </tr>
                         
                         <tr wicket:id="rows">
-                            <td wicket:id="product">EAP</td>
-                            <td wicket:id="version">6.0.0.ER1</td>
+                            <td wicket:id="productTD"><a wicket:id="productLink">EAP</a></td>
+                            <td><a wicket:id="versionLink">6.0.0.ER1</a></td>
+                            <td wicket:id="status" >in progress</td>
                             <td wicket:id="planned">today</td>
                         </tr>
                         

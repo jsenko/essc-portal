@@ -3,6 +3,7 @@ package org.jboss.essc.web.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -40,9 +41,9 @@ public class ProductRelease implements Serializable {
     private Date plannedFor;
     
     @Temporal(TemporalType.DATE)
-    private Date lastChanged;
+    private Date lastChanged = new Date();
     
-    private Status status;
+    private Status status = Status.PLANNED;
     
     private String note;
     
@@ -71,10 +72,21 @@ public class ProductRelease implements Serializable {
     public ProductRelease() {
     }
 
-    public ProductRelease(Long id, ProductLine line, String version) {
+    public ProductRelease(Long id, ProductLine product, String version) {
         this.id = id;
-        this.product = line;
+        this.product = product;
         this.version = version;
+        
+        this.updateWithProductDefaults();
+    }
+    
+    private void updateWithProductDefaults(){
+        if( this.product == null )  return;
+        if( StringUtils.isBlank(this.version) )  return;
+        
+        this.linkReleasedBinaries = this.product.getLinkReleasedBinaries().replace("${ver}", this.version);
+        this.linkStagedBinaries   = this.product.getLinkStagedBinaries().replace("${ver}", this.version);
+        // TODO - the rest.
     }
 
 
@@ -150,9 +162,20 @@ public class ProductRelease implements Serializable {
     
     
     public enum Status {
-        PLANNED,
-        IN_PROGRESS,
-        RELEASED
+        PLANNED("planned for"),
+        IN_PROGRESS("in progress, expected "),
+        RELEASED("released");
+        
+        private String statusString;
+
+        private Status( String ss ) {
+            this.statusString = ss;
+        }
+
+        public String getStatusString() {
+            return statusString;
+        }
+        
     }
     
 }
