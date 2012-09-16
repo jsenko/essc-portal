@@ -1,6 +1,8 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 import javax.persistence.*;
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="`release`")
-public class ProductRelease implements Serializable {
+public class ProductRelease implements Serializable, IHasTraits {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +48,11 @@ public class ProductRelease implements Serializable {
     private Status status = Status.PLANNED;
     
     private String note;
+    
+    // ---- Traits ----
+    
+    // TODO @Embedded 
+    private ReleaseTraits traits;
     
     // Source links
     private String gitHash;
@@ -77,16 +84,34 @@ public class ProductRelease implements Serializable {
         this.product = product;
         this.version = version;
         
-        this.updateWithProductDefaults();
+        this.updateWithProductTemplates();
     }
     
-    private void updateWithProductDefaults(){
+    private void updateWithProductTemplates(){
         if( this.product == null )  return;
         if( StringUtils.isBlank(this.version) )  return;
         
-        this.linkReleasedBinaries = this.product.getLinkReleasedBinaries().replace("${ver}", this.version);
-        this.linkStagedBinaries   = this.product.getLinkStagedBinaries().replace("${ver}", this.version);
+        //this.linkReleasedBinaries = this.product.getLinkReleasedBinaries().replace("${ver}", this.version);
+        //this.linkStagedBinaries   = this.product.getLinkStagedBinaries().replace("${ver}", this.version);
         // TODO - the rest.
+        
+        Field[] fields = this.getClass().getFields();
+        for( Field field : fields ) {
+            String methodName = "get" + StringUtils.capitalize( field.getName() );
+            try {
+                Method method = this.product.getClass().getMethod(methodName);
+                String tpl = (String) method.invoke(this.product);
+                if( tpl == null )  continue;
+                field.set( this, replaceVersionIfNotNull(tpl) );
+            }
+            catch( Exception ex ) { }
+        }
+    }
+    
+    private String replaceVersionIfNotNull( String template ){
+        return template.replace("${ver}", this.version)
+                .replace("${ver.lower}", this.version.toLowerCase())
+                .replace("${ver.upper}", this.version.toUpperCase());
     }
 
 
@@ -102,6 +127,10 @@ public class ProductRelease implements Serializable {
     public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
+
+    public ReleaseTraits getTraits() { return traits; }
+    public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
+        
     public String getGitHash() {        return gitHash;    }
     public void setGitHash(String gitHash) { this.gitHash = gitHash;    }
     public String getLinkBrew() {        return linkBrew;    }

@@ -3,9 +3,11 @@ package org.jboss.essc.web.pages;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.model.ProductLine;
@@ -40,9 +42,11 @@ public class ProductPage extends BaseLayoutPage {
     private void init(){
         if( this.product != null ){
             add( new ReleasesBox("releases", this.product, 100) );
+            add( new ReleaseTraitsBox("templates", this.product) );
         }
         else {
             add( new NoItemsFoundBox("releases", "No product specified."));
+            add( new WebMarkupContainer("templates"));
         }
     }
     

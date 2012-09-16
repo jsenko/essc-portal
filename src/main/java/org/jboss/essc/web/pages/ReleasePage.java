@@ -57,6 +57,12 @@ public class ReleasePage extends BaseLayoutPage {
         }
     }
     
+
+    public static PageParameters createPageParameters( ProductRelease rel ){
+        return new PageParameters()
+            .add("product", rel.getProduct().getName())
+            .add("version", rel.getVersion() );
+    }
     
     
     /** Adds CSS reference. */
@@ -65,4 +71,4 @@ public class ReleasePage extends BaseLayoutPage {
         response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
     }
 
-}
+}// class

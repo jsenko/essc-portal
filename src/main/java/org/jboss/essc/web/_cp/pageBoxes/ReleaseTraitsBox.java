@@ -14,6 +14,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.model.IHasTraits;
+import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 
@@ -27,14 +29,14 @@ public class ReleaseTraitsBox extends Panel {
     @Inject private ProductLineDaoBean prodDao;
 
     // Components
-    private Form<ProductRelease> insertForm;
+    private Form<IHasTraits> insertForm;
 
     // Data
-    private ProductRelease release;
+    private IHasTraits release;
 
 
     
-    public ReleaseTraitsBox( String id, final ProductRelease release ) {
+    public ReleaseTraitsBox( String id, final IHasTraits release ) {
         super(id);
         
         this.release = release;
@@ -45,9 +47,12 @@ public class ReleaseTraitsBox extends Panel {
         feedbackPanel.setOutputMarkupId( true );
         add(feedbackPanel);
         
-        this.insertForm = new Form("form") {
+        this.insertForm = new StatelessForm("form") {
             @Override protected void onSubmit() {
-                ReleaseTraitsBox.this.release = prodRelDao.update(release);
+                if( release instanceof ProductRelease )
+                    ReleaseTraitsBox.this.release = prodRelDao.update( (ProductRelease) release );
+                else if( release instanceof ProductLine )
+                    ReleaseTraitsBox.this.release = prodDao.update( (ProductLine) release );
             }
         };
         this.insertForm.setVersioned(false);

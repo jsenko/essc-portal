@@ -18,9 +18,7 @@ public class ReleaseLink extends Panel {
         setRenderBodyOnly(true);
         
         add( new BookmarkablePageLink("link", ReleasePage.class, 
-                new PageParameters()
-                        .add("product", rel.getProduct().getName())
-                        .add("version", rel.getVersion() )
+                ReleasePage.createPageParameters( rel )
              ).add( new Label("label", rel.getVersion()) )
         );
     }

@@ -50,11 +50,11 @@ public class AddReleasePage extends BaseLayoutPage {
         this.insertForm = new Form<ProductRelease>("form") {
             @Override protected void onSubmit() {
                 ProductRelease rel = prodRelDao.addProductRelease( product, version );
-                setResponsePage( new ReleasePage(rel) );
+                setResponsePage( ReleasePage.class, ReleasePage.createPageParameters( rel ) );
             }
         };
 
-        this.insertForm.add(new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
+        this.insertForm.add( new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
         this.insertForm.add( new DropDownChoice("productSelect", new PropertyModel<String>(this, "line"), new ProductsLDM() )
                 .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
         

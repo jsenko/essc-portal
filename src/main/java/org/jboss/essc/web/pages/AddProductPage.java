@@ -36,11 +36,9 @@ public class AddProductPage extends BaseLayoutPage {
         add(new FeedbackPanel("feedback"));
 
         this.insertForm = new Form<ProductLine>("form") {
-
-            @Override
-            protected void onSubmit() {
+            @Override protected void onSubmit() {
                 product = prodDao.addProductLine(product);
-                setResponsePage(new ProductPage(product));
+                setResponsePage(ProductPage.class, new PageParameters().add("name", product.getName()) );
             }
         };
 

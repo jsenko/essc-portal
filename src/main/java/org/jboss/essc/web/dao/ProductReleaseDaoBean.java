@@ -32,7 +32,7 @@ public class ProductReleaseDaoBean {
     }
 
     public List<ProductRelease> getProductReleasesOfLine(ProductLine prod) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product = ? ORDER BY pr.name DESC").setParameter(1, prod).getResultList();
+        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product = ? ORDER BY pr.version DESC").setParameter(1, prod).getResultList();
     }
 
     

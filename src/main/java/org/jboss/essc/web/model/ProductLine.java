@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="product")
-public class ProductLine implements Serializable {
+public class ProductLine implements Serializable, IHasTraits {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
