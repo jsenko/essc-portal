@@ -38,16 +38,14 @@ public class ReleaseTraitsBox extends Panel {
 
     
     // Wicket needs this :(
-    /*
     public ReleaseTraitsBox( String id, final ProductLine prod ) {
         this( id, prod, 0 );
     }
     public ReleaseTraitsBox( String id, final ProductRelease release ) {
         this( id, release, 0 );
     }
-    */
 
-    public ReleaseTraitsBox( String id, final IHasTraits release ) {
+    public ReleaseTraitsBox( String id, final IHasTraits release, int foo ) {
         super(id);
         
         this.release = release;
