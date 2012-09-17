@@ -5,7 +5,9 @@ import org.apache.wicket.Component;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 
 
@@ -18,8 +20,8 @@ public class HeaderPanel extends Panel {
         super(id);
         this.setRenderBodyOnly(true);
         
-        add( new WebMarkupContainer("menuProducts").add( new ActiveMenuItemBehavior() ) );
-        add( new WebMarkupContainer("menuAbout").add( new ActiveMenuItemBehavior() ) );
+        add( new WebMarkupContainer("menuProducts").add( new BookmarkablePageLink("link", HomePage.class) ).add( new ActiveMenuItemBehavior() ) );
+        add( new WebMarkupContainer("menuAbout").add( new BookmarkablePageLink("link", AboutPage.class) ).add( new ActiveMenuItemBehavior() ) );
     }// const
     
 }// class

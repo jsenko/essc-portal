@@ -8,8 +8,11 @@
         </div>
         <div id="menu">
             <ul>
-                <li wicket:id="menuProducts" class="active"><wicket:link><a href="HomePage.html">Products</a></wicket:link></li>
-                <li wicket:id="menuAbout"><wicket:link><a href="AboutPage.html">What's this</a></wicket:link></li>
+                <li wicket:id="menuProducts"><a wicket:id="link" href="/">Products</a></li>
+                <li wicket:id="menuAbout"><a wicket:id="link" href="/about">What's this</a></li>
+                <wicket:remove>
+                <li class="active"><a href="/about">What's this</a></li>
+                </wicket:remove>
             </ul>
         </div>
     </div>

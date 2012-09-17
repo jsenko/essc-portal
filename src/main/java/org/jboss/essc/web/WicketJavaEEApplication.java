@@ -43,6 +43,10 @@ public class WicketJavaEEApplication extends WebApplication {
         this.getMarkupSettings().setStripWicketTags(true);
         
         
+        // This would prevent Ajax components throwing an exception after session expiration.
+        //this.getApplication().getPageSettings().setRecreateMountedPagesAfterExpiry(false);
+        
+        
         // Mounts
         mountPage("/about", AboutPage.class);
         mountPage("/404",   Http404.class);
