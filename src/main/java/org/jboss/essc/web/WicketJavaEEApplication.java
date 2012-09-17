@@ -1,5 +1,6 @@
 package org.jboss.essc.web;
 
+import org.jboss.essc.web.pages.statics.AboutPage;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,6 +9,7 @@ import net.ftlines.wicket.cdi.ConversationPropagation;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.jboss.essc.web.pages.*;
+import org.jboss.essc.web.pages.statics.Http404;
 
 
 /**
@@ -37,9 +39,14 @@ public class WicketJavaEEApplication extends WebApplication {
         // Configure CDI, disabling Conversations as we aren't using them
         new CdiConfiguration(bm).setPropagation(ConversationPropagation.NONE).configure(this);
 
+        this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
+        this.getMarkupSettings().setStripWicketTags(true);
+        
         
         // Mounts
         mountPage("/about", AboutPage.class);
+        mountPage("/404",   Http404.class);
+        
         mountPage("/addProduct", AddProductPage.class);
         mountPage("/addRelease", AddReleasePage.class);
         

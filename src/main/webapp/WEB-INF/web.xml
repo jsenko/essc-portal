@@ -26,8 +26,14 @@
     <filter-mapping>
         <filter-name>Wicket</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher> <!-- Let 404 etc go through Wicket. -->
     </filter-mapping>
 
+    <error-page>
+            <error-code>404</error-code>
+            <location>/404</location>
+    </error-page>
 
     <servlet>
         <servlet-name>health</servlet-name>
@@ -38,9 +44,9 @@
         <url-pattern>/health</url-pattern>
     </servlet-mapping>
 
-    <!--
+    <!-- Two days
     <session-config>
-        <session-timeout>86400</session-timeout>
+        <session-timeout>2880</session-timeout>
     </session-config>
     -->
     

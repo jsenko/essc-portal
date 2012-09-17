@@ -1,4 +1,7 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.statics;
+
+import org.jboss.essc.web.pages.BaseLayoutPage;
+
 
 /**
  * Dynamic behavior for the ListContact page

@@ -2,7 +2,7 @@
 package org.jboss.essc.web.test.page;
 
 import org.apache.wicket.util.tester.WicketTester;
-import org.jboss.essc.web.pages.AboutPage;
+import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.HomePage;
 import org.junit.Test;

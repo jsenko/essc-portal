@@ -17,7 +17,7 @@ public class BaseLayoutPage extends WebPage {
 
     // Set up the dynamic behavior for the page, widgets bound by id
     public BaseLayoutPage() {
-
+        
         add( new HeaderPanel("header") );
         
         add( new SidebarPanel("sidebar") );
