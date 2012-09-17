@@ -48,15 +48,16 @@ public class ProductRelease implements Serializable, IHasTraits {
     private Status status = Status.PLANNED;
     
     private String note;
+
     
     // ---- Traits ----
     
-    // TODO @Embedded 
-    //private ReleaseTraits traits;
+    @Embedded 
+    private ReleaseTraits traits;
     
+    /*
     // Source links
     private String gitHash;
-    private String linkGitRepo;
     
     // Files links
     private String linkReleasedBinaries;
@@ -72,7 +73,8 @@ public class ProductRelease implements Serializable, IHasTraits {
     // Build links
     private String linkMead;
     private String linkBrew;
-    
+    private String linkGitRepo;
+    */
 
     
     
@@ -119,18 +121,27 @@ public class ProductRelease implements Serializable, IHasTraits {
     //<editor-fold defaultstate="collapsed" desc="Get/set">
     public Long getId() {        return id;    }
     public void setId(Long id) { this.id = id;    }
-    public String getVersion() { return version; }
-    public void setVersion( String version ) { this.version = version; }
+    
     public ProductLine getProduct() { return product; }
     public void setProduct( ProductLine product ) { this.product = product; }
+    public String getVersion() { return version; }
+    public void setVersion( String version ) { this.version = version; }
+
+    public String getNote() {        return note;    }
+    public void setNote(String note) { this.note = note;    }
+    public Status getStatus() {        return status;    }
+    public void setStatus(Status status) { this.status = status;    }
+    
     public Date getPlannedFor() { return plannedFor; }
     public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
 
-    //public ReleaseTraits getTraits() { return traits; }
-    //public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
+    //*
+    public ReleaseTraits getTraits() { return traits; }
+    public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
         
+    /*/
     public String getGitHash() {        return gitHash;    }
     public void setGitHash(String gitHash) { this.gitHash = gitHash;    }
     public String getLinkBrew() {        return linkBrew;    }
@@ -153,10 +164,7 @@ public class ProductRelease implements Serializable, IHasTraits {
     public void setLinkStagedBinaries(String linkStagedBinaries) { this.linkStagedBinaries = linkStagedBinaries;    }
     public String getLinkStagedDocs() {        return linkStagedDocs;    }
     public void setLinkStagedDocs(String linkStagedDocs) { this.linkStagedDocs = linkStagedDocs;    }
-    public String getNote() {        return note;    }
-    public void setNote(String note) { this.note = note;    }
-    public Status getStatus() {        return status;    }
-    public void setStatus(Status status) { this.status = status;    }
+    /**/
     //</editor-fold>
 
 
@@ -191,9 +199,9 @@ public class ProductRelease implements Serializable, IHasTraits {
     
     
     public enum Status {
-        PLANNED("planned for"),
-        IN_PROGRESS("in progress, expected "),
-        RELEASED("released");
+        PLANNED("Planned"),
+        IN_PROGRESS("In progress"),
+        RELEASED("Released");
         
         private String statusString;
 

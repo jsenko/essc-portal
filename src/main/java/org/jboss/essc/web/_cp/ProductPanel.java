@@ -17,6 +17,8 @@ import org.jboss.essc.web.pages.HomePage;
 /**
  * Contains a list of products. Appears on the home page.
  * 
+ * TODO: Rename to ProductsPanel or ProductsBox
+ * 
  * @author Ondrej Zizka
  */
 public class ProductPanel extends Panel {
@@ -38,7 +40,7 @@ public class ProductPanel extends Panel {
                 item.add( new Label("version", pr.getVersion()));
                 item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
                 item.add( new Label("state", pr.getStatus().name()));
-                item.add( new Label("gitHash", pr.getGitHash()));
+                item.add( new Label("gitHash", pr.getTraits().getGitHash()));
                 item.add( new Link<ProductRelease>("delete", item.getModel()) {
                     @Override
                     public void onClick() {

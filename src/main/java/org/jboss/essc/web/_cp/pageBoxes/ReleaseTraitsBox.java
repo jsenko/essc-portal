@@ -17,6 +17,7 @@ import org.jboss.essc.web.dao.ProductReleaseDaoBean;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 
 
@@ -36,6 +37,16 @@ public class ReleaseTraitsBox extends Panel {
 
 
     
+    // Wicket needs this :(
+    /*
+    public ReleaseTraitsBox( String id, final ProductLine prod ) {
+        this( id, prod, 0 );
+    }
+    public ReleaseTraitsBox( String id, final ProductRelease release ) {
+        this( id, release, 0 );
+    }
+    */
+
     public ReleaseTraitsBox( String id, final IHasTraits release ) {
         super(id);
         
@@ -47,6 +58,7 @@ public class ReleaseTraitsBox extends Panel {
         feedbackPanel.setOutputMarkupId( true );
         add(feedbackPanel);
         
+        // Form
         this.insertForm = new StatelessForm("form") {
             @Override protected void onSubmit() {
                 if( release instanceof ProductRelease )
@@ -58,6 +70,7 @@ public class ReleaseTraitsBox extends Panel {
         this.insertForm.setVersioned(false);
         add( this.insertForm );
         
+        // Status
         this.insertForm.add( new DropDownChoice("status",
                 new PropertyModel( release, "status"),
                 new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
@@ -66,8 +79,11 @@ public class ReleaseTraitsBox extends Panel {
         UrlValidator val = new UrlValidator();
         UrlHttpRequestValidator val2 = new UrlHttpRequestValidator();
         
-        //this.insertForm.add( new TextField("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("releasedBinaries", new PropertyModel( release, "linkReleasedBinaries") ){
+        // Traits
+        ReleaseTraits traits = this.release.getTraits();
+        
+        //this.insertForm.add( new TextField("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ){
             @Override protected void onError( AjaxRequestTarget target ) {
                 target.add( feedbackPanel );
                 //super.onError( target ); // puts the focus back.
@@ -77,16 +93,16 @@ public class ReleaseTraitsBox extends Panel {
                 super.onSubmit( target );
             }
         }.add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("stagedBinaries",   new PropertyModel( release, "linkStagedBinaries") ).add(val) ); //.add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("releasedDocs",     new PropertyModel( release, "linkReleasedDocs") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("stagedDocs",       new PropertyModel( release, "linkStagedDocs") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("gitRepo",          new PropertyModel( release, "linkGitRepo") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("gitHash",          new PropertyModel( release, "gitHash") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("mead",             new PropertyModel( release, "linkMead") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("brew",             new PropertyModel( release, "linkBrew") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("issuesFixed",      new PropertyModel( release, "linkIssuesFixed") ).add(val).add(val2) );
-        this.insertForm.add( new AjaxEditableLabel("issuesFound",      new PropertyModel( release, "linkIssuesFound") ).add(val).add(val2) );
-        //this.insertForm.add( new AjaxEditableLabel("",            new PropertyModel( release, "link") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ).add(val) ); //.add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("gitRepo",          new PropertyModel( traits, "linkGitRepo") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("gitHash",          new PropertyModel( traits, "gitHash") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("mead",             new PropertyModel( traits, "linkMead") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("brew",             new PropertyModel( traits, "linkBrew") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("issuesFixed",      new PropertyModel( traits, "linkIssuesFixed") ).add(val).add(val2) );
+        this.insertForm.add( new AjaxEditableLabel("issuesFound",      new PropertyModel( traits, "linkIssuesFound") ).add(val).add(val2) );
+        //this.insertForm.add( new AjaxEditableLabel("",            new PropertyModel( traits, "link") ).add(val).add(val2) );
 
     }// const
 

@@ -46,7 +46,7 @@ public class ReleasesPanel extends Panel {
                 item.add( new Label("version", pr.getVersion()));
                 item.add( new Label("planned", DF.format( pr.getPlannedFor() )));
                 item.add( new Label("state", pr.getStatus().name()));
-                item.add( new Label("gitHash", pr.getGitHash()));
+                item.add( new Label("gitHash", pr.getTraits().getGitHash()));
                 item.add( new Link<ProductRelease>("delete", item.getModel()) {
                     @Override
                     public void onClick() {

@@ -6,7 +6,8 @@ import javax.persistence.Embeddable;
 
 
 /**
- *
+ *  Traits - used for 1) product trait templates 2) release trait values.
+ * 
  * @author ozizka@redhat.com
  */
 @Embeddable
@@ -14,7 +15,6 @@ public class ReleaseTraits implements Serializable {
 
     // Source links
     private String gitHash;
-    private String linkGitRepo;
     
     // Files links
     private String linkReleasedBinaries;
@@ -28,9 +28,12 @@ public class ReleaseTraits implements Serializable {
     private String linkIssuesFound;
     
     // Build links
+    private String linkGitRepo;
     private String linkMead;
     private String linkBrew;
 
+    
+    //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public String getGitHash() { return gitHash; }
     public void setGitHash( String gitHash ) { this.gitHash = gitHash; }
     public String getLinkBrew() { return linkBrew; }
@@ -53,5 +56,7 @@ public class ReleaseTraits implements Serializable {
     public void setLinkStagedBinaries( String linkStagedBinaries ) { this.linkStagedBinaries = linkStagedBinaries; }
     public String getLinkStagedDocs() { return linkStagedDocs; }
     public void setLinkStagedDocs( String linkStagedDocs ) { this.linkStagedDocs = linkStagedDocs; }
-
+    //</editor-fold>
+    
+    
 }// class

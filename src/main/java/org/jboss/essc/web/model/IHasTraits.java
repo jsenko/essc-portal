@@ -6,7 +6,7 @@ package org.jboss.essc.web.model;
  */
 public interface IHasTraits {
     
-    //public ReleaseTraits getTraits();
-    //public void setTraits( ReleaseTraits traits );
+    public ReleaseTraits getTraits();
+    public void setTraits( ReleaseTraits traits );
     
 }// class

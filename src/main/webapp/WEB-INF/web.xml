@@ -38,4 +38,10 @@
         <url-pattern>/health</url-pattern>
     </servlet-mapping>
 
+    <!--
+    <session-config>
+        <session-timeout>86400</session-timeout>
+    </session-config>
+    -->
+    
 </web-app>
