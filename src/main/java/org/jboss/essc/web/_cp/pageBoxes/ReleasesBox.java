@@ -1,8 +1,5 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -26,7 +23,6 @@ public class ReleasesBox extends Panel {
 
     @Inject protected ProductReleaseDaoBean dao;
     
-    private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 
     protected int numReleases = 6;
     
@@ -65,8 +61,7 @@ public class ReleasesBox extends Panel {
                 );
                 item.add( new ReleaseLink("versionLink", pr));
                 item.add( new Label("status", pr.getStatus() == null ? "" : pr.getStatus().getStatusString()));
-                Date date = pr.getPlannedFor();
-                item.add( new Label("planned", (date == null) ? "" : DF.format( date )));
+                item.add( new Label("planned", pr.formatPlannedFor()) );
                 //item.add( new Label("gitHash", pr.getGitHash()));
                 //item.add( new Label("parent", pr.getParent().getVersion()));
             }

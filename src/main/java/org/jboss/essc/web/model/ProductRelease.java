@@ -3,9 +3,12 @@ package org.jboss.essc.web.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.Format;
 import java.util.Date;
+import java.util.Locale;
 import javax.persistence.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.FastDateFormat;
 
 
 /**
@@ -26,6 +29,9 @@ import org.apache.commons.lang.StringUtils;
 @SuppressWarnings("serial")
 @Entity @Table(name="`release`")
 public class ProductRelease implements Serializable, IHasTraits {
+    
+    private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +58,9 @@ public class ProductRelease implements Serializable, IHasTraits {
     
     // ---- Traits ----
     
-    @Embedded 
-    private ReleaseTraits traits;
+    @Embedded
+    //@Basic(fetch=FetchType.EAGER, optional=false) // HHH-7610
+    private ReleaseTraits traits = new ReleaseTraits();
     
     /*
     // Source links
@@ -138,7 +145,10 @@ public class ProductRelease implements Serializable, IHasTraits {
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
 
     //*
-    public ReleaseTraits getTraits() { return traits; }
+    public ReleaseTraits getTraits() { 
+        if( traits == null )  traits = new ReleaseTraits(); // HHH-7610
+        return traits; 
+    }
     public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
         
     /*/
@@ -195,6 +205,10 @@ public class ProductRelease implements Serializable, IHasTraits {
         else if (!version.equals(other.version)) return false;
         
         return true;
+    }
+
+    public String formatPlannedFor() {
+        return (this.plannedFor == null) ? "" : DF.format( this.plannedFor );
     }
     
     

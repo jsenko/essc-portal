@@ -71,7 +71,10 @@ public class ProductLine implements Serializable, IHasTraits {
     
     
     //*
-    public ReleaseTraits getTraits() { return traits; }
+    public ReleaseTraits getTraits() { 
+        if( traits == null )  traits = new ReleaseTraits(); // HHH-7610
+        return traits; 
+    }
     public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
         
     /*/

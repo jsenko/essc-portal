@@ -22,6 +22,10 @@ import org.jboss.essc.wicket.UrlHttpRequestValidator;
 
 
 /**
+ *  A box with release traits OR product templates.
+ * 
+ *  TODO: Split - move form and status to release-specific sup-component.
+ * 
  * @author Ondrej Zizka
  */
 public class ReleaseTraitsBox extends Panel {
@@ -42,6 +46,9 @@ public class ReleaseTraitsBox extends Panel {
         this( id, prod, 0 );
     }
     public ReleaseTraitsBox( String id, final ProductRelease release ) {
+        this( id, release, 0 );
+    }
+    public ReleaseTraitsBox( String id, final IHasTraits release ) {
         this( id, release, 0 );
     }
 
@@ -72,7 +79,7 @@ public class ReleaseTraitsBox extends Panel {
         this.insertForm.add( new DropDownChoice("status",
                 new PropertyModel( release, "status"),
                 new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
-        ));
+        ).setVisibilityAllowed( release instanceof ProductRelease ) );
         
         UrlValidator val = new UrlValidator();
         UrlHttpRequestValidator val2 = new UrlHttpRequestValidator();
