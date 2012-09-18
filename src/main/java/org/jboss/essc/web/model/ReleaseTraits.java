@@ -34,6 +34,9 @@ public class ReleaseTraits implements Serializable {
     private String linkBrew;
     
     // Test links
+    private String linkMeadJob;
+    private String linkTattleTale;
+    private String linkCodeCoverage;
     private String linkTck;
     private String linkCC;
     private String link508;
@@ -73,6 +76,13 @@ public class ReleaseTraits implements Serializable {
     public void setLinkStagedDocs( String linkStagedDocs ) { this.linkStagedDocs = linkStagedDocs; }
     
     // Tests
+    public String getLinkCodeCoverage() { return linkCodeCoverage; }
+    public void setLinkCodeCoverage( String linkCodeCoverage ) { this.linkCodeCoverage = linkCodeCoverage; }
+    public String getLinkMeadJob() { return linkMeadJob; }
+    public void setLinkMeadJob( String linkMeadJob ) { this.linkMeadJob = linkMeadJob; }
+    public String getLinkTattleTale() { return linkTattleTale; }
+    public void setLinkTattleTale( String linkTattleTale ) { this.linkTattleTale = linkTattleTale; }
+    
     public String getLinkTck() { return linkTck; }
     public void setLinkTck( String linkTck ) { this.linkTck = linkTck; }
     public String getLinkJavaEE() { return linkJavaEE; }

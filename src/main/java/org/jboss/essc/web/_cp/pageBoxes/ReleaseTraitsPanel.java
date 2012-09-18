@@ -26,11 +26,12 @@ public class ReleaseTraitsPanel extends Panel {
     final FeedbackPanel feedbackPanel;
     
     // Validators
-    UrlValidator val = new UrlValidator();
-    UrlHttpRequestValidator val2 = new UrlHttpRequestValidator();
+    UrlValidator urlFormatValidator = new UrlValidator();
+    UrlHttpRequestValidator urlHttpValidator = new UrlHttpRequestValidator();
     
     // Data
     private IHasTraits release;
+    private boolean urlVerificationEnabled;
 
 
     
@@ -87,7 +88,10 @@ public class ReleaseTraitsPanel extends Panel {
         this.add( new MyAjaxEditableLabel("mead",             new PropertyModel( traits, "linkMead") ) );
         this.add( new MyAjaxEditableLabel("brew",             new PropertyModel( traits, "linkBrew") ) );
 
-        // Tests
+        // Tests and reports
+        this.add( new MyAjaxEditableLabel("linkMeadJob",      new PropertyModel( traits, "linkMeadJob") ) );
+        this.add( new MyAjaxEditableLabel("linkTattleTale",   new PropertyModel( traits, "linkTattleTale") ) );
+        this.add( new MyAjaxEditableLabel("linkCodeCoverage", new PropertyModel( traits, "linkCodeCoverage") ) );
         this.add( new MyAjaxEditableLabel("linkTck",          new PropertyModel( traits, "linkTck") ) );
         this.add( new MyAjaxEditableLabel("linkCC",           new PropertyModel( traits, "linkCC") ) );
         this.add( new MyAjaxEditableLabel("link508",          new PropertyModel( traits, "link508") ) );
@@ -106,8 +110,9 @@ public class ReleaseTraitsPanel extends Panel {
 
         public MyAjaxEditableLabel( String id, IModel<String> model ) {
             super( id, model );
-            this.add( val );
-            this.add( val2 );
+            this.add( urlFormatValidator );
+            if( isUrlVerificationEnabled() )
+                this.add( urlHttpValidator );
         }
 
         @Override protected void onError( AjaxRequestTarget target ) {
@@ -119,5 +124,12 @@ public class ReleaseTraitsPanel extends Panel {
             super.onSubmit( target );
         }
     }
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public boolean isUrlVerificationEnabled() { return urlVerificationEnabled; }
+    public void setUrlVerificationEnabled( boolean urlVerificationEnabled ) { this.urlVerificationEnabled = urlVerificationEnabled; }
+    //</editor-fold>
+
     
 }// class
