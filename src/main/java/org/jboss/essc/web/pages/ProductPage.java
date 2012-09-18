@@ -11,7 +11,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
-import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsBox;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.model.ProductLine;
@@ -67,7 +67,7 @@ public class ProductPage extends BaseLayoutPage {
         // Boxes
         if( this.product != null ){
             add( new ReleasesBox("releasesBox", this.product, 100) );
-            add( new ReleaseTraitsBox("templates", this.product) );
+            add( new ReleaseTraitsPanel("templates", this.product) );
         }
         else {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));

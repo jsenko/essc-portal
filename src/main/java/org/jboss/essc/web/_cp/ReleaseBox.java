@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web.dao.ProductLineDaoBean;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
@@ -61,7 +62,8 @@ public class ReleaseBox extends Panel {
                 new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
         ).setVisibilityAllowed( release instanceof ProductRelease ) );
         
-        
+        // Traits
+        this.form.add( new ReleaseTraitsPanel( "traits", release ) );
     }
 
 }// class
