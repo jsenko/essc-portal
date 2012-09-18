@@ -1,8 +1,8 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
 import java.util.List;
-import org.jboss.essc.web.model.ProductLine;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -12,7 +12,7 @@ import org.jboss.essc.web.model.ProductRelease;
  */
 public class RecentReleasesBox extends ReleasesBox {
 
-    public RecentReleasesBox( String id, ProductLine forProduct, int numReleases ) {
+    public RecentReleasesBox( String id, Product forProduct, int numReleases ) {
         super( id, forProduct, numReleases );
     }
 
@@ -21,7 +21,7 @@ public class RecentReleasesBox extends ReleasesBox {
     }
 
     
-    protected List<ProductRelease> getReleases(){
+    protected List<Release> getReleases(){
         return this.dao.getProductReleases_orderDateDesc(this.numReleases);
     }
     

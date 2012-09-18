@@ -15,8 +15,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductLine;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.Release;
 import org.jboss.logging.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +32,10 @@ public class AddReleasePage extends BaseLayoutPage {
     @Inject private ProductDaoBean prodDao;
 
     // Components
-    private Form<ProductRelease> insertForm;
+    private Form<Release> insertForm;
 
     // Data
-    private ProductLine product;
+    private Product product;
     private String version;
     
 
@@ -47,9 +47,9 @@ public class AddReleasePage extends BaseLayoutPage {
         
         add(new FeedbackPanel("feedback"));
 
-        this.insertForm = new Form<ProductRelease>("form") {
+        this.insertForm = new Form<Release>("form") {
             @Override protected void onSubmit() {
-                ProductRelease rel = prodRelDao.addProductRelease( product, version );
+                Release rel = prodRelDao.addProductRelease( product, version );
                 setResponsePage( ReleasePage.class, ReleasePage.createPageParameters( rel ) );
             }
         };
@@ -64,21 +64,21 @@ public class AddReleasePage extends BaseLayoutPage {
     
     
     
-    public ProductLine getLine() { return product; }
-    public void setLine( ProductLine product ) { this.product = product; }
+    public Product getLine() { return product; }
+    public void setLine( Product product ) { this.product = product; }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
 
     
     // ProductsLDM 
-    private class ProductsLDM extends LoadableDetachableModel<List<ProductLine>> {
+    private class ProductsLDM extends LoadableDetachableModel<List<Product>> {
 
         public ProductsLDM() {
         }
 
         @Override
-        protected List<ProductLine> load() {
-            List<ProductLine> products = prodDao.getProductLines_orderName(0);
+        protected List<Product> load() {
+            List<Product> products = prodDao.getProductLines_orderName(0);
             //LoggerFactory.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
             Logger.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
             return products;

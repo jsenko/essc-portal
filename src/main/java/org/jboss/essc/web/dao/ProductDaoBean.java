@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.essc.web.model.ProductLine;
+import org.jboss.essc.web.model.Product;
 
 
 /**
@@ -19,49 +19,49 @@ public class ProductDaoBean {
     private EntityManager em;
 
 
-    public List<ProductLine> getProductLines_orderName(int limit) {
+    public List<Product> getProductLines_orderName(int limit) {
         return this.em.createQuery("SELECT pl FROM ProductLine pl ORDER BY pl.name").getResultList();
     }
 
     /**
      * Get ProductLine by ID.
      */
-    public ProductLine getProductLine(Long id) {
-        return this.em.find(ProductLine.class, id);
+    public Product getProductLine(Long id) {
+        return this.em.find(Product.class, id);
     }
 
     /**
      * Get ProductLine by name.
      */
-    public ProductLine getProductLineByName( String name ) {
-        return this.em.createQuery("SELECT pl FROM ProductLine pl WHERE pl.name = ?", ProductLine.class).setParameter(1, name).getSingleResult();
+    public Product getProductLineByName( String name ) {
+        return this.em.createQuery("SELECT pl FROM ProductLine pl WHERE pl.name = ?", Product.class).setParameter(1, name).getSingleResult();
     }
 
     /**
      * Add a new ProductLine.
      */
-    public ProductLine addProductLine( String name) {
-        return this.em.merge( new ProductLine( null, name ) );
+    public Product addProductLine( String name) {
+        return this.em.merge( new Product( null, name ) );
     }
 
     /**
      * Add a new ProductLine.
      */
-    public ProductLine addProductLine( ProductLine prod ) {
+    public Product addProductLine( Product prod ) {
         return this.em.merge( prod );
     }
 
     /**
      * Remove a ProductLine.
      */
-    public void remove(ProductLine pl) {
-        ProductLine managed = this.em.merge(pl);
+    public void remove(Product pl) {
+        Product managed = this.em.merge(pl);
         this.em.remove(managed);
         this.em.flush();
     }
 
-    public ProductLine update( ProductLine product ) {
-        ProductLine managed = this.em.merge(product);
+    public Product update( Product product ) {
+        Product managed = this.em.merge(product);
         return managed;
     }
     

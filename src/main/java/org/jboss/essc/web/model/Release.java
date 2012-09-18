@@ -28,7 +28,7 @@ import org.apache.commons.lang.time.FastDateFormat;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="`release`")
-public class ProductRelease implements Serializable, IHasTraits {
+public class Release implements Serializable, IHasTraits {
     
     private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
     
@@ -40,7 +40,7 @@ public class ProductRelease implements Serializable, IHasTraits {
     //@Column(unique=true)
     @ManyToOne
     @JoinColumn(updatable=false, nullable=false)
-    private ProductLine product;
+    private Product product;
 
     private String version;
     
@@ -85,10 +85,10 @@ public class ProductRelease implements Serializable, IHasTraits {
 
     
     
-    public ProductRelease() {
+    public Release() {
     }
 
-    public ProductRelease(Long id, ProductLine product, String version) {
+    public Release(Long id, Product product, String version) {
         this.id = id;
         this.product = product;
         this.version = version;
@@ -129,8 +129,8 @@ public class ProductRelease implements Serializable, IHasTraits {
     public Long getId() {        return id;    }
     public void setId(Long id) { this.id = id;    }
     
-    public ProductLine getProduct() { return product; }
-    public void setProduct( ProductLine product ) { this.product = product; }
+    public Product getProduct() { return product; }
+    public void setProduct( Product product ) { this.product = product; }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
 
@@ -192,7 +192,7 @@ public class ProductRelease implements Serializable, IHasTraits {
         if (this == obj)  return true;
         if (obj == null)  return false;
         if (getClass() != obj.getClass())  return false;
-        ProductRelease other = (ProductRelease) obj;
+        Release other = (Release) obj;
         
         if (product == null) {
             if (other.product != null) return false;

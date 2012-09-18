@@ -13,7 +13,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -27,14 +27,14 @@ public class ReleaseBox extends Panel {
     @Inject private ProductDaoBean prodDao;
 
     // Components
-    private Form<ProductRelease> form;
+    private Form<Release> form;
 
     // Data
-    private ProductRelease release;
+    private Release release;
 
     
         
-    public ReleaseBox( String id, final ProductRelease release ) {
+    public ReleaseBox( String id, final Release release ) {
         super( id );
         this.release = release;
 
@@ -50,7 +50,7 @@ public class ReleaseBox extends Panel {
         // Form
         this.form = new StatelessForm("form") {
             @Override protected void onSubmit() {
-                ReleaseBox.this.release = prodRelDao.update( (ProductRelease) release );
+                ReleaseBox.this.release = prodRelDao.update( (Release) release );
             }
         };
         this.form.setVersioned(false);
@@ -59,8 +59,8 @@ public class ReleaseBox extends Panel {
         // Status
         this.form.add( new DropDownChoice("status",
                 new PropertyModel( release, "status"),
-                new ArrayList<ProductRelease.Status>( Arrays.asList( ProductRelease.Status.values() ))
-        ).setVisibilityAllowed( release instanceof ProductRelease ) );
+                new ArrayList<Release.Status>( Arrays.asList( Release.Status.values() ))
+        ).setVisibilityAllowed( release instanceof Release ) );
         
         // Traits
         this.form.add( new ReleaseTraitsPanel( "traits", release ) );

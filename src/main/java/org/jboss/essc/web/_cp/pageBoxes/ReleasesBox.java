@@ -10,8 +10,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductLine;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -26,7 +26,7 @@ public class ReleasesBox extends Panel {
 
     protected int numReleases = 6;
     
-    private ProductLine forProduct;
+    private Product forProduct;
     
     
     public ReleasesBox( String id, int numReleases ) {
@@ -34,26 +34,26 @@ public class ReleasesBox extends Panel {
     }
     
     
-    public ReleasesBox( String id, ProductLine forProduct, int numReleases ) {
+    public ReleasesBox( String id, Product forProduct, int numReleases ) {
         super(id);
         this.setRenderBodyOnly( true );
         
         this.forProduct = forProduct;
         this.numReleases = numReleases;
         
-        List<ProductRelease> releases = getReleases();
+        List<Release> releases = getReleases();
         final boolean showProd = this.forProduct == null;
 
         add( new Label("heading", "Releases" + (showProd ? "" : " of " + this.forProduct.getName() ) ) );
         add( new WebMarkupContainer("productTH").setVisible( showProd ) );
         
         //if( releases.size() == 0 )
-        add( new ListView<ProductRelease>("rows", releases)
+        add( new ListView<Release>("rows", releases)
         {
             // Populate the table of contacts
             @Override
-            protected void populateItem( final ListItem<ProductRelease> item) {
-                ProductRelease pr = item.getModelObject();
+            protected void populateItem( final ListItem<Release> item) {
+                Release pr = item.getModelObject();
                 //item.add( new Label("product", pr.getProduct().getName()).setVisible(ReleasesBox.this.forProduct == null) );
                 item.add( new WebMarkupContainer("productTD")
                         .add( new ProductLink("productLink", pr.getProduct()) )
@@ -69,7 +69,7 @@ public class ReleasesBox extends Panel {
     }// const
     
     
-    protected List<ProductRelease> getReleases(){
+    protected List<Release> getReleases(){
         if( this.forProduct == null )
             return dao.getProductReleases_orderDateDesc(this.numReleases);
         else

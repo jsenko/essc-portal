@@ -9,8 +9,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
-import org.jboss.essc.web.model.ProductLine;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 
@@ -35,10 +35,10 @@ public class ReleaseTraitsPanel extends Panel {
 
     
     // Wicket needs this :(
-    public ReleaseTraitsPanel( String id, final ProductLine prod ) {
+    public ReleaseTraitsPanel( String id, final Product prod ) {
         this( id, prod, 0 );
     }
-    public ReleaseTraitsPanel( String id, final ProductRelease release ) {
+    public ReleaseTraitsPanel( String id, final Release release ) {
         this( id, release, 0 );
     }
     public ReleaseTraitsPanel( String id, final IHasTraits release ) {

@@ -8,7 +8,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -19,7 +19,7 @@ public class ReleasePage extends BaseLayoutPage {
 
     @Inject private ReleaseDaoBean releaseDao;
     
-    private ProductRelease release;
+    private Release release;
 
     
     public ReleasePage( PageParameters par ) {
@@ -33,7 +33,7 @@ public class ReleasePage extends BaseLayoutPage {
         init( titleIfNotFound );
     }
 
-    public ReleasePage( ProductRelease release ) {
+    public ReleasePage( Release release ) {
         this.release = release;
         init("Release not specified.");
     }
@@ -49,7 +49,7 @@ public class ReleasePage extends BaseLayoutPage {
     }
     
 
-    public static PageParameters createPageParameters( ProductRelease rel ){
+    public static PageParameters createPageParameters( Release rel ){
         return new PageParameters()
             .add("product", rel.getProduct().getName())
             .add("version", rel.getVersion() );

@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="product")
-public class ProductLine implements Serializable, IHasTraits {
+public class Product implements Serializable, IHasTraits {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +50,10 @@ public class ProductLine implements Serializable, IHasTraits {
 
     
     
-    public ProductLine() {
+    public Product() {
     }
 
-    public ProductLine(Long id, String name) {
+    public Product(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -115,7 +115,7 @@ public class ProductLine implements Serializable, IHasTraits {
         if (this == obj)  return true;
         if (obj == null)  return false;
         if (getClass() != obj.getClass())  return false;
-        ProductLine other = (ProductLine) obj;
+        Product other = (Product) obj;
         
         if (name == null) {
             if (other.name != null)  return false;
@@ -124,4 +124,4 @@ public class ProductLine implements Serializable, IHasTraits {
         return true;
     }
    
-}// class
+}

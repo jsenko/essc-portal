@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductLine;
+import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;
 
 
@@ -22,19 +22,19 @@ public class ProductDefaultsPanel extends Panel {
     @Inject private ProductDaoBean prodDao;
 
     // Components
-    private Form<ProductLine> insertForm;
+    private Form<Product> insertForm;
 
     // Data
-    private ProductLine product;
+    private Product product;
 
     
-    public ProductDefaultsPanel( String id, final ProductLine _product ) {
+    public ProductDefaultsPanel( String id, final Product _product ) {
         super(id);
         
         add(new FeedbackPanel("feedback"));
         
         // Form
-        this.insertForm = new StatelessForm<ProductLine>("insertForm") {
+        this.insertForm = new StatelessForm<Product>("insertForm") {
             @Override protected void onSubmit() {
                 ProductDefaultsPanel.this.product = prodDao.update(_product);
             }

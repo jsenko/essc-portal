@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.ReleasePage;
 
 
@@ -13,7 +13,7 @@ import org.jboss.essc.web.pages.ReleasePage;
  */
 public class ReleaseLink extends Panel {
 
-    public ReleaseLink( String id, final ProductRelease rel ) {
+    public ReleaseLink( String id, final Release rel ) {
         super( id );
         setRenderBodyOnly(true);
         

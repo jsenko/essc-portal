@@ -14,7 +14,7 @@ import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
-import org.jboss.essc.web.model.ProductLine;
+import org.jboss.essc.web.model.Product;
 
 
 /**
@@ -28,10 +28,10 @@ public class ProductPage extends BaseLayoutPage {
     @Inject private ProductDaoBean productDao;
     
     // Components
-    private Form<ProductLine> form;
+    private Form<Product> form;
 
     // Data
-    private ProductLine product;
+    private Product product;
 
     
     public ProductPage( PageParameters par ) {
@@ -42,7 +42,7 @@ public class ProductPage extends BaseLayoutPage {
         init();
     }
 
-    public ProductPage( ProductLine product ) {
+    public ProductPage( Product product ) {
         this.product = product;
         init();
     }
@@ -58,7 +58,7 @@ public class ProductPage extends BaseLayoutPage {
         // Form
         this.form = new StatelessForm("form") {
             @Override protected void onSubmit() {
-                product = productDao.update( (ProductLine) product );
+                product = productDao.update( (Product) product );
             }
         };
         this.form.setVersioned(false);

@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.model.ProductLine;
+import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.ProductPage;
 
 
@@ -13,7 +13,7 @@ import org.jboss.essc.web.pages.ProductPage;
  */
 public class ProductLink extends Panel {
 
-    public ProductLink( String id, final ProductLine prod ) {
+    public ProductLink( String id, final Product prod ) {
         super( id );
         setRenderBodyOnly(true);
         

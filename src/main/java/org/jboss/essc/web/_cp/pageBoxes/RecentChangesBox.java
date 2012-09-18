@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.ProductRelease;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -33,12 +33,12 @@ public class RecentChangesBox extends Panel {
         
         this.numReleases = numReleases;
         
-        add( new ListView<ProductRelease>("rows", dao.getProductReleases_orderDateDesc(this.numReleases)) {
+        add( new ListView<Release>("rows", dao.getProductReleases_orderDateDesc(this.numReleases)) {
 
             // Populate the table of contacts
             @Override
-            protected void populateItem( final ListItem<ProductRelease> item) {
-                ProductRelease pr = item.getModelObject();
+            protected void populateItem( final ListItem<Release> item) {
+                Release pr = item.getModelObject();
                 item.add( new Label("product", pr.getProduct().getName()));
                 item.add( new Label("version", pr.getVersion()));
                 Date date = pr.getLastChanged();
