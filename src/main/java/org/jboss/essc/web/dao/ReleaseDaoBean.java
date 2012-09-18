@@ -13,7 +13,7 @@ import org.jboss.essc.web.model.ProductRelease;
  * A bean which manages Contact entities.
  */
 @Stateless
-public class ProductReleaseDaoBean {
+public class ReleaseDaoBean {
 
     @PersistenceContext
     private EntityManager em;
@@ -79,4 +79,4 @@ public class ProductReleaseDaoBean {
     }
 
     
-}// class
+}

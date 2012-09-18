@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 import org.jboss.essc.web.pages.HomePage;
@@ -23,7 +23,7 @@ import org.jboss.essc.web.pages.HomePage;
  */
 public class ProductPanel extends Panel {
 
-    @Inject private ProductReleaseDaoBean dao;
+    @Inject private ReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 

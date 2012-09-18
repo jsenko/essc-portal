@@ -13,7 +13,7 @@ import org.jboss.essc.web.model.ProductLine;
  * A bean which manages Contact entities.
  */
 @Stateless
-public class ProductLineDaoBean {
+public class ProductDaoBean {
 
     @PersistenceContext
     private EntityManager em;
@@ -65,4 +65,4 @@ public class ProductLineDaoBean {
         return managed;
     }
     
-}// class
+}

@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web._cp.links.ProductLink;
-import org.jboss.essc.web.dao.ProductLineDaoBean;
+import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 
 
@@ -14,7 +14,7 @@ import org.jboss.essc.web.model.ProductLine;
  */
 public class SidebarPanel extends Panel {
 
-    @Inject private ProductLineDaoBean dao;
+    @Inject private ProductDaoBean dao;
     
     
     public SidebarPanel( String id ) {

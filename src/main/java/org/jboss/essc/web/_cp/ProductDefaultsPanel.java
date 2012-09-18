@@ -7,8 +7,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
-import org.jboss.essc.web.dao.ProductLineDaoBean;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ReleaseTraits;
 
@@ -18,8 +18,8 @@ import org.jboss.essc.web.model.ReleaseTraits;
  */
 public class ProductDefaultsPanel extends Panel {
     
-    @Inject private ProductReleaseDaoBean prodRelDao;
-    @Inject private ProductLineDaoBean prodDao;
+    @Inject private ReleaseDaoBean prodRelDao;
+    @Inject private ProductDaoBean prodDao;
 
     // Components
     private Form<ProductLine> insertForm;

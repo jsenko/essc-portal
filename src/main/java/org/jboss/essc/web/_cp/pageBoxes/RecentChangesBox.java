@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
 
 
@@ -19,7 +19,7 @@ import org.jboss.essc.web.model.ProductRelease;
  */
 public class RecentChangesBox extends Panel {
 
-    @Inject private ProductReleaseDaoBean dao;
+    @Inject private ReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 

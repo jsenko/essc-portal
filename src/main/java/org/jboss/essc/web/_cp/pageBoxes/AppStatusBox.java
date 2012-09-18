@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 
 
@@ -15,7 +15,7 @@ import org.jboss.essc.web.model.ProductLine;
  */
 public class AppStatusBox extends Panel {
 
-    @Inject private ProductReleaseDaoBean dao;
+    @Inject private ReleaseDaoBean dao;
     
     private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
 

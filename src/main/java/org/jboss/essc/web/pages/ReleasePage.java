@@ -7,7 +7,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
 
 
@@ -17,7 +17,7 @@ import org.jboss.essc.web.model.ProductRelease;
 @SuppressWarnings("serial")
 public class ReleasePage extends BaseLayoutPage {
 
-    @Inject private ProductReleaseDaoBean releaseDao;
+    @Inject private ReleaseDaoBean releaseDao;
     
     private ProductRelease release;
 

@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 
@@ -21,7 +21,7 @@ import org.jboss.essc.web.model.ProductRelease;
  */
 public class ReleasesBox extends Panel {
 
-    @Inject protected ProductReleaseDaoBean dao;
+    @Inject protected ReleaseDaoBean dao;
     
 
     protected int numReleases = 6;

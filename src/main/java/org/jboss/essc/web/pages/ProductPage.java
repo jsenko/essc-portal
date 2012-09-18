@@ -13,7 +13,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
-import org.jboss.essc.web.dao.ProductLineDaoBean;
+import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 
 
@@ -25,7 +25,7 @@ import org.jboss.essc.web.model.ProductLine;
 @SuppressWarnings("serial")
 public class ProductPage extends BaseLayoutPage {
 
-    @Inject private ProductLineDaoBean productDao;
+    @Inject private ProductDaoBean productDao;
     
     // Components
     private Form<ProductLine> form;

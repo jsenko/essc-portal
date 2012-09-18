@@ -11,8 +11,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
-import org.jboss.essc.web.dao.ProductLineDaoBean;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
 
 
@@ -23,8 +23,8 @@ import org.jboss.essc.web.model.ProductRelease;
  */
 public class ReleaseBox extends Panel {
     
-    @Inject private ProductReleaseDaoBean prodRelDao;
-    @Inject private ProductLineDaoBean prodDao;
+    @Inject private ReleaseDaoBean prodRelDao;
+    @Inject private ProductDaoBean prodDao;
 
     // Components
     private Form<ProductRelease> form;

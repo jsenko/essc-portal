@@ -13,8 +13,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.ProductLineDaoBean;
-import org.jboss.essc.web.dao.ProductReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDaoBean;
+import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.ProductLine;
 import org.jboss.essc.web.model.ProductRelease;
 import org.jboss.logging.Logger;
@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("serial")
 public class AddReleasePage extends BaseLayoutPage {
 
-    @Inject private ProductReleaseDaoBean prodRelDao;
-    @Inject private ProductLineDaoBean prodDao;
+    @Inject private ReleaseDaoBean prodRelDao;
+    @Inject private ProductDaoBean prodDao;
 
     // Components
     private Form<ProductRelease> insertForm;
