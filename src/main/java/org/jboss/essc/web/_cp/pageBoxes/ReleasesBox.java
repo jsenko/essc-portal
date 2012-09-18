@@ -71,8 +71,11 @@ public class ReleasesBox extends Panel {
         });
         
         // "Add" link
-        add( new WebMarkupContainer("add")
-                .add( new BookmarkablePageLink("link", AddReleasePage.class, new PageParameters().add("product", this.forProduct.getName()) ) )
+        add( new WebMarkupContainer("add") .add( 
+                forProduct == null 
+                  ? new WebMarkupContainer("link")
+                  : new BookmarkablePageLink("link", AddReleasePage.class, new PageParameters().add("product", this.forProduct.getName()) ) 
+                )
                 .setVisibilityAllowed(this.forProduct != null)
         );
         
