@@ -21,7 +21,7 @@ public class SidebarPanel extends Panel {
         super(id);
         this.setRenderBodyOnly( true );
         
-        add( new ListView<Product>("projects", dao.getProductLines_orderName(0) ) {
+        add( new ListView<Product>("projects", dao.getProducts_orderName(0) ) {
             @Override protected void populateItem( ListItem<Product> item ) {
                 item.add(new ProductLink("link", item.getModelObject()) );
             }

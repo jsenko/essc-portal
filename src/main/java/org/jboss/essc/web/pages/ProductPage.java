@@ -36,7 +36,7 @@ public class ProductPage extends BaseLayoutPage {
     
     public ProductPage( PageParameters par ) {
         try {
-            this.product = productDao.getProductLineByName( par.get("name").toString() );
+            this.product = productDao.getProductByName( par.get("name").toString() );
         }
         catch( NoResultException ex ){ /* remains null. */ }
         init();

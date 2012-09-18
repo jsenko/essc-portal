@@ -21,33 +21,33 @@ public class ReleaseDaoBean {
 
     @SuppressWarnings("unchecked")
     @Deprecated // Non-sense.
-    public List<Release> getProductReleases_orderName(int limit) {
-        //return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.product.name").getResultList();
-        //return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN ProductLine pl ORDER BY pl.name").getResultList();
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr LEFT JOIN pr.product pl ORDER BY pl.name").getResultList();
+    public List<Release> getReleases_orderName(int limit) {
+        //return this.em.createQuery("SELECT rel FROM Release rel ORDER BY rel.product.name").getResultList();
+        //return this.em.createQuery("SELECT rel FROM Release rel LEFT JOIN Product prod ORDER BY prod.name").getResultList();
+        return this.em.createQuery("SELECT rel FROM Release rel LEFT JOIN rel.product prod ORDER BY prod.name").getResultList();
     }
 
-    public List<Release> getProductReleases_orderDateDesc(int limit) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr ORDER BY pr.plannedFor DESC").getResultList();
+    public List<Release> getReleases_orderDateDesc(int limit) {
+        return this.em.createQuery("SELECT rel FROM Release rel ORDER BY rel.plannedFor DESC").getResultList();
     }
 
-    public List<Release> getProductReleasesOfLine(Product prod) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product = ? ORDER BY pr.version DESC").setParameter(1, prod).getResultList();
+    public List<Release> getReleasesOfLine(Product prod) {
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ? ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
     }
 
     
     /**
-     * Get ProductRelease by ID.
+     * Get Release by ID.
      */
-    public Release getProductRelease(Long id) {
+    public Release getRelease(Long id) {
         return this.em.find(Release.class, id);
     }
     
     /**
-     *  Get release by product name and version.
+     *  Get Release by product name and version.
      */
-    public Release getProductRelease( String prodName, String version ) {
-        return this.em.createQuery("SELECT pr FROM ProductRelease pr WHERE pr.product.name = ? AND pr.version = ?", Release.class)
+    public Release getRelease( String prodName, String version ) {
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ? AND rel.version = ?", Release.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult();
@@ -55,25 +55,25 @@ public class ReleaseDaoBean {
     
 
     /**
-     * Add a new ProductRelease.
+     * Add a new Release.
      */
-    public Release addProductRelease( Product product, String version) {
+    public Release addRelease( Product product, String version) {
         return this.em.merge( new Release( null, product, version ) );
     }
 
     /**
-     * Update a ProductRelease.
+     * Update a Release.
      */
-    public Release update(Release pr) {
-        Release managed = this.em.merge(pr);
+    public Release update(Release rel) {
+        Release managed = this.em.merge(rel);
         return managed;
     }
 
     /**
-     * Remove a ProductRelease.
+     * Remove a Release.
      */
-    public void remove(Release pr) {
-        Release managed = this.em.merge(pr);
+    public void remove(Release rel) {
+        Release managed = this.em.merge(rel);
         this.em.remove(managed);
         this.em.flush();
     }

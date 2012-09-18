@@ -33,7 +33,7 @@ public class RecentChangesBox extends Panel {
         
         this.numReleases = numReleases;
         
-        add( new ListView<Release>("rows", dao.getProductReleases_orderDateDesc(this.numReleases)) {
+        add( new ListView<Release>("rows", dao.getReleases_orderDateDesc(this.numReleases)) {
 
             // Populate the table of contacts
             @Override

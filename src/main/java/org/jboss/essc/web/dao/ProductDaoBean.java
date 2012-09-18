@@ -1,11 +1,9 @@
 package org.jboss.essc.web.dao;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.jboss.essc.web.model.Product;
 
 
@@ -19,8 +17,8 @@ public class ProductDaoBean {
     private EntityManager em;
 
 
-    public List<Product> getProductLines_orderName(int limit) {
-        return this.em.createQuery("SELECT pl FROM ProductLine pl ORDER BY pl.name").getResultList();
+    public List<Product> getProducts_orderName(int limit) {
+        return this.em.createQuery("SELECT pl FROM Product pl ORDER BY pl.name").getResultList();
     }
 
     /**
@@ -33,8 +31,8 @@ public class ProductDaoBean {
     /**
      * Get ProductLine by name.
      */
-    public Product getProductLineByName( String name ) {
-        return this.em.createQuery("SELECT pl FROM ProductLine pl WHERE pl.name = ?", Product.class).setParameter(1, name).getSingleResult();
+    public Product getProductByName( String name ) {
+        return this.em.createQuery("SELECT pl FROM Product pl WHERE pl.name = ?", Product.class).setParameter(1, name).getSingleResult();
     }
 
     /**
@@ -47,7 +45,7 @@ public class ProductDaoBean {
     /**
      * Add a new ProductLine.
      */
-    public Product addProductLine( Product prod ) {
+    public Product addProduct( Product prod ) {
         return this.em.merge( prod );
     }
 

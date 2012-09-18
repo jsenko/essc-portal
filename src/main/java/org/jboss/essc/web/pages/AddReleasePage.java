@@ -1,6 +1,5 @@
 package org.jboss.essc.web.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -18,7 +17,6 @@ import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.logging.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -49,13 +47,13 @@ public class AddReleasePage extends BaseLayoutPage {
 
         this.insertForm = new Form<Release>("form") {
             @Override protected void onSubmit() {
-                Release rel = prodRelDao.addProductRelease( product, version );
+                Release rel = prodRelDao.addRelease( product, version );
                 setResponsePage( ReleasePage.class, ReleasePage.createPageParameters( rel ) );
             }
         };
 
         this.insertForm.add( new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
-        this.insertForm.add( new DropDownChoice("productSelect", new PropertyModel<String>(this, "line"), new ProductsLDM() )
+        this.insertForm.add( new DropDownChoice("productSelect", new PropertyModel<String>(this, "product"), new ProductsLDM() )
                 .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
         
         add(this.insertForm);
@@ -64,8 +62,8 @@ public class AddReleasePage extends BaseLayoutPage {
     
     
     
-    public Product getLine() { return product; }
-    public void setLine( Product product ) { this.product = product; }
+    public Product getProduct() { return product; }
+    public void setProduct( Product product ) { this.product = product; }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
 
@@ -78,8 +76,7 @@ public class AddReleasePage extends BaseLayoutPage {
 
         @Override
         protected List<Product> load() {
-            List<Product> products = prodDao.getProductLines_orderName(0);
-            //LoggerFactory.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
+            List<Product> products = prodDao.getProducts_orderName(0);
             Logger.getLogger(AddReleasePage.class).info("Found products #: "  + products.size());
             return products;
         }

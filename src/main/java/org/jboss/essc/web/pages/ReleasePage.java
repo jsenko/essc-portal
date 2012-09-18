@@ -27,7 +27,7 @@ public class ReleasePage extends BaseLayoutPage {
         String ver = par.get("version").toOptionalString();
         String titleIfNotFound = prod + " " + ver;
         try {
-            this.release = releaseDao.getProductRelease( prod, ver );
+            this.release = releaseDao.getRelease( prod, ver );
         }
         catch( NoResultException ex ){ /* Release remains null. */ }
         init( titleIfNotFound );
