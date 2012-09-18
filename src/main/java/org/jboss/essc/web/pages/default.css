@@ -151,84 +151,88 @@ a:hover { color: #7ACE11; text-decoration: none; }
 /* --- Post --- */
 
 .post {
-	padding: 20px 20px;
-	background: url("images/bg04-w740.png") no-repeat top left;
+    padding: 20px 20px;
+    background: url("images/bg04-w740.png") no-repeat top left;
 }
 
-	.post.hledani {
-		background: url("images/bg04-w740-h80.png") no-repeat top left;
-	}
-	
-	
-	
-	.post .title {
-		margin: 0;
-		border-bottom: 2px solid #484848;
-		color: #484848;
-	}
-	
-	.post .byline {
-		margin: 0;
-		color: #D79B00;
-	}
-	
-	.post .byline small {
-		margin: 0;
-		color: black;
-		font-size: 90%;
-	}
-	
+    .post.hledani {
+        background: url("images/bg04-w740-h80.png") no-repeat top left;
+    }
 
-	/* --- Table --- */
-	.post table {
-		margin: 2ex 0ex 0ex;
-		width: 100%;
-		x-background: url("images/bg04-w740.png") no-repeat top left;
-		x-border-collapse: collapse;
-		border-spacing: 0px;
-		empty-cells: show;
-	}
-		.post table.data a { color: #6ABE01; text-decoration: none; }
-		.post table th { font-weight: bold; background-color: #E3E3E3; }
-		.post table th,
-		.post table td {
-			text-align: left;
-			padding: 0px 0.1ex 0px 0.2ex;
-			margin: 0;
-                }
-		.post table.data td {
-			x-background: url("images/bg04-w740.png") no-repeat bottom left;
-			border-width: 2px;
-			border-style: groove;
-			border-color: white;
-		}
-		.post.stav table th,
-		.post.stav table td {
-			padding: 0.2ex 1ex 0.2ex 2ex;
-		}
-		
-		.post table tr.header th { text-align: center; }
-		
-		.post table td.stav.oddluzeno { color: red; }
-		.post table td.stav.prihlaseno { color: gray; }
-		.post table td.stav.zamitnuto { color: green; }
-		
-	
-	.post .meta {
-		text-align: left;
-		color: #646464;
-	}
-	
-	.post .meta .more {
-		padding-left: 20px;
-		background: url(images/img03.gif) no-repeat left center;
-	}
-	
-	.post .meta .comments {
-		padding-left: 20px;
-		background: url(images/img04.gif) no-repeat left center;
-	}
-	
+
+
+    .post .title,
+    .post h2 {
+        margin: 0;
+        border-bottom: 2px solid #484848;
+        color: #484848;
+    }
+
+    .post .byline {
+        margin: 0;
+        color: #D79B00;
+    }
+
+    .post .byline small {
+        margin: 0;
+        color: black;
+        font-size: 90%;
+    }
+
+
+    /* --- Table --- */
+    .post table {
+        margin: 2ex 0ex 0ex;
+        width: 100%;
+        x-background: url("images/bg04-w740.png") no-repeat top left;
+        x-border-collapse: collapse;
+        border-spacing: 0px;
+        empty-cells: show;
+    }
+        .post table.data a { color: #6ABE01; text-decoration: none; }
+        .post table th { font-weight: bold; background-color: #E3E3E3; }
+        .post table th,
+        .post table td {
+                text-align: left;
+                padding: 0px 0.1ex 0px 0.2ex;
+                margin: 0;
+        }
+        .post table.data td {
+                x-background: url("images/bg04-w740.png") no-repeat bottom left;
+        }
+        .post table.data td,
+        .post table.data th {
+                border-width: 2px;
+                border-style: groove;
+                border-color: white;
+        }
+        .post.stav table th,
+        .post.stav table td {
+                padding: 0.2ex 1ex 0.2ex 2ex;
+        }
+
+        .post table tr.header th { text-align: left; padding-top: 0.3ex; }
+
+        .post table td.stav.oddluzeno { color: red; }
+        .post table td.stav.prihlaseno { color: gray; }
+        .post table td.stav.zamitnuto { color: green; }
+
+
+    .post .meta {
+            text-align: left;
+            color: #646464;
+    }
+
+    .post .meta .more {
+            padding-left: 20px;
+            background: url(images/img03.gif) no-repeat left center;
+    }
+
+    .post .meta .comments {
+            padding-left: 20px;
+            background: url(images/img04.gif) no-repeat left center;
+    }
+
 	
 
 
@@ -237,40 +241,40 @@ a:hover { color: #7ACE11; text-decoration: none; }
 /* --- Sidebar --- */
 
 #sidebar {
-	float: right;
-	width: 210px;
+    float: right;
+    width: 210px;
 }
 
 #sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #sidebar li {
 }
 
 #sidebar li ul {
-	padding: 15px 0;
+    padding: 15px 0;
 }
 
 #sidebar li li {
-	padding-left: 20px;
-	border-bottom: 1px dotted #7B9418;
+    padding-left: 20px;
+    border-bottom: 1px dotted #7B9418;
 }
 
 #sidebar h2 {
-	margin: 0;
-	padding: 5px 0 0 20px;
-	background: url(images/img06.jpg) no-repeat left 80%;
+    margin: 0;
+    padding: 5px 0 0 20px;
+    background: url(images/img06.jpg) no-repeat left 80%;
 }
 
 #sidebar .ext {
-	color: #EE0000;
+    color: #EE0000;
 }
 
 #sidebar a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #sidebar a:hover {
@@ -285,17 +289,17 @@ a:hover { color: #7ACE11; text-decoration: none; }
 /* --- Footer --- */
 
 #footer {
-	clear: both;
-	margin: 0px;
-	height: 80px;
-	background: #F2F2F2 url(images/bg02.jpg) repeat-x left top;
+    clear: both;
+    margin: 0px;
+    height: 80px;
+    background: #F2F2F2 url(images/bg02.jpg) repeat-x left top;
 }
 
 #footer p {
-	padding: 20px 0;
-	text-align: center;
-	font-size: smaller;
-	color: #717171;
+    padding: 20px 0;
+    text-align: center;
+    font-size: smaller;
+    color: #717171;
 }
 
 

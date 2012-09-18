@@ -52,7 +52,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/404",   Http404.class);
         
         mountPage("/addProduct", AddProductPage.class);
-        mountPage("/addRelease", AddReleasePage.class);
+        mountPage("/addRelease/#{product}", AddReleasePage.class);
         
         mountPage("/product/${name}", ProductPage.class);
         mountPage("/release/${product}/${version}", ReleasePage.class);

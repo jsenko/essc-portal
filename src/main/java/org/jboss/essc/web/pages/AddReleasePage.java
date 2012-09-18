@@ -26,11 +26,11 @@ import org.jboss.logging.Logger;
 @SuppressWarnings("serial")
 public class AddReleasePage extends BaseLayoutPage {
 
-    @Inject private ReleaseDaoBean prodRelDao;
+    @Inject private ReleaseDaoBean releaseDao;
     @Inject private ProductDaoBean prodDao;
 
     // Components
-    private Form<Release> insertForm;
+    private Form<Release> form;
 
     // Data
     private Product product;
@@ -38,25 +38,39 @@ public class AddReleasePage extends BaseLayoutPage {
     
 
     
+    public AddReleasePage(Product product) {
+        this.product = product;
+        init(null);
+    }
+    
     public AddReleasePage(PageParameters params) {
+        String prodName = params.get("product").toOptionalString();
+        this.product = prodDao.getProductByName(prodName);
+        init(prodName);
+    }
+    
+    private void init( String prodName ){
         
-        String proj = params.get("product").toOptionalString();
-        add(new Label("titleReleaseOf", proj == null ? "" : " of " + proj ));
+        add(new Label("titleReleaseOf", prodName == null ? "" : " of " + prodName ));
         
         add(new FeedbackPanel("feedback"));
 
-        this.insertForm = new Form<Release>("form") {
+        // Form
+        this.form = new Form<Release>("form") {
             @Override protected void onSubmit() {
-                Release rel = prodRelDao.addRelease( product, version );
+                Release rel = releaseDao.addRelease( product, version );
                 setResponsePage( ReleasePage.class, ReleasePage.createPageParameters( rel ) );
             }
         };
 
-        this.insertForm.add( new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
-        this.insertForm.add( new DropDownChoice("productSelect", new PropertyModel<String>(this, "product"), new ProductsLDM() )
+        // Product select
+        this.form.add( new DropDownChoice("productSelect", new PropertyModel(this, "product"), new ProductsLDM() )
                 .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
+
+        // Version
+        this.form.add( new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));
         
-        add(this.insertForm);
+        add(this.form);
     }
 
     

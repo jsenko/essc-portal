@@ -5,7 +5,7 @@ import javax.persistence.NoResultException;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
-import org.jboss.essc.web._cp.ReleaseBox;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Release;

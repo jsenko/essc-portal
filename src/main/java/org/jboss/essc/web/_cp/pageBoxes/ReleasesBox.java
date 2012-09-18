@@ -4,14 +4,17 @@ import java.util.List;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.pages.AddReleasePage;
 
 
 /**
@@ -66,6 +69,13 @@ public class ReleasesBox extends Panel {
                 //item.add( new Label("parent", pr.getParent().getVersion()));
             }
         });
+        
+        // "Add" link
+        add( new WebMarkupContainer("add")
+                .add( new BookmarkablePageLink("link", AddReleasePage.class, new PageParameters().add("product", this.forProduct.getName()) ) )
+                .setVisibilityAllowed(this.forProduct != null)
+        );
+        
     }// const
     
     
