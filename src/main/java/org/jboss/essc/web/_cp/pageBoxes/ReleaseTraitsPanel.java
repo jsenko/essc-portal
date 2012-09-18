@@ -13,6 +13,7 @@ import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
+import org.jboss.essc.wicket.UrlSimpleValidator;
 
 
 /**
@@ -27,6 +28,7 @@ public class ReleaseTraitsPanel extends Panel {
     
     // Validators
     UrlValidator urlFormatValidator = new UrlValidator();
+    UrlSimpleValidator urlFormatSimpleValidator = new UrlSimpleValidator();
     UrlHttpRequestValidator urlHttpValidator = new UrlHttpRequestValidator();
     
     // Data
@@ -64,16 +66,7 @@ public class ReleaseTraitsPanel extends Panel {
         ReleaseTraits traits = this.release.getTraits();
         
         //this.add( new TextField("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ).add(val).add(val2) );
-        this.add( new AjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ){
-            @Override protected void onError( AjaxRequestTarget target ) {
-                target.add( feedbackPanel );
-                //super.onError( target ); // puts the focus back.
-            }
-            @Override protected void onSubmit( AjaxRequestTarget target ) {
-                target.add( feedbackPanel );
-                super.onSubmit( target );
-            }
-        }.add(val).add(val2) );
+        this.add( new MyAjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ));
         this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
         this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
         this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
@@ -110,9 +103,12 @@ public class ReleaseTraitsPanel extends Panel {
 
         public MyAjaxEditableLabel( String id, IModel<String> model ) {
             super( id, model );
-            this.add( urlFormatValidator );
-            if( isUrlVerificationEnabled() )
+            if( isUrlVerificationEnabled() ){
+                this.add( urlFormatValidator );
                 this.add( urlHttpValidator );
+            } else {
+                this.add( urlFormatSimpleValidator );
+            }
         }
 
         @Override protected void onError( AjaxRequestTarget target ) {
