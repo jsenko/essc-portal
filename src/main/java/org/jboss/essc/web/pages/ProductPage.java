@@ -2,8 +2,12 @@ package org.jboss.essc.web.pages;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
@@ -23,6 +27,10 @@ public class ProductPage extends BaseLayoutPage {
 
     @Inject private ProductLineDaoBean productDao;
     
+    // Components
+    private Form<ProductLine> form;
+
+    // Data
     private ProductLine product;
 
     
@@ -39,23 +47,32 @@ public class ProductPage extends BaseLayoutPage {
         init();
     }
     
-    private void init(){
+    private void init()
+    {
+        // Feedback
+        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel.setOutputMarkupId( true );
+        feedbackPanel.setFilter( new ContainerFeedbackMessageFilter(this) );
+        add(feedbackPanel);
+
+        // Form
+        this.form = new StatelessForm("form") {
+            @Override protected void onSubmit() {
+                product = productDao.update( (ProductLine) product );
+            }
+        };
+        this.form.setVersioned(false);
+        add( this.form );
+        
+        // Boxes
         if( this.product != null ){
-            add( new ReleasesBox("releases", this.product, 100) );
+            add( new ReleasesBox("releasesBox", this.product, 100) );
             add( new ReleaseTraitsBox("templates", this.product) );
         }
         else {
-            add( new NoItemsFoundBox("releases", "No product specified."));
+            add( new NoItemsFoundBox("releasesBox", "No product specified."));
             add( new WebMarkupContainer("templates"));
         }
     }
     
-    
-    
-    /** Adds CSS reference. */
-    public void renderHead(IHeaderResponse response) {
-        //response.renderCSSReference(new PackageResourceReference(HomePage.class, "default/calendar.css"));
-        response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
-    }
-
-}
+}// class

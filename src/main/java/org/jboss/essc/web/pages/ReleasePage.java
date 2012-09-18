@@ -3,18 +3,15 @@ package org.jboss.essc.web.pages;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.jboss.essc.web._cp.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
-import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsBox;
 import org.jboss.essc.web.dao.ProductReleaseDaoBean;
 import org.jboss.essc.web.model.ProductRelease;
 
 
 /**
- * Dynamic behavior for the ListContact page
- * 
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
@@ -43,14 +40,11 @@ public class ReleasePage extends BaseLayoutPage {
     
     private void init( String titleIfNotFound ){
         
-        add( new Label("productName", this.release.getProduct().getName()) );
-        add( new Label("version", this.release.getVersion()) );
-        
         if( this.release != null ){
-            add( new ReleaseTraitsBox("traits", this.release) );
+            add( new ReleaseBox("releaseBox", this.release) );
         }
         else {
-            add( new NoItemsFoundBox("traits", titleIfNotFound));
+            add( new NoItemsFoundBox("releaseBox", titleIfNotFound));
         }
     }
     
@@ -61,11 +55,4 @@ public class ReleasePage extends BaseLayoutPage {
             .add("version", rel.getVersion() );
     }
     
-    
-    /** Adds CSS reference. */
-    public void renderHead(IHeaderResponse response) {
-        //response.renderCSSReference(new PackageResourceReference(HomePage.class, "default/calendar.css"));
-        response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
-    }
-
 }// class

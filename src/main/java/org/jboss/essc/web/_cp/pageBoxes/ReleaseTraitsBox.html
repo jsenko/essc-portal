@@ -1,35 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><body>
         
-<wicket:panel>
+    <wicket:panel>
 
-    <!-- Defaults -->
-    <div id="defaults" class="post">
-        
-        <!--
-        <h1>Traits of <span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h1>
-        -->
-        
-        <div wicket:id="feedback" class="feedback">Feedback will be here</div>
-        
-        <form wicket:id="form" method="post" action="#">
-            
-            <table class="traits" border="0" cellpadding="5">
-                <tr>
-                    <td>Status:</td>
-                    <td><select wicket:id="status"/></td>
-                </tr>
-            </table>
-            
             <h3>Traits</h3>
-            <table class="traits" border="0" cellpadding="5">
+
+            <div wicket:id="feedback" class="feedback">Feedback will be here</div>
+
+            <table class="form traits" border="0" cellpadding="5">
                 <tr>
                     <td>Released binaries:</td>
-                    <!--
-                    <td><input type="text" wicket:id="releasedBinaries" class="noBorder"/></td>
-                    -->
                     <td><span wicket:id="releasedBinaries"/></td>
                 </tr>
+                <!-- Different text field approach tryout. -->
                 <tr>
                     <td>JS test:</td>
                     <td><input type="text" class="fakeLink noBorder" style="width: 100%"
@@ -82,14 +65,7 @@
                 </tr>
                 -->
                 
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><input type="submit" value="Save"/></td>
-                </tr>
             </table>
-        </form>
-        
-    </div>
 
-</wicket:panel>
+    </wicket:panel>
 </body></html>

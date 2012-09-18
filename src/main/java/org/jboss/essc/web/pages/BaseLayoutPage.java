@@ -27,7 +27,6 @@ public class BaseLayoutPage extends WebPage {
     
     /** Adds CSS reference. */
     public void renderHead(IHeaderResponse response) {
-        //response.renderCSSReference(new PackageResourceReference(HomePage.class, "default/calendar.css"));
         response.renderCSSReference(new CssResourceReference( BaseLayoutPage.class, "default.css" ));
     }
 

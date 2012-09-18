@@ -6,32 +6,45 @@
     <meta name="keywords" content="" />
     <meta name="description" content="ESSC team portal" />
 </head>
-    
 <body>
-
-<!-- start page -->
 <div id="page">
     
     
     <wicket:extend>
-	<!-- start content -->
+	<!-- Content -->
 	<div id="content">
 	
 	
             <!-- Releases -->
-            <div wicket:id="releases"/>
+            <div wicket:id="releasesBox"/>
             
-            <!-- Trait templates -->
-            <div wicket:id="templates"/>
             
+            <!-- Product's values -->
+            <div id="defaults" class="post">
+
+                <div wicket:id="feedback" class="feedback">Feedback will be here</div>
+
+                <form wicket:id="form" method="post" action="#">
+
+                    <table class="form" border="0" cellpadding="5">
+                        <tr> <td>Status:</td> <td><select wicket:id="status"/></td>
+                        <tr> <td>Planned for / Released on:</td> <td><select wicket:id="date"/></td>
+                    </table>
+
+                    <!-- Trait templates -->
+                    <wicket:container wicket:id="templates"/>
+
+                    <input type="submit" value="Save"/>
+
+                </form>
+
+            </div>
 
         </div>
 	<!-- end content -->
-	
     
     </wicket:extend>
     
 </div>
-
 </body>
 </html>
