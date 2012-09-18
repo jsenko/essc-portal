@@ -2,7 +2,10 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import javax.persistence.Embeddable;
+import org.apache.commons.lang.SerializationUtils;
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -11,7 +14,7 @@ import javax.persistence.Embeddable;
  * @author ozizka@redhat.com
  */
 @Embeddable
-public class ReleaseTraits implements Serializable {
+public class ReleaseTraits implements Serializable, Cloneable {
 
     // Source links
     private String gitHash;
@@ -42,6 +45,20 @@ public class ReleaseTraits implements Serializable {
     private String link508;
     private String linkJavaEE;
 
+
+    public void replaceTemplatesTokens( String token, String val ){
+        // Iterate over fields and copy those of matching names.
+        Field[] fields = this.getClass().getDeclaredFields(); // Only gives public fields!
+        for( Field field : fields ) {
+            try {
+                if( field.getType() != String.class )  continue;
+                String tpl = (String) field.get(this);
+                if( tpl == null )  continue;
+                field.set( this, tpl.replace( token, val ) );
+            }
+            catch( Exception ex ) { }
+        }
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public String getGitHash() { return gitHash; }
@@ -92,6 +109,12 @@ public class ReleaseTraits implements Serializable {
     public String getLinkCC() { return linkCC; }
     public void setLinkCC( String linkCC ) { this.linkCC = linkCC; }
     //</editor-fold>
+
+    @Override
+    protected ReleaseTraits clone() {
+        byte[] bytes = SerializationUtils.serialize( this );
+        return (ReleaseTraits) SerializationUtils.deserialize( bytes );
+    }
 
     
 }// class

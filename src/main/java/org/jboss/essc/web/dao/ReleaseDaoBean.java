@@ -58,7 +58,9 @@ public class ReleaseDaoBean {
      * Add a new Release.
      */
     public Release addRelease( Product product, String version) {
-        return this.em.merge( new Release( null, product, version ) );
+        Release rel = new Release( null, product, version );
+        //rel.updateWithProductTemplates(); // It's in constructor.
+        return this.em.merge( rel );
     }
 
     /**

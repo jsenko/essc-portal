@@ -1,8 +1,6 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.Format;
 import java.util.Date;
 import java.util.Locale;
@@ -28,7 +26,7 @@ import org.apache.commons.lang.time.FastDateFormat;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="`release`")
-public class Release implements Serializable, IHasTraits {
+public final class Release implements Serializable, IHasTraits {
     
     private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
     
@@ -62,28 +60,6 @@ public class Release implements Serializable, IHasTraits {
     //@Basic(fetch=FetchType.EAGER, optional=false) // HHH-7610
     private ReleaseTraits traits = new ReleaseTraits();
     
-    /*
-    // Source links
-    private String gitHash;
-    
-    // Files links
-    private String linkReleasedBinaries;
-    private String linkReleasedDocs;
-    private String linkStagedBinaries;
-    private String linkStagedDocs;
-    private String linkMavenLocalRepo;
-    
-    // Info links
-    private String linkIssuesFixed;
-    private String linkIssuesFound;
-    
-    // Build links
-    private String linkMead;
-    private String linkBrew;
-    private String linkGitRepo;
-    */
-
-    
     
     public Release() {
     }
@@ -96,15 +72,21 @@ public class Release implements Serializable, IHasTraits {
         this.updateWithProductTemplates();
     }
     
-    private void updateWithProductTemplates(){
+
+    
+    public void updateWithProductTemplates(){
         if( this.product == null )  return;
         if( StringUtils.isBlank(this.version) )  return;
         
-        //this.linkReleasedBinaries = this.product.getLinkReleasedBinaries().replace("${ver}", this.version);
-        //this.linkStagedBinaries   = this.product.getLinkStagedBinaries().replace("${ver}", this.version);
-        // TODO - the rest.
+        this.traits = this.product.getTraits().clone();
+        this.traits.replaceTemplatesTokens( "${ver}", this.version );
+        this.traits.replaceTemplatesTokens( "${ver.lower}", this.version.toLowerCase() );
+        this.traits.replaceTemplatesTokens( "${ver.upper}", this.version.toUpperCase() );
+
         
-        Field[] fields = this.getClass().getFields();
+        // Iterate over fields and copy those of matching names.
+        /*
+        Field[] fields = this.getClass().getFields(); // Only gives public fields!
         for( Field field : fields ) {
             String methodName = "get" + StringUtils.capitalize( field.getName() );
             try {
@@ -115,6 +97,9 @@ public class Release implements Serializable, IHasTraits {
             }
             catch( Exception ex ) { }
         }
+        */
+        
+        
     }
     
     private String replaceVersionIfNotNull( String template ){
