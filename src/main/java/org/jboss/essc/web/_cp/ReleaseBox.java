@@ -2,7 +2,12 @@ package org.jboss.essc.web._cp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import javax.inject.Inject;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -10,6 +15,9 @@ import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.validator.DateValidator;
+import org.apache.wicket.validation.validator.PatternValidator;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
@@ -60,7 +68,17 @@ public class ReleaseBox extends Panel {
         this.form.add( new DropDownChoice("status",
                 new PropertyModel( release, "status"),
                 new ArrayList<Release.Status>( Arrays.asList( Release.Status.values() ))
-        ).setVisibilityAllowed( release instanceof Release ) );
+        ));
+        // Date
+        //this.form.add( new AjaxEditableLabel("date").add(new PatternValidator("\\d{4}-\\d\\d-\\d\\d") ) );
+        this.form.add( new DateTextField("date", new PropertyModel<Date>( release, "plannedFor"), "yyyy-MM-dd")
+            .add(new AjaxFormComponentUpdatingBehavior("onchange") {
+                @Override protected void onUpdate( AjaxRequestTarget target ) {
+                    Date date = ((DateTextField)getFormComponent()).getModelObject();
+                    release.setPlannedFor( date );
+                }
+            })
+        );
         
         // Traits
         this.form.add( new ReleaseTraitsPanel( "traits", release ) );

@@ -76,12 +76,23 @@ public class ReleaseTraitsPanel extends Panel {
         this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
         this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
         this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
-        this.add( new MyAjaxEditableLabel("gitRepo",          new PropertyModel( traits, "linkGitRepo") ) );
-        this.add( new MyAjaxEditableLabel("gitHash",          new PropertyModel( traits, "gitHash") ) );
-        this.add( new MyAjaxEditableLabel("mead",             new PropertyModel( traits, "linkMead") ) );
-        this.add( new MyAjaxEditableLabel("brew",             new PropertyModel( traits, "linkBrew") ) );
+
         this.add( new MyAjaxEditableLabel("issuesFixed",      new PropertyModel( traits, "linkIssuesFixed") ) );
         this.add( new MyAjaxEditableLabel("issuesFound",      new PropertyModel( traits, "linkIssuesFound") ) );
+        
+        // Build
+        this.add( new MyAjaxEditableLabel("linkBuildHowto",   new PropertyModel( traits, "linkBuildHowto") ) );
+        this.add( new MyAjaxEditableLabel("gitHash",          new PropertyModel( traits, "gitHash") ) );
+        this.add( new MyAjaxEditableLabel("gitRepo",          new PropertyModel( traits, "linkGitRepo") ) );
+        this.add( new MyAjaxEditableLabel("mead",             new PropertyModel( traits, "linkMead") ) );
+        this.add( new MyAjaxEditableLabel("brew",             new PropertyModel( traits, "linkBrew") ) );
+
+        // Tests
+        this.add( new MyAjaxEditableLabel("linkTck",          new PropertyModel( traits, "linkTck") ) );
+        this.add( new MyAjaxEditableLabel("linkCC",           new PropertyModel( traits, "linkCC") ) );
+        this.add( new MyAjaxEditableLabel("link508",          new PropertyModel( traits, "link508") ) );
+        this.add( new MyAjaxEditableLabel("linkJavaEE",       new PropertyModel( traits, "linkJavaEE") ) );
+        
         //this.add( new MyAjaxEditableLabel("",            new PropertyModel( traits, "link") ) );
 
     }// const

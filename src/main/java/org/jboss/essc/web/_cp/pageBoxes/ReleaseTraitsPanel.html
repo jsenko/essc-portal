@@ -8,61 +8,44 @@
             <div wicket:id="feedback" class="feedback">Feedback will be here</div>
 
             <table class="form traits" border="0" cellpadding="5">
-                <tr>
-                    <td>Released binaries:</td>
-                    <td><span wicket:id="releasedBinaries"/></td>
-                </tr>
+
+                <!-- Files -->
+                <tr> <th colspan="2">Files</th></tr>
+                <tr> <td>Released binaries:</td> <td><span wicket:id="releasedBinaries"/></td></tr>
+                
                 <!-- Different text field approach tryout. -->
                 <tr>
                     <td>JS test:</td>
                     <td><input type="text" class="fakeLink noBorder" style="width: 100%"
                                onfocus="this.className='';"
-                               onblur="this.className='fakeLink noBorder';"
+                               onblur=" this.className='fakeLink noBorder';"
                                onclick="if(isWorkingURL(this.value))  window.open(this.value, '_blank');"/>
                     </td>
                 </tr>
-                <tr>
-                    <td>Staged binaries:</td>
-                    <td><span wicket:id="stagedBinaries" class="fakeLink noBorder" style="width: 100%"/></td>
-                </tr>
-                <tr>
-                    <td>Released docs:</td>
-                    <td><span wicket:id="releasedDocs"/></td>
-                </tr>
-                <tr>
-                    <td>Staged docs:</td>
-                    <td><span wicket:id="stagedDocs"/></td>
-                </tr>
-                <tr>
-                    <td>Git hash:</td>
-                    <td><span wicket:id="gitHash"/></td>
-                </tr>
-                <tr>
-                    <td>Git tag:</td>
-                    <td><span wicket:id="gitRepo"/></td>
-                </tr>
-                <tr>
-                    <td>Mead:</td>
-                    <td><span wicket:id="mead"/></td>
-                </tr>
-                <tr>
-                    <td>Brew:</td>
-                    <td><span wicket:id="brew"/></td>
-                </tr>
-                <tr>
-                    <td>Fixed issues:</td>
-                    <td><span wicket:id="issuesFixed"/></td>
-                </tr>
-                <tr>
-                    <td>Found issues:</td>
-                    <td><span wicket:id="issuesFound"/></td>
-                </tr>
                 
+                <tr> <td>Staged binaries:</td> <td><span wicket:id="stagedBinaries" class="fakeLink noBorder" style="width: 100%"/></td></tr>
+                <tr> <td>Released docs:</td> <td><span wicket:id="releasedDocs"/></td></tr>
+                <tr> <td>Staged docs:</td>   <td><span wicket:id="stagedDocs"/></td></tr>
+
+                <!-- Build-->
+                <tr> <th colspan="2">Build logs</th></tr>
+                <tr> <td>Build HOWTO:</td>   <td><span wicket:id="linkBuildHowto"/></td></tr>
+                <tr> <td>Git hash:</td>      <td><span wicket:id="gitHash"/></td></tr>
+                <tr> <td>Git tag:</td>       <td><span wicket:id="gitRepo"/></td></tr>
+                <tr> <td>Fixed issues:</td>  <td><span wicket:id="issuesFixed"/></td></tr>
+                <tr> <td>Found issues:</td>  <td><span wicket:id="issuesFound"/></td></tr>
+                <tr> <td>Mead:</td>          <td><span wicket:id="mead"/></td></tr>
+                <tr> <td>Brew:</td>          <td><span wicket:id="brew"/></td></tr>
+                    
+                <!-- Tests -->
+                <tr> <th colspan="2">Tests</th></tr>
+                <tr> <td>TCK tests:</td>                   <td><span wicket:id="linkTck"/></td></tr>
+                <tr> <td>Java EE compliance tests:</td>    <td><span wicket:id="linkJavaEE"/></td></tr>
+                <tr> <td>508 compliance tests:</td>        <td><span wicket:id="link508"/></td></tr>
+                <tr> <td>Common Criteria tests:</td>       <td><span wicket:id="linkCC"/></td></tr>
+
                 <!--
-                <tr>
-                    <td>:</td>
-                    <td><span wicket:id=""/></td>
-                </tr>
+                <tr> <td>:</td>          <td><span wicket:id=""/></td></tr>
                 -->
                 
             </table>

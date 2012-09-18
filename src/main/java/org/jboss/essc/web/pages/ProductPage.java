@@ -3,13 +3,11 @@ package org.jboss.essc.web.pages;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
-import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
@@ -67,11 +65,11 @@ public class ProductPage extends BaseLayoutPage {
         // Boxes
         if( this.product != null ){
             add( new ReleasesBox("releasesBox", this.product, 100) );
-            add( new ReleaseTraitsPanel("templates", this.product) );
+            this.form.add( new ReleaseTraitsPanel("templates", this.product) );
         }
         else {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));
-            add( new WebMarkupContainer("templates"));
+            this.form.add( new WebMarkupContainer("templates"));
         }
     }
     
