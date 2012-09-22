@@ -23,7 +23,7 @@ public class ReleaseInfoRest {
     @GET
     @Path("/release/{product}/{version}")
     @Produces("application/json")
-    public Release getProductInfo( @PathParam("product") String product, @PathParam("project") String version, @Context SecurityContext sc ) {
+    public Release getReleaseInfo( @PathParam("product") String product, @PathParam("version") String version, @Context SecurityContext sc ) {
         System.out.println("Release: " + product + " " + version);
         
         Release rel = relDao.getRelease(product, version);
