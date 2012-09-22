@@ -2,6 +2,8 @@ package org.jboss.essc.web.rest;
 
 import java.io.IOException;
 import java.util.List;
+import javax.ejb.ApplicationException;
+import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import org.jboss.essc.web.model.Release;
  */
 
 @Path("/")
+//@ApplicationException
 public class ReleaseInfoRest {
     
     @Inject private ReleaseDaoBean relDao; 
@@ -64,7 +67,11 @@ public class ReleaseInfoRest {
         } catch (NoResultException ex){
             res.sendError(404, "No such release.");
             return null;
-        }
+        }/* catch (EJBException ex){
+            if( ex.getCausedByException() instanceof NoResultException)
+            res.sendError(404, "No such release.");
+            return null;
+        }*/
     }
 
 }// class
