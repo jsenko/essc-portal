@@ -14,6 +14,10 @@
             <param-name>applicationClassName</param-name>
             <param-value>org.jboss.essc.web.WicketJavaEEApplication</param-value>
         </init-param>
+        <init-param>
+            <param-name>ignorePaths</param-name>
+            <param-value>rest/</param-value>
+        </init-param>
     </filter>
     
     <!-- Wicket mode -->
