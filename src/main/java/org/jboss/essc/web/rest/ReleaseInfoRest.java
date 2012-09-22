@@ -2,8 +2,6 @@ package org.jboss.essc.web.rest;
 
 import java.io.IOException;
 import java.util.List;
-import javax.ejb.ApplicationException;
-import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +21,6 @@ import org.jboss.essc.web.model.Release;
  */
 
 @Path("/")
-//@ApplicationException
 public class ReleaseInfoRest {
     
     @Inject private ReleaseDaoBean relDao; 
@@ -34,8 +31,11 @@ public class ReleaseInfoRest {
     @Path("/products")
     @Produces("application/json")
     public List<Product> getProducts( @Context SecurityContext sc ) {
-        List<Product> rel = prodDao.getProducts_orderName(0);
-        return rel;
+        List<Product> prods = prodDao.getProducts_orderName(0);
+        for (Product prod : prods) {
+            prod.setTraits(null);
+        }
+        return prods;
     }
     
     @GET

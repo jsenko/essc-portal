@@ -2,6 +2,9 @@ package org.jboss.essc.web.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 /**
@@ -11,6 +14,7 @@ import javax.persistence.*;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="product")
+@XmlRootElement(name="product")
 public class Product implements Serializable, IHasTraits {
 
     @Id
@@ -26,28 +30,11 @@ public class Product implements Serializable, IHasTraits {
     
     // ---- Traits ----
     
-    @Embedded 
+    @Embedded
+    @XmlTransient
+    @JsonIgnore
     private ReleaseTraits traits;
     
-    /*/
-    // Files links
-    private String linkReleasedBinaries;
-    private String linkReleasedDocs;
-    private String linkStagedBinaries;
-    private String linkStagedDocs;
-    private String linkMavenLocalRepo;
-    
-    // Info links
-    private String linkJiraResolvedInThisVersion;
-    private String linkJiraFixedInThisVersion;
-    
-    // Build links
-    private String linkMead;
-    private String linkBrew;
-    private String linkGitRepo;
-    /**/
-    
-
     
     
     public Product() {
@@ -69,36 +56,14 @@ public class Product implements Serializable, IHasTraits {
     public String getNote() { return note; }
     public void setNote(String note) { this.note = note; }
     
-    
-    //*
+
+    @XmlTransient
+    @JsonIgnore
     public ReleaseTraits getTraits() { 
         if( traits == null )  traits = new ReleaseTraits(); // HHH-7610
         return traits; 
     }
     public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
-        
-    /*/
-    public String getLinkBrew() { return linkBrew; }
-    public void setLinkBrew(String linkBrew) { this.linkBrew = linkBrew; }
-    public String getLinkGitRepo() { return linkGitRepo; }
-    public void setLinkGitRepo(String linkGitRepo) { this.linkGitRepo = linkGitRepo; }
-    public String getLinkJiraFixedInThisVersion() { return linkJiraFixedInThisVersion; }
-    public void setLinkJiraFixedInThisVersion(String linkJiraFixedInThisVersion) { this.linkJiraFixedInThisVersion = linkJiraFixedInThisVersion; }
-    public String getLinkJiraResolvedInThisVersion() { return linkJiraResolvedInThisVersion; }
-    public void setLinkJiraResolvedInThisVersion(String linkJiraResolvedInThisVersion) { this.linkJiraResolvedInThisVersion = linkJiraResolvedInThisVersion; }
-    public String getLinkMavenLocalRepo() { return linkMavenLocalRepo; }
-    public void setLinkMavenLocalRepo(String linkMavenLocalRepo) { this.linkMavenLocalRepo = linkMavenLocalRepo; }
-    public String getLinkMead() { return linkMead; }
-    public void setLinkMead(String linkMead) { this.linkMead = linkMead; }
-    public String getLinkReleasedBinaries() { return linkReleasedBinaries; }
-    public void setLinkReleasedBinaries(String linkReleasedBinaries) { this.linkReleasedBinaries = linkReleasedBinaries; }
-    public String getLinkReleasedDocs() { return linkReleasedDocs; }
-    public void setLinkReleasedDocs(String linkReleasedDocs) { this.linkReleasedDocs = linkReleasedDocs; }
-    public String getLinkStagedBinaries() { return linkStagedBinaries; }
-    public void setLinkStagedBinaries(String linkStagedBinaries) { this.linkStagedBinaries = linkStagedBinaries; }
-    public String getLinkStagedDocs() { return linkStagedDocs; }
-    public void setLinkStagedDocs(String linkStagedDocs) { this.linkStagedDocs = linkStagedDocs; }
-    /**/
     //</editor-fold>
 
 
