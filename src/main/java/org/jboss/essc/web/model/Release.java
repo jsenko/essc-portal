@@ -5,6 +5,7 @@ import java.text.Format;
 import java.util.Date;
 import java.util.Locale;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
 
@@ -26,7 +27,7 @@ import org.apache.commons.lang.time.FastDateFormat;
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="`release`")
-public final class Release implements Serializable, IHasTraits {
+public class Release implements Serializable, IHasTraits {
     
     private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
     
@@ -38,6 +39,8 @@ public final class Release implements Serializable, IHasTraits {
     //@Column(unique=true)
     @ManyToOne
     @JoinColumn(updatable=false, nullable=false)
+    @XmlTransient
+    //@JsonIgnore
     private Product product;
 
     private String version;

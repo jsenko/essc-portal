@@ -86,7 +86,7 @@ public class ReleasesBox extends Panel {
         if( this.forProduct == null )
             return dao.getReleases_orderDateDesc(this.numReleases);
         else
-            return dao.getReleasesOfLine( forProduct );
+            return dao.getReleasesOfProduct( forProduct );
     }
         
 

@@ -31,7 +31,7 @@ public class ProductPanel extends Panel {
     public ProductPanel( String id, Product product ) {
         super(id);
         
-        add( new ListView<Release>("releaseList", dao.getReleasesOfLine(product)) {
+        add( new ListView<Release>("releaseList", dao.getReleasesOfProduct(product)) {
 
             // Populate the table of contacts
             @Override

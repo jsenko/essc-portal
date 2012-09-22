@@ -31,8 +31,12 @@ public class ReleaseDaoBean {
         return this.em.createQuery("SELECT rel FROM Release rel ORDER BY rel.plannedFor DESC").getResultList();
     }
 
-    public List<Release> getReleasesOfLine(Product prod) {
+    public List<Release> getReleasesOfProduct(Product prod) {
         return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ? ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
+    }
+
+    public List<Release> getReleasesOfProduct(String prodName) {
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ? ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
     }
 
     
