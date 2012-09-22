@@ -50,4 +50,10 @@
     </session-config>
     -->
     
+    <!-- One of the way of activating REST Servises. -->
+    <servlet-mapping>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
