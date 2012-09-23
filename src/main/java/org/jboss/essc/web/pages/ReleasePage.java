@@ -2,12 +2,16 @@ package org.jboss.essc.web.pages;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 
 
@@ -46,6 +50,36 @@ public class ReleasePage extends BaseLayoutPage {
         else {
             add( new NoItemsFoundBox("releaseBox", titleIfNotFound));
         }
+        
+        
+        // Danger Zone
+        WebMarkupContainer dangerZone = new WebMarkupContainer("dangerZone");
+        this.add( dangerZone );
+        
+        // Danger Zone Form
+        dangerZone.add( new StatelessForm("form") {
+            {
+                // Really button
+                final AjaxButton really = new AjaxButton("deleteReally") {};
+                really.setVisible(false).setRenderBodyOnly(false);
+                really.setOutputMarkupPlaceholderTag(true);
+                add( really );
+                
+                // Delete button
+                add( new AjaxLink("delete"){
+                    @Override public void onClick( AjaxRequestTarget target ) {
+                        target.add( really );
+                        really.setVisible(true);
+                    }
+                });
+            }
+            @Override protected void onSubmit() {
+                PageParameters params = ProductPage.createPageParameters(release.getProduct());
+                releaseDao.remove( release );
+                setResponsePage(ProductPage.class, params );
+            }
+        });
+        
     }
     
 

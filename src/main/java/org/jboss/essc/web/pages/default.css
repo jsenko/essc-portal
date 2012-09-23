@@ -233,7 +233,8 @@ a:hover { color: #7ACE11; text-decoration: none; }
             background: url(images/img04.gif) no-repeat left center;
     }
 
-	
+.post .dangerousButton      {  }
+.post .dangerousButton.very { background-color: #E00000; color: white; font-weight: bold; text-decoration: blink; }
 
 
 

@@ -20,6 +20,7 @@ import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.Release;
 
 
 /**
@@ -109,5 +110,11 @@ public class ProductPage extends BaseLayoutPage {
         });
 
     }// init()
+
+    
+    
+    public static PageParameters createPageParameters( Product prod ){
+        return new PageParameters().add("name", prod.getName());
+    }
     
 }// class

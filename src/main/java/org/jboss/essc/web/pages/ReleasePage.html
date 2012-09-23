@@ -6,27 +6,30 @@
     <meta name="keywords" content="" />
     <meta name="description" content="ESSC team portal" />
 </head>
-    
 <body>
-
-<!-- start page -->
 <div id="page">
     
-    
     <wicket:extend>
+        
 	<!-- start content -->
 	<div id="content">
             
             <!-- Release traits -->
             <div wicket:id="releaseBox"/>
 
+            <!-- Danger zone -->
+            <div wicket:id="dangerZone" class="post dangerZone">
+                <form wicket:id="form" method="post" action="#">
+                    <input wicket:id="delete"       type="button" class="     dangerousButton" value="Delete this release"/>
+                    <input wicket:id="deleteReally" type="submit" class="very dangerousButton" value="Really, delete it."/>
+                </form>
+            </div>
+            
         </div>
 	<!-- end content -->
 	
-    
     </wicket:extend>
     
 </div>
-
 </body>
 </html>
