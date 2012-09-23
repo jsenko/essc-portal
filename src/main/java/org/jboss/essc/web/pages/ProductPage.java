@@ -2,8 +2,13 @@ package org.jboss.essc.web.pages;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -71,6 +76,33 @@ public class ProductPage extends BaseLayoutPage {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));
             this.form.add( new WebMarkupContainer("templates"));
         }
-    }
+        
+        // Danger Zone
+        WebMarkupContainer dangerZone = new WebMarkupContainer("dangerZone");
+        this.add( dangerZone );
+        
+        // Danger Zone Form
+        dangerZone.add( new StatelessForm("form") {
+            {
+                // Really button
+                final AjaxButton really = new AjaxButton("deleteReally") {};
+                really.setVisible(true).setOutputMarkupId(true);
+                add( really );
+                
+                // Delete button
+                add( new AjaxLink("delete"){
+                    @Override public void onClick( AjaxRequestTarget target ) {
+                        target.add( really );
+                        really.setVisible(true);
+                        //super.onSubmit( target, form );
+                    }
+                });
+            }
+            @Override protected void onSubmit() {
+                productDao.deleteIncludingReleases( (Product) product );
+            }
+        });
+
+    }// init()
     
 }// class

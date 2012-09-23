@@ -18,7 +18,7 @@ public class ProductDaoBean {
 
 
     public List<Product> getProducts_orderName(int limit) {
-        return this.em.createQuery("SELECT pl FROM Product pl ORDER BY pl.name").getResultList();
+        return this.em.createQuery("SELECT p FROM Product p ORDER BY p.name").getResultList();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ProductDaoBean {
      * Get ProductLine by name.
      */
     public Product getProductByName( String name ) {
-        return this.em.createQuery("SELECT pl FROM Product pl WHERE pl.name = ?", Product.class).setParameter(1, name).getSingleResult();
+        return this.em.createQuery("SELECT p FROM Product p WHERE p.name = ?", Product.class).setParameter(1, name).getSingleResult();
     }
 
     /**
@@ -52,15 +52,29 @@ public class ProductDaoBean {
     /**
      * Remove a ProductLine.
      */
-    public void remove(Product pl) {
-        Product managed = this.em.merge(pl);
+    public void remove(Product prod) {
+        Product managed = this.em.merge(prod);
         this.em.remove(managed);
         this.em.flush();
     }
 
+    
     public Product update( Product product ) {
         Product managed = this.em.merge(product);
         return managed;
     }
+
     
-}
+    public void deleteIncludingReleases( Product prod ) {
+        prod = this.em.merge(prod);
+        
+        // Delete releases
+        int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?" ).setParameter( 1, prod.getName() ).executeUpdate();
+        System.out.println("Updated " + up);
+        //this.em.createQuery("DELETE FROM Product p WHERE p.name = ?").setParameter(1, prod.getName()).executeUpdate();
+        
+        this.em.remove(prod);
+        this.em.flush();
+    }
+    
+}// class

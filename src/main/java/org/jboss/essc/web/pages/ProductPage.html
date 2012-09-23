@@ -9,7 +9,6 @@
 <body>
 <div id="page">
     
-    
     <wicket:extend>
 	<!-- Content -->
 	<div id="content">
@@ -21,18 +20,20 @@
             
             <!-- Product's values -->
             <div id="defaults" class="post">
-
                 <div wicket:id="feedback" class="feedback">Feedback will be here</div>
-
                 <form wicket:id="form" method="post" action="#">
-
                     <!-- Trait templates -->
                     <wicket:container wicket:id="templates"/>
-
                     <input type="submit" value="Save"/>
-
                 </form>
+            </div>
 
+            <!-- Danger zone -->
+            <div wicket:id="dangerZone" class="post">
+                <form wicket:id="form" method="post" action="#">
+                    <input wicket:id="delete" type="button" value="Delete this product"/>
+                    <input wicket:id="deleteReally" type="submit" value="Really, delete it including all releases."/>
+                </form>
             </div>
 
         </div>
