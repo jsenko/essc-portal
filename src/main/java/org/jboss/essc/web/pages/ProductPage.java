@@ -2,10 +2,12 @@ package org.jboss.essc.web.pages;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
+import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Button;
@@ -86,7 +88,8 @@ public class ProductPage extends BaseLayoutPage {
             {
                 // Really button
                 final AjaxButton really = new AjaxButton("deleteReally") {};
-                really.setVisible(true).setOutputMarkupId(true);
+                really.setVisible(false).setRenderBodyOnly(false);
+                really.setOutputMarkupPlaceholderTag(true);
                 add( really );
                 
                 // Delete button
@@ -94,12 +97,14 @@ public class ProductPage extends BaseLayoutPage {
                     @Override public void onClick( AjaxRequestTarget target ) {
                         target.add( really );
                         really.setVisible(true);
+                        //really.add(AttributeModifier.replace("style", "")); // Removes style="visibility: hidden".
                         //super.onSubmit( target, form );
                     }
                 });
             }
             @Override protected void onSubmit() {
                 productDao.deleteIncludingReleases( (Product) product );
+                setResponsePage(HomePage.class);
             }
         });
 

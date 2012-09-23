@@ -69,9 +69,11 @@ public class ProductDaoBean {
         prod = this.em.merge(prod);
         
         // Delete releases
-        int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?" ).setParameter( 1, prod.getName() ).executeUpdate();
+        // Ends up with Hibernate screwing up SQL - "cross join"
+        //int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?" ).setParameter( 1, prod.getName() ).executeUpdate();
+        int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product IN "
+                + "(SELECT p FROM Product p WHERE p.name = ?)" ).setParameter( 1, prod.getName() ).executeUpdate();
         System.out.println("Updated " + up);
-        //this.em.createQuery("DELETE FROM Product p WHERE p.name = ?").setParameter(1, prod.getName()).executeUpdate();
         
         this.em.remove(prod);
         this.em.flush();
