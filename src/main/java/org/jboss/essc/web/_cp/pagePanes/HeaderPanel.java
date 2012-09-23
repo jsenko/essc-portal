@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp;
+package org.jboss.essc.web._cp.pagePanes;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.Component;

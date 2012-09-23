@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp;
+package org.jboss.essc.web._cp.pagePanes;
 
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.list.ListItem;
