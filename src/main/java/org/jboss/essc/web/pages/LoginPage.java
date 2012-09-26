@@ -69,11 +69,12 @@ public class LoginPage extends BaseLayoutPage {
                 //checkLoginWithPicketBox();
                 try {
                     User user_ = userDao.loadUserIfPasswordMatches( user );
+                    
                     setResponsePage(HomePage.class);
                 }
                 catch( NoResultException ex ){
                     //setResponsePage(HomePage.class);
-                    feedback.error("Wrong password or non-existent user.");
+                    feedback.error("Wrong password or non-existent user: " + user.getName() + " / " + user.getPass());
                     feedback.info( "To get forgotten password, fill in user name and/or email.");
                     lostButton.setVisible( true );
                 }
@@ -98,8 +99,10 @@ public class LoginPage extends BaseLayoutPage {
                 target.add( feedback );
                 try{
                     resetPassword(user);
+                    feedback.info("Password was reset and sent by mail.");
                     info("Password was reset and sent by mail.");
                 } catch (Exception ex){
+                    feedback.error("Could not reset password: " + ex.getMessage() );
                     error("Could not reset password: " + ex.getMessage() );
                 }
                 //super.onSubmit( target, form );
@@ -112,7 +115,9 @@ public class LoginPage extends BaseLayoutPage {
     }
 
 
-    
+    /**
+     *   Generates a new password and sends it to user's mail.
+     */
     private void resetPassword( User user ) throws Exception {
         String pass = "pass";
         user.setPass( DigestUtils.md5Hex( pass ) );
@@ -131,6 +136,9 @@ public class LoginPage extends BaseLayoutPage {
     
     
     
+    /**
+     *   Test of PicketBox login approach. Doesn't work - says 'Invalid'.
+     */
     private void checkLoginWithPicketBox() {
         try {
             //ServletContext sc = (ServletContext) getRequest().getContainerRequest();
