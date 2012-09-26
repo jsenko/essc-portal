@@ -1,11 +1,9 @@
 package org.jboss.essc.web.pages;
 
-import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import javax.security.auth.Subject;
 import javax.security.auth.login.LoginException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -19,9 +17,6 @@ import org.jboss.essc.web.dao.UserDaoBean;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.util.MailSender;
 import org.jboss.essc.web.util.PicketBoxAuthPojo;
-import org.jboss.security.AuthenticationManager;
-import org.jboss.security.SimplePrincipal;
-import org.jboss.security.identity.RoleGroup;
 import org.picketbox.exceptions.PicketBoxProcessingException;
 import org.picketbox.plugins.PicketBoxProcessor;
 

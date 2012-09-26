@@ -1,10 +1,12 @@
 package org.jboss.essc.web.pages;
 
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pagePanes.HeaderPanel;
 import org.jboss.essc.web._cp.pagePanes.SidebarPanel;
+import org.jboss.essc.web.security.EsscAuthSession;
 
 
 /**
@@ -22,6 +24,14 @@ public class BaseLayoutPage extends WebPage {
         
         add( new SidebarPanel("sidebar") );
         
+    }
+    
+    
+    /**
+     *  Global helper to avoid casting everywhere.
+     */
+    public EsscAuthSession getSession(){
+        return (EsscAuthSession) Session.get();
     }
     
     

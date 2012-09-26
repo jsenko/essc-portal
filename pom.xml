@@ -224,8 +224,13 @@
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-extensions</artifactId>
-            <version>1.5.8</version>
-            <type>jar</type>
+            <version>${version.wicket}</version>
+        </dependency>
+        <!-- Security - instead of PicketBox. -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-auth-roles</artifactId>
+            <version>${version.wicket}</version>
         </dependency>
 
         <!-- Wicket CDI integration. -->
@@ -361,7 +366,7 @@
             <type>jar</type>
         </dependency>
         
-        <!-- Security -->
+        <!-- Security - programatic by PicketBox. -->
         <dependency>
             <groupId>org.picketbox</groupId>
             <artifactId>picketbox</artifactId>
@@ -370,6 +375,7 @@
         </dependency>
     </dependencies>
     
+    <!-- For PicketBox. -->
     <repositories>
         <repository>
             <id>jboss</id>
