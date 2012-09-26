@@ -63,8 +63,9 @@ public class LoginPage extends BaseLayoutPage {
                 target.add( feedback );
                 //checkLoginWithPicketBox();
                 try {
-                    User user_ = userDao.loadUserIfPasswordMatches( user );
-                    
+                    //User user_ = userDao.loadUserIfPasswordMatches( user );
+                    if( !  LoginPage.this.getSession().authenticate( user ) )
+                        throw new NoResultException("No such user.");
                     setResponsePage(HomePage.class);
                 }
                 catch( NoResultException ex ){

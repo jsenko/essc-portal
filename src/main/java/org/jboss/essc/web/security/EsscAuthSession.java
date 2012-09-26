@@ -34,13 +34,17 @@ public class EsscAuthSession extends AuthenticatedWebSession {
         super.signOut();
     }
 
-
+    
     @Override
     public boolean authenticate( String name, String pass ) {
         if( this.user != null )  return true;
+        return authenticate( new User( name, pass ) );
+    }
+
+    public boolean authenticate( User user_) {
+        if( this.user != null )  return true;
 
         try {
-            User user_ = new User( name, pass );
             this.user = userDao.loadUserIfPasswordMatches( user_ );
             return true;
         } catch (NoResultException ex){

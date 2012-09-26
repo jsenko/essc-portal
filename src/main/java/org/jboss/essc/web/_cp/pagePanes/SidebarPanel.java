@@ -28,7 +28,9 @@ public class SidebarPanel extends Panel {
         super(id);
         this.setRenderBodyOnly( true );
         
+        // User menu "box". Later it could be a real box.
         if( ((EsscAuthSession)getSession()).isSignedIn()  ){
+            // Logout link
             add( new AjaxLink("loginLink") {
                     @Override public void onClick( AjaxRequestTarget target ) {
                         getSession().invalidateNow();
@@ -38,6 +40,7 @@ public class SidebarPanel extends Panel {
                 .add( new Label("label", "Logout") )
             );
         } else {
+            // Login link
             add( new BookmarkablePageLink("loginLink", LoginPage.class)
                 .add( new Label("label", "Login / Register") ) );
         }
