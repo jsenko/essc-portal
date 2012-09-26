@@ -28,7 +28,7 @@ public class MailSender {
     * @param sAddress
     * @param sMailText
     */
-    protected void sendMail( String sMailFrom, String sMailTo, String sSubject, String sMailText ) throws Exception {
+    public void sendMail( String sMailTo, String sSubject, String sMailText ) throws Exception {
 
         try {
             MimeMessage message = new MimeMessage( mailSession );

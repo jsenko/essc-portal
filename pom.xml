@@ -297,9 +297,6 @@
         
         
         
-        
-        
-        
         <!-- ====== Testing ======= -->
         
         <dependency>
@@ -357,6 +354,27 @@
             <scope>test</scope>
         </dependency>
         
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!-- Security -->
+        <dependency>
+            <groupId>org.picketbox</groupId>
+            <artifactId>picketbox</artifactId>
+            <version>4.0.9.Final</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+    
+    <repositories>
+        <repository>
+            <id>jboss</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -67,9 +67,5 @@ public class UserDaoBean {
         User managed = this.em.merge(user);
         return managed;
     }
-
-    public void sendLostPassword( User user ) {
-        
-    }
     
 }// class

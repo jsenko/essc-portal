@@ -31,7 +31,9 @@ public class User implements Serializable {
     @Column(unique=true)
     private String mail;
     
-
+    @Column(nullable=false)
+    private boolean showProd;
+    
     
     public User() {
     }
@@ -49,6 +51,9 @@ public class User implements Serializable {
     public void setName( String name ) { this.name = name; }
     public String getPass() { return pass; }
     public void setPass( String pass ) { this.pass = pass; }
+
+    public boolean isShowProd() { return showProd; }
+    public void setShowProd( boolean showProd ) { this.showProd = showProd; }
     //</editor-fold>
 
 

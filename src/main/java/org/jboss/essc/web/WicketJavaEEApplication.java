@@ -50,11 +50,12 @@ public class WicketJavaEEApplication extends WebApplication {
         // Mounts
         mountPage("/about", AboutPage.class);
         mountPage("/404",   Http404.class);
+        mountPage("/login", LoginPage.class);
         
-        mountPage("/addProduct", AddProductPage.class);
+        mountPage("/addProduct",            AddProductPage.class);
         mountPage("/addRelease/#{product}", AddReleasePage.class);
         
-        mountPage("/product/${name}", ProductPage.class);
+        mountPage("/product/${name}",               ProductPage.class);
         mountPage("/release/${product}/${version}", ReleasePage.class);
         
     }
