@@ -1,6 +1,8 @@
 package org.jboss.essc.web.pages;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.authroles.authentication.panel.SignInPanel;
+import org.apache.wicket.devutils.debugbar.DebugBar;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.CssResourceReference;
@@ -19,6 +21,8 @@ public class BaseLayoutPage extends WebPage {
 
     // Set up the dynamic behavior for the page, widgets bound by id
     public BaseLayoutPage() {
+        
+        add( new DebugBar("debugBar") );
         
         add( new HeaderPanel("header") );
         

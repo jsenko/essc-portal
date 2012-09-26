@@ -226,6 +226,11 @@
             <artifactId>wicket-extensions</artifactId>
             <version>${version.wicket}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-devutils</artifactId>
+            <version>${version.wicket}</version>
+        </dependency>
         <!-- Security - instead of PicketBox. -->
         <dependency>
             <groupId>org.apache.wicket</groupId>
