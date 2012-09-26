@@ -1,0 +1,36 @@
+
+
+Mail config in AS:
+Set SMTP host, user and pass.
+
+            <mail-session jndi-name="java:jboss/mail/Default">
+                <smtp-server outbound-socket-binding-ref="mail-smtp">
+                    <!-- <login name="user" password="pass"/> -->
+                </smtp-server>
+            </mail-session>
+
+        <outbound-socket-binding name="mail-smtp">
+            <remote-destination host="mail.upcmail.cz" port="25"/>
+        </outbound-socket-binding>
+
+Security config in AS (devel purposes):
+
+        <subsystem xmlns="urn:jboss:domain:security:1.2">
+            <security-domains>
+                <security-domain name="example-domain">
+                    <authentication>
+                        <login-module code="UsersRoles" flag="required">
+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/example-users.properties"/>
+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/example-roles.properties"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="db-domain">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/MysqlDS"/>
+                            <module-option name="principalsQuery" value="SELECT pass FROM users WHERE name=?"/>
+                            <module-option name="rolesQuery" value="SELECT role, 'Roles' AS roleGroup FROM users_roles WHERE name=?"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
