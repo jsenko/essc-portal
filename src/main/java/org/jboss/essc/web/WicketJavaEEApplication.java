@@ -1,25 +1,25 @@
 package org.jboss.essc.web;
 
-import org.jboss.essc.web.pages.statics.AboutPage;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import net.ftlines.wicket.cdi.CdiConfiguration;
 import net.ftlines.wicket.cdi.ConversationPropagation;
-import org.apache.wicket.Component;
-import org.apache.wicket.Page;
-import org.apache.wicket.RestartResponseAtInterceptPageException;
-import org.apache.wicket.Session;
+import org.apache.wicket.*;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.IExceptionMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
+import org.apache.wicket.util.IProvider;
 import org.jboss.essc.web.pages.*;
+import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
+import org.jboss.essc.wicket.AS74554exceptionMapperProvider;
 
 
 /**
@@ -34,6 +34,15 @@ public class WicketJavaEEApplication extends WebApplication {
         return HomePage.class;
     }
 
+    /**
+     *  Maps exceptions to pages.
+     */
+    @Override public IProvider<IExceptionMapper> getExceptionMapperProvider() {
+        //return new AS74554exceptionMapperProvider();
+        return super.getExceptionMapperProvider();
+    }
+
+    
     @Override
     protected void init() {
         super.init();
@@ -49,12 +58,13 @@ public class WicketJavaEEApplication extends WebApplication {
         // Configure CDI, disabling Conversations as we aren't using them
         new CdiConfiguration(bm).setPropagation(ConversationPropagation.NONE).configure(this);
 
+        // This would prevent Ajax components throwing an exception after session expiration.
+        // this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
+        
         this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
         this.getMarkupSettings().setStripWicketTags(true);
         
         
-        // This would prevent Ajax components throwing an exception after session expiration.
-        //this.getApplication().getPageSettings().setRecreateMountedPagesAfterExpiry(false);
         
         
         // Mounts

@@ -5,6 +5,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -31,21 +32,20 @@ public class SidebarPanel extends Panel {
         final EsscAuthSession sess = (EsscAuthSession)getSession();
         
         // User menu "box". Later it could be a real box.
-        if( sess.isSignedIn()  ){
+        if( ! sess.isSignedIn()  ){
+            // Login link
+            add( new BookmarkablePageLink("loginLink", LoginPage.class)
+                .add( new Label("label", "Login / Register") ) );
+        } else {
             // Logout link
-            add( new AjaxLink("loginLink") {
-                    @Override public void onClick( AjaxRequestTarget target ) {
-                        //getSession().invalidateNow();
+            add( new Link("loginLink") {
+                    @Override public void onClick() {
                         sess.signOut();
                         setResponsePage( HomePage.class );
                     }
                 }
-                .add( new Label("label", "Logout") )
+                .add( new Label("label", "Logout " + sess.getUser().getName()) )
             );
-        } else {
-            // Login link
-            add( new BookmarkablePageLink("loginLink", LoginPage.class)
-                .add( new Label("label", "Login / Register") ) );
         }
                 
         add( new ListView<Product>("projects", dao.getProducts_orderName(0) ) {
