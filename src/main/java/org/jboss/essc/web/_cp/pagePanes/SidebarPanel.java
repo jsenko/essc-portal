@@ -1,8 +1,6 @@
 package org.jboss.essc.web._cp.pagePanes;
 
 import javax.inject.Inject;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
@@ -12,7 +10,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
-import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.pages.LoginPage;
 import org.jboss.essc.web.security.EsscAuthSession;
 
@@ -29,7 +26,7 @@ public class SidebarPanel extends Panel {
         super(id);
         this.setRenderBodyOnly( true );
         
-        final EsscAuthSession sess = (EsscAuthSession)getSession();
+        EsscAuthSession sess = (EsscAuthSession)getSession();
         
         // User menu "box". Later it could be a real box.
         if( ! sess.isSignedIn()  ){
@@ -40,8 +37,7 @@ public class SidebarPanel extends Panel {
             // Logout link
             add( new Link("loginLink") {
                     @Override public void onClick() {
-                        sess.signOut();
-                        setResponsePage( HomePage.class );
+                        getSession().invalidate();
                     }
                 }
                 .add( new Label("label", "Logout " + sess.getUser().getName()) )

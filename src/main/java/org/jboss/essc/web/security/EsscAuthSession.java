@@ -31,6 +31,7 @@ public class EsscAuthSession extends AuthenticatedWebSession {
     
     @Override
     public void signOut() {
+        user = null;
         super.signOut();
     }
 
