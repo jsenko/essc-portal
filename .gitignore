@@ -1,2 +1,7 @@
 target
-/.openshift/
+/.openshift/*
+!/.openshift/config/
+
+/.openshift/config/*
+!/.openshift/config/standalone.xml
+
