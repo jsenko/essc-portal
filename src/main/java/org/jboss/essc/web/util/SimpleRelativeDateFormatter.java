@@ -50,7 +50,7 @@ public class SimpleRelativeDateFormatter {
         // Hours
         diff /= 3600;
         if( diff < 24 )  return in + diff + " hours" + ago;
-        if( ! sameDay )  return "yesterday";
+        if( diff < 48 && ! sameDay )  return "yesterday";
         
         long diffDays = diff /= 24;  // Days
         if( diff < 7 )  return in + diff + " days" + ago;

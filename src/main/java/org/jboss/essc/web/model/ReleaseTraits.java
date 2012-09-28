@@ -25,6 +25,7 @@ public class ReleaseTraits implements Serializable, Cloneable {
     private String linkStagedBinaries;
     private String linkStagedDocs;
     private String linkMavenLocalRepo;
+    private String linkJavadoc;
     
     // Info links
     private String linkIssuesFixed;

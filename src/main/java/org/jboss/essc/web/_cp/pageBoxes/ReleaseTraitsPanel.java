@@ -71,6 +71,7 @@ public class ReleaseTraitsPanel extends Panel {
         this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
         this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
         this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
+        this.add( new MyAjaxEditableLabel("linkJavadoc",      new PropertyModel( traits, "linkJavadoc") ) );
 
         this.add( new MyAjaxEditableLabel("issuesFixed",      new PropertyModel( traits, "linkIssuesFixed") ) );
         this.add( new MyAjaxEditableLabel("issuesFound",      new PropertyModel( traits, "linkIssuesFound") ) );

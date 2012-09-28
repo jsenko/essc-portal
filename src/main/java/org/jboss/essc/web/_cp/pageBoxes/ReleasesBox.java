@@ -71,8 +71,8 @@ public class ReleasesBox extends Panel {
                 item.add( new ReleaseLink("versionLink", rel));
                 
                 // Status
-                String status = rel.getStatus() == null ? "" 
-                        : rel.getStatus().getStatusString() + " "+ rel.formatPlannedFor() + " "+ rel.formatPlannedForRelative();
+                String plannedFor = rel.getPlannedFor() == null ? "" : " "+ rel.formatPlannedFor() + " ("+ rel.formatPlannedForRelative()+")";
+                String status = rel.getStatus() == null ? "" : plannedFor;
                 item.add( new Label("status", status));
                 
                 // Links
