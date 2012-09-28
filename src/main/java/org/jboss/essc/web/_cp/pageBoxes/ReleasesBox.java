@@ -1,10 +1,12 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -15,6 +17,10 @@ import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.AddReleasePage;
+
+
+
+
 
 
 /**
@@ -56,18 +62,31 @@ public class ReleasesBox extends Panel {
             // Populate the table of contacts
             @Override
             protected void populateItem( final ListItem<Release> item) {
-                Release pr = item.getModelObject();
+                Release rel = item.getModelObject();
                 //item.add( new Label("product", pr.getProduct().getName()).setVisible(ReleasesBox.this.forProduct == null) );
                 item.add( new WebMarkupContainer("productTD")
-                        .add( new ProductLink("productLink", pr.getProduct()) )
+                        .add( new ProductLink("productLink", rel.getProduct()) )
                         .setVisible(showProd)
                 );
-                item.add( new ReleaseLink("versionLink", pr));
-                item.add( new Label("status", pr.getStatus() == null ? "" : pr.getStatus().getStatusString()));
-                item.add( new Label("planned", pr.formatPlannedFor()) );
-                //item.add( new Label("gitHash", pr.getGitHash()));
-                //item.add( new Label("parent", pr.getParent().getVersion()));
+                item.add( new ReleaseLink("versionLink", rel));
+                
+                // Status
+                String status = rel.getStatus() == null ? "" 
+                        : rel.getStatus().getStatusString() + " "+ rel.formatPlannedFor() + " "+ rel.formatPlannedForRelative();
+                item.add( new Label("status", status));
+                
+                // Links
+                item.add( new WebMarkupContainer("links").add(
+                    new ListView<LabelAndLink>("repeater", createLinksList(rel)){
+                        @Override protected void populateItem( ListItem<LabelAndLink> item ) {
+                            LabelAndLink ll = item.getModelObject();
+                            item.add(new ExternalLink("link", ll.link, ll.label) );
+                        }
+                    }
+                ) );
+                
             }
+
         });
         
         // "Add" link
@@ -88,6 +107,36 @@ public class ReleasesBox extends Panel {
         else
             return dao.getReleasesOfProduct( forProduct );
     }
-        
+    
+    
+    private static List<LabelAndLink> createLinksList( Release rel ) {
+        List<LabelAndLink> links = new ArrayList<LabelAndLink>();
+        addLinkIfNotNull( links, "Release", rel.getTraits().getLinkReleasedBinaries());
+        addLinkIfNotNull( links, "Docs", rel.getTraits().getLinkReleasedDocs());
+        addLinkIfNotNull( links, "Tests", rel.getTraits().getLinkMeadJob());
+        addLinkIfNotNull( links, "Tattle", rel.getTraits().getLinkTattleTale());
+        addLinkIfNotNull( links, "How to build", rel.getTraits().getLinkBuildHowto());
+        //links.add( new LinkAndLabel( "", rel.getTraits().getLink()) );
+        return links;
+    }
+    
+    private static void addLinkIfNotNull( List<LabelAndLink> links, String label, String link ) {
+        if( null != link)
+            links.add( new LabelAndLink(label, link) );
+    }
+
 
 }// class
+
+
+
+class LabelAndLink {
+    
+    public final String label;
+    public final String link;
+
+    public LabelAndLink( String label, String link ) {
+        this.label = label;
+        this.link = link;
+    }
+}

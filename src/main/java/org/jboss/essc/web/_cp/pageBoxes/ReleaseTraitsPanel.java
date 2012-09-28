@@ -1,5 +1,6 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
@@ -109,6 +110,7 @@ public class ReleaseTraitsPanel extends Panel {
             } else {
                 this.add( urlFormatSimpleValidator );
             }
+            add(AttributeModifier.append("class", " fakeLink") );
         }
 
         @Override protected void onError( AjaxRequestTarget target ) {

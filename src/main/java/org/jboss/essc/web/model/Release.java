@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
+import org.jboss.essc.web.util.SimpleRelativeDateFormatter;
 
 
 /**
@@ -197,6 +198,10 @@ public class Release implements Serializable, IHasTraits {
 
     public String formatPlannedFor() {
         return (this.plannedFor == null) ? "" : DF.format( this.plannedFor );
+    }
+
+    public String formatPlannedForRelative() {
+        return SimpleRelativeDateFormatter.format( plannedFor );
     }
     
     

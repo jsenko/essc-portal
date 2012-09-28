@@ -384,13 +384,13 @@ public class RelativeDateFormatter extends DateFormat {
 
         toAppendTo.append(signPrefix);
         if (days != 0 || this.showZeroDays) {
-            toAppendTo.append(this.dayFormatter.format(days) + getDaySuffix());
+            toAppendTo.append( this.dayFormatter.format(days) ).append(getDaySuffix());
         }
         if (hours != 0 || this.showZeroHours) {
-            toAppendTo.append(this.hourFormatter.format(hours) + getHourSuffix());
+            toAppendTo.append( this.hourFormatter.format(hours) ).append(getHourSuffix());
         }
-        toAppendTo.append(this.minuteFormatter.format(minutes) + getMinuteSuffix());
-        toAppendTo.append(this.secondFormatter.format(seconds) + getSecondSuffix());
+        toAppendTo.append( this.minuteFormatter.format(minutes) ).append(getMinuteSuffix());
+        toAppendTo.append( this.secondFormatter.format(seconds) ).append(getSecondSuffix());
         return toAppendTo;
     }
 

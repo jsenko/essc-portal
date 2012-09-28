@@ -213,10 +213,12 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
         .post table tr.header th { text-align: left; padding-top: 0.3ex; }
 
-        .post table td.stav.oddluzeno { color: red; }
-        .post table td.stav.prihlaseno { color: gray; }
-        .post table td.stav.zamitnuto { color: green; }
+        .post.releases table td.state.planned { color: gray; }
+        .post.releases table td.state.in_progress { color: goldenrod; }
+        .post.releases table td.state.released { color: green; }
 
+        .releases table .links a { }
+        .releases table .links a:hover { color: green; }
 
     .post .meta {
             text-align: left;
