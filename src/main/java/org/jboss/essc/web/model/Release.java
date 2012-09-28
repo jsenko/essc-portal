@@ -1,9 +1,13 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.Format;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.StringUtils;
@@ -166,6 +170,9 @@ public class Release implements Serializable, IHasTraits {
     /**/
     //</editor-fold>
 
+    public String toStringIdentifier() {
+        return (this.product == null ? "" : this.product.getName()) + "-" + this.version;
+    }
 
     @Override
     public int hashCode() {
@@ -202,6 +209,23 @@ public class Release implements Serializable, IHasTraits {
 
     public String formatPlannedForRelative() {
         return (this.plannedFor == null) ? "" : SimpleRelativeDateFormatter.format( plannedFor );
+    }
+
+    @Deprecated // see PropertiesDownloadLink.getPropertiesAsString().
+    public String getTraitsAsProperties() {
+        StringBuilder sb = new StringBuilder(1024);
+        Field[] fields = this.getClass().getDeclaredFields();
+        for( Field field : fields ) {
+            if( ! field.getType().equals(String.class) )  continue;
+            sb.append( field.getName() ).append("=");
+            try {
+                sb.append( (String) field.get(this) );
+            }
+            catch( Exception ex ) {
+                sb.append( ex.toString().replace("\n", " ") );
+            }
+        }
+        return sb.toString();
     }
     
     
