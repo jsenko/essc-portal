@@ -217,7 +217,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
         .post.releases table td.state.in_progress { color: goldenrod; }
         .post.releases table td.state.released { color: green; }
 
-        .releases table .links a { }
+        .releases table .links a { margin-right: 1em; }
         .releases table .links a:hover { color: green; }
 
     .post .meta {
