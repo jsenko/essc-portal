@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
@@ -74,6 +75,11 @@ public class ProductPage extends BaseLayoutPage {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));
             this.form.add( new WebMarkupContainer("templates"));
         }
+        
+        
+        // Save as .properties - TODO
+        this.form.add( new PropertiesDownloadLink("downloadProps", product.getTraits(), product.getName() + "-traits.properties") );
+
         
         // Danger Zone
         WebMarkupContainer dangerZone = new WebMarkupContainer("dangerZone");

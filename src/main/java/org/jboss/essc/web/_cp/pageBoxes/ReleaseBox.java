@@ -22,6 +22,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
+import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Release;
@@ -88,22 +89,7 @@ public class ReleaseBox extends Panel {
         this.form.add( new ReleaseTraitsPanel( "traits", release ) );
         
         // Save as .properties - TODO
-        this.form.add( new DownloadLink( "downloadProps", new AbstractReadOnlyModel<File>() {
-            @Override public File getObject() {
-                
-                String propsString = release.getTraitsAsProperties();
-                        
-                try {
-                    File tempFile = File.createTempFile( release.toStringIdentifier() + "-traits-", ".properties" );
-                    InputStream data = new ByteArrayInputStream(propsString.getBytes() );
-                    Files.writeTo( tempFile, data );
-                    return tempFile;
-                }
-                catch( IOException e ) {
-                    throw new RuntimeException( e );
-                }
-            }
-        } ).setCacheDuration( Duration.NONE ).setDeleteAfterDownload( true ));
+        this.form.add( new PropertiesDownloadLink("downloadProps", release, release.toStringIdentifier() + "-traits.properties") );
         
     }
 
