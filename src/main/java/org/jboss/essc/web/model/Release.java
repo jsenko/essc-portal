@@ -201,7 +201,7 @@ public class Release implements Serializable, IHasTraits {
     }
 
     public String formatPlannedForRelative() {
-        return SimpleRelativeDateFormatter.format( plannedFor );
+        return (this.plannedFor == null) ? "" : SimpleRelativeDateFormatter.format( plannedFor );
     }
     
     
