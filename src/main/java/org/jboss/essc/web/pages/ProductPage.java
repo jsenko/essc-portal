@@ -1,5 +1,10 @@
 package org.jboss.essc.web.pages;
 
+import java.io.IOException;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -9,14 +14,19 @@ import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.lang.Bytes;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.util.PropertiesUtils;
 
 
 /**
@@ -51,6 +61,8 @@ public class ProductPage extends BaseLayoutPage {
     
     private void init()
     {
+        setDefaultModel( new PropertyModel( this, "product") );
+        
         // Feedback
         final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
         feedbackPanel.setOutputMarkupId( true );
@@ -60,7 +72,7 @@ public class ProductPage extends BaseLayoutPage {
         // Form
         this.form = new StatelessForm("form") {
             @Override protected void onSubmit() {
-                product = productDao.update( (Product) product );
+                product = productDao.update( product );
             }
         };
         this.form.setVersioned(false);
@@ -80,6 +92,33 @@ public class ProductPage extends BaseLayoutPage {
         // Save as .properties - TODO
         this.form.add( new PropertiesDownloadLink("downloadProps", product.getTraits(), product.getName() + "-traits.properties") );
 
+        // Upload & apply .properties
+        this.add( new Form("uploadForm"){
+            FileUploadField upload;
+            {
+                add( this.upload = new FileUploadField("file") );
+                setMultiPart(true);
+                setMaxSize(Bytes.kilobytes(100));
+            }
+
+            @Override
+            protected void onSubmit() {
+                FileUpload fu = this.upload.getFileUpload();
+                if( null == fu ) return;
+                
+                Properties props = new Properties();
+                try {
+                    props.load( fu.getInputStream() );
+                }
+                catch( IOException ex ) {
+                    feedbackPanel.error( "Could not process properties: " + ex.toString() );
+                    return;
+                }
+                PropertiesUtils.applyOnObject( getPage().getDefaultModelObject(), props );
+                productDao.update( product );
+            }
+        });
+        
         
         // Danger Zone
         WebMarkupContainer dangerZone = new WebMarkupContainer("dangerZone");
@@ -117,5 +156,11 @@ public class ProductPage extends BaseLayoutPage {
     public static PageParameters createPageParameters( Product prod ){
         return new PageParameters().add("name", prod.getName());
     }
+
+    
+    
+    public Product getProduct() { return product; }
+    public void setProduct( Product product ) { this.product = product; }
+    
     
 }// class

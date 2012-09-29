@@ -48,9 +48,9 @@ public class WicketJavaEEApplication extends WebApplication {
         new CdiConfiguration(bm).setPropagation(ConversationPropagation.NONE).configure(this);
 
         // This would prevent Ajax components throwing an exception after session expiration.
-        // this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
+        this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
         
-        //this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
+        this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
         this.getMarkupSettings().setStripWicketTags(true);
         
         

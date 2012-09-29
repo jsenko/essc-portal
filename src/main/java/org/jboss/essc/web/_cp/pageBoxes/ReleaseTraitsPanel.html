@@ -8,12 +8,12 @@
             <table class="form traits" border="0" cellpadding="5">
 
                 <!-- Files -->
-                <tr> <th colspan="2">Files</th></tr>
-                <tr> <td>Released binaries:</td> <td><span wicket:id="releasedBinaries"/></td></tr>
+                <tr class="header"> <th colspan="2">Files</th></tr>
+                <tr> <td class="name">Released binaries:</td> <td><span wicket:id="releasedBinaries"/></td></tr>
                 
                 <!-- Different text field approach tryout. -->
                 <tr>
-                    <td>JS test:</td>
+                    <td class="name">JS test:</td>
                     <td><input type="text" class="fakeLink noBorder" style="width: 100%"
                                onfocus="this.className='';"
                                onblur=" this.className='fakeLink noBorder';"
@@ -21,33 +21,33 @@
                     </td>
                 </tr>
                 
-                <tr> <td>Staged binaries:</td> <td><span wicket:id="stagedBinaries" class="fakeLink" style="width: 100%"/></td></tr>
-                <tr> <td>Released docs:</td> <td><span wicket:id="releasedDocs"/></td></tr>
-                <tr> <td>Staged docs:</td>   <td><span wicket:id="stagedDocs"/></td></tr>
-                <tr> <td>Public API Javadoc:</td>   <td><span wicket:id="linkJavadoc"/></td></tr>
+                <tr> <td class="name">Staged binaries:</td> <td><span wicket:id="stagedBinaries" class="fakeLink" style="width: 100%"/></td></tr>
+                <tr> <td class="name">Released docs:</td> <td><span wicket:id="releasedDocs"/></td></tr>
+                <tr> <td class="name">Staged docs:</td>   <td><span wicket:id="stagedDocs"/></td></tr>
+                <tr> <td class="name">Public API Javadoc:</td>   <td><span wicket:id="linkJavadoc"/></td></tr>
 
                 <!-- Build-->
-                <tr> <th colspan="2">Build logs</th></tr>
-                <tr> <td>Build HOWTO:</td>   <td><span wicket:id="linkBuildHowto"/></td></tr>
-                <tr> <td>Git hash:</td>      <td><span wicket:id="gitHash"/></td></tr>
-                <tr> <td>Git tag:</td>       <td><span wicket:id="gitRepo"/></td></tr>
-                <tr> <td>Fixed issues:</td>  <td><span wicket:id="issuesFixed"/></td></tr>
-                <tr> <td>Found issues:</td>  <td><span wicket:id="issuesFound"/></td></tr>
-                <tr> <td>Mead:</td>          <td><span wicket:id="mead"/></td></tr>
-                <tr> <td>Brew:</td>          <td><span wicket:id="brew"/></td></tr>
+                <tr class="header"> <th colspan="2">Build logs</th></tr>
+                <tr> <td class="name">Build HOWTO:</td>   <td><span wicket:id="linkBuildHowto"/></td></tr>
+                <tr> <td class="name">Git hash:</td>      <td><span wicket:id="gitHash"/></td></tr>
+                <tr> <td class="name">Git tag:</td>       <td><span wicket:id="gitRepo"/></td></tr>
+                <tr> <td class="name">Fixed issues:</td>  <td><span wicket:id="issuesFixed"/></td></tr>
+                <tr> <td class="name">Found issues:</td>  <td><span wicket:id="issuesFound"/></td></tr>
+                <tr> <td class="name">Mead:</td>          <td><span wicket:id="mead"/></td></tr>
+                <tr> <td class="name">Brew:</td>          <td><span wicket:id="brew"/></td></tr>
                     
                 <!-- Tests and reports -->
-                <tr> <th colspan="2">Tests and reports</th></tr>
-                <tr> <td>Jenkins MEAD job:</td>            <td><span wicket:id="linkMeadJob"/></td></tr>
-                <tr> <td>TattleTale:</td>                  <td><span wicket:id="linkTattleTale"/></td></tr>
-                <tr> <td>Code coverage:</td>               <td><span wicket:id="linkCodeCoverage"/></td></tr>
-                <tr> <td>TCK tests:</td>                   <td><span wicket:id="linkTck"/></td></tr>
-                <tr> <td>Java EE compliance tests:</td>    <td><span wicket:id="linkJavaEE"/></td></tr>
-                <tr> <td>508 compliance tests:</td>        <td><span wicket:id="link508"/></td></tr>
-                <tr> <td>Common Criteria tests:</td>       <td><span wicket:id="linkCC"/></td></tr>
+                <tr class="header"> <th colspan="2">Tests and reports</th></tr>
+                <tr> <td class="name">Jenkins MEAD job:</td>            <td><span wicket:id="linkMeadJob"/></td></tr>
+                <tr> <td class="name">TattleTale:</td>                  <td><span wicket:id="linkTattleTale"/></td></tr>
+                <tr> <td class="name">Code coverage:</td>               <td><span wicket:id="linkCodeCoverage"/></td></tr>
+                <tr> <td class="name">TCK tests:</td>                   <td><span wicket:id="linkTck"/></td></tr>
+                <tr> <td class="name">Java EE compliance tests:</td>    <td><span wicket:id="linkJavaEE"/></td></tr>
+                <tr> <td class="name">508 compliance tests:</td>        <td><span wicket:id="link508"/></td></tr>
+                <tr> <td class="name">Common Criteria tests:</td>       <td><span wicket:id="linkCC"/></td></tr>
 
                 <!--
-                <tr> <td>:</td>          <td><span wicket:id=""/></td></tr>
+                <tr> <td class="name">:</td>          <td><span wicket:id=""/></td></tr>
                 -->
                 
             </table>

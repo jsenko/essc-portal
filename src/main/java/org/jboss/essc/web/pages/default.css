@@ -189,36 +189,46 @@ a:hover { color: #7ACE11; text-decoration: none; }
         border-spacing: 0px;
         empty-cells: show;
     }
-        .post table.data a { color: #6ABE01; text-decoration: none; }
-        .post table th { font-weight: bold; background-color: #E3E3E3; }
-        .post table th,
-        .post table td {
-                text-align: left;
-                padding: 0px 0.1ex 0px 0.2ex;
-                margin: 0;
-        }
-        .post table.data td {
-                x-background: url("images/bg04-w740.png") no-repeat bottom left;
-        }
-        .post table.data td,
-        .post table.data th {
-                border-width: 2px;
-                border-style: groove;
-                border-color: white;
-        }
-        .post.stav table th,
-        .post.stav table td {
-                padding: 0.2ex 1ex 0.2ex 2ex;
-        }
+    .post table.data a { color: #6ABE01; text-decoration: none; }
+    .post table th { font-weight: bold; background-color: #E3E3E3; }
+    .post table th,
+    .post table td {
+            text-align: left;
+            padding: 0px 0.1ex 0px 0.2ex;
+            margin: 0;
+    }
+    .post table.data td {
+            x-background: url("images/bg04-w740.png") no-repeat bottom left;
+    }
+    .post table.data td,
+    .post table.data th {
+            border-width: 2px;
+            border-style: groove;
+            border-color: white;
+    }
+    .post.stav table th,
+    .post.stav table td {
+            padding: 0.2ex 1ex 0.2ex 2ex;
+    }
 
-        .post table tr.header th { text-align: left; padding-top: 0.3ex; }
+    .post table tr.header th { text-align: left; padding-top: 0.3ex; }
 
-        .post.releases table td.state.planned { color: gray; }
-        .post.releases table td.state.in_progress { color: goldenrod; }
-        .post.releases table td.state.released { color: green; }
+    .post.releases table td.state.planned { color: gray; }
+    .post.releases table td.state.in_progress { color: goldenrod; }
+    .post.releases table td.state.released { color: green; }
 
-        .releases table .links a { margin-right: 1em; }
-        .releases table .links a:hover { color: green; }
+    .releases table .links a { margin-right: 1em; }
+    .releases table .links a:hover { color: green; }
+
+    /* Traits */
+    .fakeLink { color: blue; text-decoration: underline; }
+    .post .traits span.fakeLink span {
+        font-size: 90%;
+        display: block; max-width: 560px; overflow: hidden;  /* Don't allow long links to break to leak. */
+    }  
+    .post .traits table td { vertical-align: top; }
+    .post .traits table td.name { white-space: nowrap; }
+
 
     .post .meta {
             text-align: left;
@@ -311,7 +321,6 @@ input.noBorder {
     border: none;
 }
 
-.fakeLink { color: blue; text-decoration: underline; }
 
 
 .feedback { font-weight: bold; }
