@@ -17,6 +17,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.lang.Bytes;
+import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
@@ -91,22 +92,13 @@ public class ProductPage extends BaseLayoutPage {
         this.form.add( new PropertiesDownloadLink("downloadProps", product.getTraits(), product.getName() + "-traits.properties") );
 
         // Upload & apply .properties
-        this.add( new Form("uploadForm"){
+        this.add( new PropertiesUploadForm("uploadForm"){
             FileUploadField upload;
-            {
-                add( this.upload = new FileUploadField("file") );
-                setMultiPart(true);
-                setMaxSize(Bytes.kilobytes(100));
-            }
 
-            @Override
-            protected void onSubmit() {
-                FileUpload fu = this.upload.getFileUpload();
-                if( null == fu ) return;
-                
-                Properties props = new Properties();
+            @Override protected void onSubmit() {
+                Properties props;
                 try {
-                    props.load( fu.getInputStream() );
+                    props = processPropertiesFromUploadedFile();
                 }
                 catch( IOException ex ) {
                     feedbackPanel.error( "Could not process properties: " + ex.toString() );
