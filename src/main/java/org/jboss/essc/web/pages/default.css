@@ -283,7 +283,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
 }
 
 #sidebar .ext {
-    color: #EE0000;
+    color: gray;
 }
 
 #sidebar a {
