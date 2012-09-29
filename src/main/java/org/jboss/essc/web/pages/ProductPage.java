@@ -117,7 +117,7 @@ public class ProductPage extends BaseLayoutPage {
                 }
                 
                 ReleaseTraits traits = ((Product)getPage().getDefaultModelObject()).getTraits();
-                PropertiesUtils.applyOnObject( traits, props );
+                PropertiesUtils.applyToObjectFlat( traits, props );
                 productDao.update( product );
             }
         });

@@ -41,7 +41,7 @@ public class PropertiesUtils {
      */
     private static void appendPropertiesAsString( Object obj, StringBuilder sb, Set visited, boolean deep, final String prefix ) {
         if( obj == null || sb == null || visited == null || prefix == null )
-            throw new IllegalArgumentException("Nothing can be null");
+            throw new IllegalArgumentException("Params cant be null");
         
         if( visited.contains( obj ) )  return;
         visited.add( obj );
@@ -101,7 +101,7 @@ public class PropertiesUtils {
                 sb.append("# ");
                 valStr = ex.toString().replace("\n", " ");
             }
-            sb.append(prefix).append(name).append("=").append(valStr).append("\n");
+            sb.append(prefix).append(name).append(" = ").append(valStr).append("\n");
         }
     }// appendPropertiesAsString()
 
@@ -114,15 +114,17 @@ public class PropertiesUtils {
     public static void applyOnObjectStrict( Object obj, Properties props ) throws IllegalArgumentException {
         if( null == obj )    throw new IllegalArgumentException("obj can't be null.");
         if( null == props )  throw new IllegalArgumentException("props can't be null.");
-        applyOnObject( obj, props );
+        applyToObjectFlat( obj, props );
     }
     
     /**
      *  Applies properties to given object. Does not support traversing.
      *  If any argument is null, does nothing.
      *  Assignment or parsing exceptions are logged.
+     * 
+     *  @deprecated  Doesn't support traversing. Use applyOnObjectRecursive.
      */
-    public static void applyOnObject( Object obj, Properties props ) {
+    public static void applyToObjectFlat( Object obj, Properties props ) {
         if( null == obj || null == props )  return;
         
         // Create map of setters.
@@ -141,12 +143,14 @@ public class PropertiesUtils {
             try {
                 if( String.class.equals(paramType) )
                     m.invoke( obj, val );
-                
                 if( Integer.class.equals(paramType) )
                     m.invoke( obj, Integer.parseInt(val) );
-                
                 if( Long.class.equals(paramType) )
                     m.invoke( obj, Long.parseLong(val) );
+                if( Short.class.equals(paramType) )
+                    m.invoke( obj, Short.parseShort(val) );
+                if( Byte.class.equals(paramType) )
+                    m.invoke( obj, Byte.parseByte(val) );
             }
             catch( Exception ex ) {
                 // TODO: Log it.
@@ -164,7 +168,7 @@ public class PropertiesUtils {
      * 
      *  @throws  Rethrows all exceptions caught when writing to the object's properties.
      */
-    public static void applyOnObjectRecursive( Object obj, Properties props ) throws Exception {
+    public static void applyPropertiesToObject( Object obj, Properties props ) throws Exception {
         if( null == obj || null == props )  return;
         
         // Create map of setters.
@@ -175,7 +179,7 @@ public class PropertiesUtils {
         // Apply properties on matching setters.
         for( Map.Entry e : props.entrySet() ){
             try {
-                applyOnObject( obj, e, setters );
+                applyPropertyOnObject( obj, e, setters );
             }
             catch( Exception ex ) {
                 exs.add( ex );
@@ -193,9 +197,9 @@ public class PropertiesUtils {
      * @param setters - Optimization.
      * @returns  True if the property was found and set.
      */
-    private static boolean applyOnObject( Object obj, final Entry e, Map<String, Method> setters) throws Exception {
+    private static boolean applyPropertyOnObject( Object obj, final Entry e, Map<String, Method> setters) throws Exception {
         if( setters == null)
-            setters = ReflectionHelpers.createSettersMap( obj );
+            setters = ReflectionHelpers.createSettersMap( obj.getClass() );
         
         final String def = (String) e.getKey();
         boolean isMultiLevel = def.contains(".");
@@ -232,7 +236,7 @@ public class PropertiesUtils {
         final String tail = StringUtils.substringAfter(def, ".");
         
         Map.Entry childEntry = new AbstractMap.SimpleEntry<String, String>( tail, (String)e.getValue() );
-        applyOnObject( obj, childEntry, null );
+        applyPropertyOnObject( child, childEntry, null );
         
         return true;
     }
@@ -245,20 +249,37 @@ public class PropertiesUtils {
         /**
         * @returns  A map  of  "POJO propertyName" -> setter Method.
         */
-        public static Map<String, Method> createSettersMap( Object obj ){
+        public static Map<String, Method> createSettersMap( Class cls ){
+            return createSettersMap( cls, false );
+        }
+        
+        /**
+         *  Only takes String, Long, Integer into account.
+         * @param cls
+         * @param onlyPrimitive
+         * @return 
+         */
+        public static Map<String, Method> createSettersMap( Class cls, boolean onlyPrimitive ){
 
             Map<String, Method> methods = new HashMap();
 
-            for( Method m : obj.getClass().getMethods() ){
+            for( Method m : cls.getMethods() ){
                 if( m.getParameterTypes().length != 1 )  continue;
                 if( ! m.getName().startsWith("set") )  continue;
-
-                Class paramType = m.getParameterTypes()[0];
-                boolean paramTypeOK = String.class.equals( paramType );
-                paramTypeOK |= Integer.class.equals( paramType );
-                paramTypeOK |= Long.class.equals( paramType );
-                if( paramTypeOK )
-                    methods.put( StringUtils.uncapitalize( m.getName().substring(3) ), m);
+                
+                if( onlyPrimitive ){
+                    Class paramType = m.getParameterTypes()[0];
+                    
+                    boolean paramTypeOK = paramType.isPrimitive()
+                        || String.class.equals( paramType )
+                        || Integer.class.equals( paramType )
+                        || Long.class.equals( paramType )
+                        || Short.class.equals( paramType )
+                        || Byte.class.equals( paramType )
+                        || Character.class.equals( paramType );
+                    if( ! paramTypeOK )  continue;
+                }
+                methods.put( StringUtils.uncapitalize( m.getName().substring(3) ), m);
             }
 
             return methods;
