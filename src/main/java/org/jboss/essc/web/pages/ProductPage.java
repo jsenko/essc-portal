@@ -26,6 +26,7 @@ import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.util.PropertiesUtils;
 
 
@@ -114,7 +115,9 @@ public class ProductPage extends BaseLayoutPage {
                     feedbackPanel.error( "Could not process properties: " + ex.toString() );
                     return;
                 }
-                PropertiesUtils.applyOnObject( getPage().getDefaultModelObject(), props );
+                
+                ReleaseTraits traits = ((Product)getPage().getDefaultModelObject()).getTraits();
+                PropertiesUtils.applyOnObject( traits, props );
                 productDao.update( product );
             }
         });
