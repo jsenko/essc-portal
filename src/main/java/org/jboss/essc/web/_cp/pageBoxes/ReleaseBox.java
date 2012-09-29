@@ -1,8 +1,10 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 import javax.inject.Inject;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -11,13 +13,20 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.util.lang.Bytes;
+import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.model.ReleaseTraits;
+import org.jboss.essc.web.util.PropertiesUtils;
 
 
 /**
@@ -27,9 +36,9 @@ import org.jboss.essc.web.model.Release;
  */
 public class ReleaseBox extends Panel {
     
-    @Inject private ReleaseDaoBean prodRelDao;
-    @Inject private ProductDaoBean prodDao;
+    @Inject private ReleaseDaoBean daoRelease;
 
+    
     // Components
     private Form<Release> form;
 
@@ -41,6 +50,7 @@ public class ReleaseBox extends Panel {
     public ReleaseBox( String id, final Release release ) {
         super( id );
         this.release = release;
+        this.setDefaultModel( new PropertyModel<Release> ( this, "release") );
 
         // Heading
         add( new Label("productName", this.release.getProduct().getName()) );
@@ -54,7 +64,7 @@ public class ReleaseBox extends Panel {
         // Form
         this.form = new StatelessForm("form") {
             @Override protected void onSubmit() {
-                ReleaseBox.this.release = prodRelDao.update( (Release) release );
+                ReleaseBox.this.release = daoRelease.update( (Release) release );
             }
         };
         this.form.setVersioned(false);
@@ -83,6 +93,31 @@ public class ReleaseBox extends Panel {
         // Save as .properties - TODO
         this.form.add( new PropertiesDownloadLink("downloadProps", release, release.toStringIdentifier() + "-traits.properties") );
         
+        // Upload & apply .properties
+        this.add( new PropertiesUploadForm("uploadForm"){
+
+            @Override protected void onSubmit() {
+                Properties props;
+                try {
+                    props = processPropertiesFromUploadedFile();
+                }
+                catch( IOException ex ) {
+                    feedbackPanel.error( "Could not process properties: " + ex.toString() );
+                    return;
+                }
+                
+                Release rel = (Release) ReleaseBox.this.getDefaultModelObject();
+                ReleaseTraits traits = release.getTraits();
+                PropertiesUtils.applyToObjectFlat( traits, props );
+                rel = daoRelease.update( rel );
+                ReleaseBox.this.setDefaultModelObject( rel );
+            }
+        });
+
     }
 
+    
+    public Release getRelease() { return release; }
+    public void setRelease( Release release ) { this.release = release; }
+    
 }// class

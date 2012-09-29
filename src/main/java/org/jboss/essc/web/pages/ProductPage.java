@@ -1,10 +1,7 @@
 package org.jboss.essc.web.pages;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
