@@ -65,7 +65,7 @@ public class SimpleRelativeDateFormatter {
         diff /= 30;  // Months, cca.
         if( diff < 12 ) return in + diff + " months" + ago;
         if( diff < 13 ) return in + "a year" + ago;
-        if( diff < 48 ) return in + (diff/12) + " years and " + diff + " months" + ago;
+        if( diff < 48 ) return in + (diff/12) + " years and " + (diff % 12) + " months" + ago;
         
         diff = diffDays / 365;  // Years, cca.
         if( diff < 200 ) return in + diff + " years" + ago;
