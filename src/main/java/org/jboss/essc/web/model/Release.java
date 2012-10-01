@@ -2,12 +2,9 @@ package org.jboss.essc.web.model;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.Format;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.StringUtils;
@@ -50,11 +47,14 @@ public class Release implements Serializable, IHasTraits {
 
     private String version;
     
+    private boolean internal = true;
+    
     
     @Temporal(TemporalType.DATE)
     private Date plannedFor;
     
     @Temporal(TemporalType.DATE)
+    @Column(columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", insertable=false, updatable=false)
     private Date lastChanged = new Date();
     
     private Status status = Status.PLANNED;
@@ -82,39 +82,27 @@ public class Release implements Serializable, IHasTraits {
     
 
     
-    public void updateWithProductTemplates(){
+    public final void updateWithProductTemplates(){
         if( this.product == null )  return;
         if( StringUtils.isBlank(this.version) )  return;
         
         this.traits = this.product.getTraits().clone();
-        this.traits.replaceTemplatesTokens( "${ver}", this.version );
-        this.traits.replaceTemplatesTokens( "${ver.lower}", this.version.toLowerCase() );
-        this.traits.replaceTemplatesTokens( "${ver.upper}", this.version.toUpperCase() );
-
-        
-        // Iterate over fields and copy those of matching names.
-        /*
-        Field[] fields = this.getClass().getFields(); // Only gives public fields!
-        for( Field field : fields ) {
-            String methodName = "get" + StringUtils.capitalize( field.getName() );
-            try {
-                Method method = this.product.getClass().getMethod(methodName);
-                String tpl = (String) method.invoke(this.product);
-                if( tpl == null )  continue;
-                field.set( this, replaceVersionIfNotNull(tpl) );
-            }
-            catch( Exception ex ) { }
-        }
-        */
-        
-        
+        replaceVersionTokens();
     }
     
+    public void replaceVersionTokens(){
+        this.traits.replaceTemplatesTokens( "${ver}", this.version );
+        this.traits.replaceTemplatesTokens( "${ver.lower}", this.version.toLowerCase() );
+        this.traits.replaceTemplatesTokens( "${ver.upper}", this.version.toUpperCase() );        
+    }
+    
+    /*
     private String replaceVersionIfNotNull( String template ){
         return template.replace("${ver}", this.version)
                 .replace("${ver.lower}", this.version.toLowerCase())
                 .replace("${ver.upper}", this.version.toUpperCase());
     }
+    */
 
 
     
@@ -126,6 +114,9 @@ public class Release implements Serializable, IHasTraits {
     public void setProduct( Product product ) { this.product = product; }
     public String getVersion() { return version; }
     public void setVersion( String version ) { this.version = version; }
+
+    public boolean isInternal() { return internal; }
+    public void setInternal( boolean internal ) { this.internal = internal; }
 
     public String getNote() {        return note;    }
     public void setNote(String note) { this.note = note;    }

@@ -12,7 +12,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
-import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 

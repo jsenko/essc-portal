@@ -1,5 +1,6 @@
 package org.jboss.essc.web;
 
+import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
