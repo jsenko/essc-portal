@@ -16,7 +16,7 @@ import org.jboss.essc.web._cp.links.ReleaseLink;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
-import org.jboss.essc.web.pages.AddReleasePage;
+import org.jboss.essc.web.pages.rel.AddReleasePage;
 
 
 

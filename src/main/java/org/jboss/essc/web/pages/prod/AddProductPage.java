@@ -1,5 +1,6 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.prod;
 
+import org.jboss.essc.web.pages.prod.ProductPage;
 import javax.inject.Inject;
 
 import org.apache.wicket.markup.html.form.Form;
@@ -10,6 +11,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.pages.BaseLayoutPage;
 
 /**
  *

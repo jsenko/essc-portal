@@ -1,4 +1,4 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.prod;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -25,6 +25,8 @@ import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;
+import org.jboss.essc.web.pages.BaseLayoutPage;
+import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.util.PropertiesUtils;
 
 

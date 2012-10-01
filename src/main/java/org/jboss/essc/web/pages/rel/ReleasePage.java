@@ -1,5 +1,6 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.rel;
 
+import org.jboss.essc.web.pages.prod.ProductPage;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -13,6 +14,7 @@ import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.pages.BaseLayoutPage;
 
 
 /**

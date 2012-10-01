@@ -1,4 +1,4 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.rel;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -16,6 +16,7 @@ import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.logging.Logger;
 
 
