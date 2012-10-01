@@ -11,21 +11,26 @@
         
     <wicket:extend>
         
-        <h1>Login</h1>
+        <h1>Account Settings</h1>
         
         <span wicket:id="feedback"></span>
         
         <form wicket:id="form" method="post" action="#">
-            <table border="0" cellpadding="5">
-                <tr> <td>User</td>     <td><input wicket:id="user" type="text"     size="20"/></td> </tr>
-                <tr> <td>Password</td> <td><input wicket:id="pass" type="password" size="20"/></td> </tr>
-                <tr> <td colspan="2"><input wicket:id="login" name="login" type="submit" style="width: 100%" value="Log in"/></td></tr>
-                
-                <tr> <td>Email</td>       <td><input wicket:id="mail" type="text"     size="20"/></td> </tr>
-                <tr> <td colspan="2"><input wicket:id="lost"  name="lost"  type="submit" style="width: 100%" value="Retrieve lost password"/></td></tr>
-                
-                <tr> <td colspan="2"></td><td><input wicket:id="prod" type="checkbox"/></td> </tr>
-                <tr> <td colspan="2"><input wicket:id="regis" name="regis" type="submit" style="width: 100%" value="Register"/></td></tr>
+            <table border="0" cellpadding="5" class="w100p">
+                <tr> <td>User</td>     <td><span  wicket:id="user">userName1</span></td> </tr>
+                <tr> <td>Email</td>    <td><input wicket:id="mail" type="text"     size="20"/></td> </tr>
+                <tr> <td><label for="showProd">Show productization releases</label></td><td><input wicket:id="showProd" id="showProd" type="checkbox"/></td> </tr>
+                <tr> <td colspan="2"><input type="submit" style="width: 100%" value="Save"/></td></tr>
+            </table>
+        </form>
+        
+        <form wicket:id="resetPassForm" method="post" action="#">
+            <h2>Reset password</h2>
+            <table border="0" cellpadding="5" class="w100p">
+                <tr> <td>Current password</td> <td><input wicket:id="oldPass"  type="password" size="20"/></td> </tr>
+                <tr> <td>New password</td>     <td><input wicket:id="newPass1" type="password" size="20"/></td> </tr>
+                <tr> <td>New again</td>        <td><input wicket:id="newPass2" type="password" size="20"/></td> </tr>
+                <tr> <td colspan="2"><input type="submit" style="width: 100%" value="Reset"/></td></tr>
             </table>
         </form>
         

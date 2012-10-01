@@ -1,171 +1,133 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.user;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.security.auth.login.LoginException;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
+import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.RestartResponseException;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.validation.IErrorMessageSource;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.IValidationError;
+import org.apache.wicket.validation.validator.AbstractValidator;
 import org.jboss.essc.web.dao.UserDaoBean;
 import org.jboss.essc.web.model.User;
-import org.jboss.essc.web.util.MailSender;
-import org.jboss.essc.web.util.PicketBoxAuthPojo;
-import org.picketbox.exceptions.PicketBoxProcessingException;
-import org.picketbox.plugins.PicketBoxProcessor;
+import org.jboss.essc.web.pages.BaseLayoutPage;
+import org.jboss.essc.web.security.EsscAuthSession;
 
 
 /**
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-public class LoginPage extends BaseLayoutPage {
+public class UserPage extends BaseLayoutPage {
 
-    @Inject private UserDaoBean userDao;
-    @Inject private MailSender mailSender;
+    @Inject private UserDaoBean daoUser;
+
+    //@Inject
+    private UserModel model;
+    
+    
+    // Password reset values
+    public String oldPass;
+    public String newPass1;
+    public String newPass2;
     
     
     // Components
     private Form<User> form;
+    private Form<User> resetPassForm;
     private FeedbackPanel feedback = (FeedbackPanel) new FeedbackPanel("feedback").setOutputMarkupId(true);
-    private Button lostButton;
 
-    // Data
-    private User user = new User();
-    
 
-    
-    public LoginPage(PageParameters params) {
+    //@AuthorizeAction(roles="authenticated")
+    public UserPage(PageParameters params) {
         
-        //String userName = params.get("user").toOptionalString();
+        // If not logged in, redirect to a login page.
+        User user = ((EsscAuthSession)getSession()).getUser();
+        if( null == user )  throw new RestartResponseException( LoginPage.class );
+
+        this.setDefaultModel( this.model = new UserModel( user ).setUserDao( daoUser ) );
+
+
+        // Components 
         
+        //this.feedback.setMarkupId("pageFeedback");
+        //this.feedback.add( AttributeModifier.append("class", "feedback") );
         add(this.feedback);
-
-        this.form = new Form<User>("form") {
+        
+        add( this.form = new Form<User>("form") {
             @Override protected void onSubmit() {
+                User user = model.getObject();
+                user = daoUser.update( user ); // Should I do this in UserModel#setObject() ?
+                model.setObject( user );
+                info("Saved.");
             }
-        };
+        });
 
-        // User, pass
-        this.form.add(new RequiredTextField("user", new PropertyModel(this.user, "name")));
-        this.form.add(new PasswordTextField("pass", new PropertyModel(this.user, "pass")));
+        //this.form.setModel( new CompoundPropertyModel<User>( model ) );
         
-        // Register button
-        final AjaxButton loginBtn = new AjaxButton("login") {
-            @Override
-            protected void onSubmit( AjaxRequestTarget target, Form<?> form ) {
-                target.add( feedback );
-                //checkLoginWithPicketBox();
-                try {
-                    //User user_ = userDao.loadUserIfPasswordMatches( user );
-                    //if( !  LoginPage.this.getSession().authenticate( user ) )
-                    if( !  LoginPage.this.getSession().signIn( user.getName(), user.getPass() ) )
-                        throw new NoResultException("No such user.");
-                    setResponsePage(HomePage.class);
-                }
-                catch( NoResultException ex ){
-                    //setResponsePage(HomePage.class);
-                    feedback.error("Wrong password or non-existent user: " + user.getName() + " / " + user.getPass());
-                    feedback.info( "To get forgotten password, fill in user name and/or email.");
-                    lostButton.setVisible( true );
-                }
-            }
-        };
-        this.form.add( loginBtn );
-        
+        // User
+        this.form.add(new Label("user", new PropertyModel(model, "name")));
+
         // Mail
-        this.form.add(new TextField("mail", new PropertyModel(this.user, "mail")));
-
-        // Register button
-        final AjaxButton regisButton = new AjaxButton("regis"){};
-        this.form.add( regisButton );
+        this.form.add(new TextField("mail", new PropertyModel(model, "mail")));
 
         // Show productization releases?
-        CheckBox showProd = new CheckBox("prod", new PropertyModel(this.user, "showProd"));
+        CheckBox showProd = new CheckBox("showProd", new PropertyModel(model, "showProd"));
         this.form.add( showProd );
+
         
-        // Lost password button
-        this.lostButton = new AjaxFallbackButton("lost", form) {
-            @Override protected void onSubmit( AjaxRequestTarget target, Form<?> form ) {
-                target.add( feedback );
-                try{
-                    resetPassword(user);
-                    feedback.info("Password was reset and sent by mail.");
-                    info("Password was reset and sent by mail.");
-                } catch (Exception ex){
-                    feedback.error("Could not reset password: " + ex.getMessage() );
-                    error("Could not reset password: " + ex.getMessage() );
+        // Reset Password form
+        final PasswordTextField oldPassField  = new PasswordTextField("oldPass",  new PropertyModel(UserPage.this, "oldPass"));
+        final PasswordTextField newPass1Field = new PasswordTextField("newPass1", new PropertyModel(UserPage.this, "newPass1"));
+        
+        add( this.resetPassForm = new Form<User>("resetPassForm") {
+            @Override protected void onSubmit() {
+                User curUser = ((EsscAuthSession)getSession()).getUser();
+                if( null == curUser )  throw new RestartResponseException( LoginPage.class );
+                
+                User user = model.getObject();
+                if( ! curUser.equals( user ) ){
+                    // This page's user != logged user. Should not ever happen.
+                    throw new RestartResponseException( LoginPage.class );
                 }
-                //super.onSubmit( target, form );
+                
+                String md5Old = DigestUtils.md5Hex( oldPassField.getValue().trim() );
+                if( ! StringUtils.equals( user.getPass(), oldPassField.getValue() ) ){
+                    error("Wrong current password.");
+                    return;
+                }
+                String md5New = DigestUtils.md5Hex( newPass1Field.getValue().trim() );
+                user.setPass( md5New );
+                user = daoUser.update( user ); // Should I do this in UserModel#setObject() ?
+                model.setObject( user );
+                info("Password was reset.");
             }
-        };
-        this.lostButton.setVisible(false).setOutputMarkupPlaceholderTag(true);
-        this.form.add( this.lostButton );
+        });
+        //this.resetPassForm.setModel( new CompoundPropertyModel(UserPage.this) );
 
-        add(this.form);
-    }
-
-
-    /**
-     *   Generates a new password and sends it to user's mail.
-     */
-    private void resetPassword( User user ) throws Exception {
-        String pass = "pass";
-        user.setPass( DigestUtils.md5Hex( pass ) );
-        user = userDao.update(user);
         
-        mailSender.sendMail( user.getMail(), "ESSC portal password", 
-                "User name:    " + user.getName() + "\n" +
-                "New password: " + user.getPass() + "\n"
+        this.resetPassForm.add( oldPassField );
+        this.resetPassForm.add( newPass1Field );
+        this.resetPassForm.add( new PasswordTextField("newPass2", new PropertyModel(UserPage.this, "newPass2"))
+            .add( new AbstractValidator<String> () {
+                @Override protected void onValidate( IValidatable<String> validatable ) {
+                    if( ! validatable.getValue().equals( newPass1Field.getValue() ) ){
+                        validatable.error( new IValidationError() {
+                            @Override public String getErrorMessage( IErrorMessageSource messageSource ) {
+                                return "Passwords do not match.";
+                            }
+                        });
+                    }
+                }
+            })
         );
     }
-    
-    
-    public User getUser() { return user; }
-    public void setUser( User user ) { this.user = user; }
 
-    
-    
-    
-    /**
-     *   Test of PicketBox login approach. Doesn't work - says 'Invalid'.
-     */
-    private void checkLoginWithPicketBox() {
-        try {
-            //ServletContext sc = (ServletContext) getRequest().getContainerRequest();
 
-            PicketBoxProcessor processor = new PicketBoxProcessor();
-            processor.setSecurityInfo("admin", "aaa");
-            processor.process( new PicketBoxAuthPojo() );
-
-            /*Principal admin = new SimplePrincipal("admin");
-            processor.getCallerPrincipal().equals( admin );
-            Subject callerSubject = processor.getCallerSubject(); // Null?
-            callerSubject.getPrincipals().contains(admin);
-            RoleGroup callerRoles = processor.getCallerRoles();
-            */
-
-            feedback.info( "Logged succesfully." );
-            error("Foo");
-        }
-        catch( LoginException ex ) {
-            feedback.error( "Login error: " + ex.getMessage() );
-            error("Foo");
-            //throw new RuntimeException(ex);
-        }
-        catch( PicketBoxProcessingException ex ) {
-            Logger.getLogger( LoginPage.class.getName() ).log( Level.SEVERE, null, ex );
-            feedback.error( "Login error: " + ex.getMessage() );
-            error("Foo");
-            //throw new RuntimeException(ex);
-        }
-    }
-    
-    
 }// class

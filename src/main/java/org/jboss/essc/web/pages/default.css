@@ -323,5 +323,12 @@ input.noBorder {
 
 
 
-.feedback { font-weight: bold; }
-.feedback .feedbackPanelERROR { color: red; font-weight: bold; }
+.feedbackPanel {
+    border: 1px solid gray;
+    background-color: lightgoldenrodyellow;
+    font-weight: bold;
+}
+.feedback .feedbackPanelERROR { font-weight: bold; color: red; }
+.feedback .feedbackPanelINFO  { font-weight: bold; color: green; }
+
+.w100p { width: 100%; }

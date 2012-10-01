@@ -20,6 +20,7 @@ import org.apache.wicket.request.component.IRequestableComponent;
 import org.jboss.essc.web.pages.*;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
+import org.jboss.essc.web.pages.user.UserPage;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
 
@@ -64,6 +65,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/about", AboutPage.class);
         mountPage("/404",   Http404.class);
         mountPage("/login", LoginPage.class);
+        mountPage("/user",  UserPage.class);
         
         mountPage("/addProduct",            AddProductPage.class);
         mountPage("/addRelease/#{product}", AddReleasePage.class);
