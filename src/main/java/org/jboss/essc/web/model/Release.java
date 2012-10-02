@@ -220,9 +220,13 @@ public class Release implements Serializable, IHasTraits {
     }
     
     
+    /**
+     *  Status of the release.
+     */
     public enum Status {
         PLANNED("Planned"),
         IN_PROGRESS("In progress"),
+        STAGED("Staged"),
         RELEASED("Released");
         
         private String statusString;
@@ -237,4 +241,4 @@ public class Release implements Serializable, IHasTraits {
         
     }
     
-}
+}// class
