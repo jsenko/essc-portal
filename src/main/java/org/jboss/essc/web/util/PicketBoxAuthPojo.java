@@ -17,11 +17,11 @@ import org.picketbox.plugins.authorization.PicketBoxAuthorizationModule;
 @Authentication(modules={@Module(code = UsersRolesLoginModule.class, options = {
     //@ModuleOption(key="usersProperties", value="${jboss.server.config.dir}/example-users.properties"),
     //@ModuleOption(key="rolesProperties", value="${jboss.server.config.dir}/example-roles.properties"),
-    //@ModuleOption(key="usersProperties", value="users.properties"),
-    //@ModuleOption(key="rolesProperties", value="roles.properties")
-    @ModuleOption
+    @ModuleOption(key="usersProperties", value="users.properties"),
+    @ModuleOption(key="rolesProperties", value="roles.properties")
+    //@ModuleOption
 })})
-@Authorization (modules={@Module(code = PicketBoxAuthorizationModule.class, options = {@ModuleOption(key="roles",value="admin")})})
+//@Authorization (modules={@Module(code = PicketBoxAuthorizationModule.class, options = {@ModuleOption(key="roles",value="admin")})})
 public class PicketBoxAuthPojo {
     
 }
