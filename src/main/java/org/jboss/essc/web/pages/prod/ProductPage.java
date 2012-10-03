@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
@@ -48,15 +49,20 @@ public class ProductPage extends BaseLayoutPage {
 
     
     public ProductPage( PageParameters par ) {
+        String prodName = par.get("name").toString();
         try {
-            this.product = productDao.getProductByName( par.get("name").toString() );
+            this.product = productDao.getProductByName( prodName );
         }
-        catch( NoResultException ex ){ /* remains null. */ }
+        catch( NoResultException ex ){
+            throw new RestartResponseException( HomePage.class, new PageParameters().add("error", "No such product: " + prodName) );
+        }
         init();
     }
 
     public ProductPage( Product product ) {
         this.product = product;
+        if( this.product == null )
+            throw new RestartResponseException( HomePage.class, new PageParameters().add("error", "No product chosen.") );
         init();
     }
     
