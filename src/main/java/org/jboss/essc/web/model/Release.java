@@ -226,6 +226,7 @@ public class Release implements Serializable, IHasTraits {
     public enum Status {
         PLANNED("Planned"),
         IN_PROGRESS("In progress"),
+        TAGGED("Tagged"),
         STAGED("Staged"),
         RELEASED("Released");
         

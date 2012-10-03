@@ -11,6 +11,7 @@ import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
@@ -82,6 +83,11 @@ public class ReleaseBox extends Panel {
                 }
             })
         );
+        
+        // Internal build
+        this.form.add( new CheckBox("internal", new PropertyModel<Boolean> ( release, "internal") ) );
+        
+        
         // Traits
         final ReleaseTraitsPanel releaseTraitsPanel = new ReleaseTraitsPanel( "traits", release );
         releaseTraitsPanel.setOutputMarkupId( true );
