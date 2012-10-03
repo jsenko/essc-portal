@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.essc.web.model.Product;
@@ -57,13 +58,29 @@ public class ReleaseDaoBean {
                 .getSingleResult();
     }
     
+    
+    /**
+     *  Does a release exist?
+     */
+    public boolean exists( String prodName, String version ){
+        return this.em.createQuery("SELECT COUNT(*) FROM Release rel WHERE rel.product.name = ? AND rel.version = ?", Long.class)
+                .setParameter(1, prodName)
+                .setParameter(2, version)
+                .getSingleResult() != 0;
+    }
 
     /**
      * Add a new Release.
      */
-    public Release addRelease( Product product, String version) {
+    public Release addRelease( Product product, String version ) {
+        // Verify that the relese doesn't exist yet.
+        // TODO: use exists().
+        try {
+            getRelease( product.getName(), version );
+            throw new IllegalArgumentException("Release already exists: " + product.getName() + " " + version );
+        } catch (NoResultException ex){ /* OK */ }
+        
         Release rel = new Release( null, product, version );
-        //rel.updateWithProductTemplates(); // It's in constructor.
         return this.em.merge( rel );
     }
 
