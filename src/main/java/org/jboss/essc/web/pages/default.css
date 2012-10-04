@@ -237,6 +237,13 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .post table.traits tr.mustBe th,
     .post table.traits tr.mustBe td { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
     
+    .legend                            { padding: 2ex 0  ; }                
+    .legend .item                      { float: left; padding: 1ex 1em; }                
+    .legend .item           div label   { float: left; padding: 1ex 2em 1ex 1em; }                
+    .legend                 span.sample { border: 1px solid black; display: inline-block; position: relative; width: 40px; height: 20px; }
+    .legend .shouldHaveBeen span.sample { background-color: #F2F2F2; /* Subtle gray */ }
+    .legend .shouldBe       span.sample { background-color: #fdfbd2; /* Subtle yellow */ }
+    .legend .mustBe         span.sample { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
 
     .post .meta {
             text-align: left;
@@ -340,3 +347,4 @@ input.noBorder {
 .feedback .feedbackPanelINFO  { font-weight: bold; color: green; }
 
 .w100p { width: 100%; }
+.clear { visibility: hidden;  clear: both; }
