@@ -9,22 +9,15 @@
 
                 <!-- Files -->
                 <tr class="header"> <th colspan="2">Files</th></tr>
-                <tr> <td class="name">Released binaries:</td> <td><span wicket:id="releasedBinaries"/></td></tr>
                 
-                <!-- Different text field approach tryout. -->
-                <tr>
-                    <td class="name">JS test:</td>
-                    <td><input type="text" class="fakeLink noBorder" style="width: 100%"
-                               onfocus="this.className='';"
-                               onblur=" this.className='fakeLink noBorder';"
-                               onclick="if(isWorkingURL(this.value))  window.open(this.value, '_blank');"/>
-                    </td>
-                </tr>
-                
+                <tr wicket:id="releasedBinaries"> <td class="name">Released binaries:</td> <td><span xwicket:id="releasedBinaries"/></td></tr>
+                <!--
                 <tr> <td class="name">Staged binaries:</td> <td><span wicket:id="stagedBinaries" class="fakeLink" style="width: 100%"/></td></tr>
+                -->
+                <tr wicket:id="stagedBinaries"></tr>
                 <tr> <td class="name">Released docs:</td> <td><span wicket:id="releasedDocs"/></td></tr>
                 <tr> <td class="name">Staged docs:</td>   <td><span wicket:id="stagedDocs"/></td></tr>
-                <tr> <td class="name">Public API Javadoc:</td>   <td><span wicket:id="linkJavadoc"/></td></tr>
+                <tr wicket:id="linkJavadoc"/>
 
                 <!-- Build-->
                 <tr class="header"> <th colspan="2">Build logs</th></tr>
@@ -49,6 +42,17 @@
                 <!--
                 <tr> <td class="name">:</td>          <td><span wicket:id=""/></td></tr>
                 -->
+                <!-- Different text field approach tryout. 
+                <tr>
+                    <td class="name">JS test:</td>
+                    <td><input type="text" class="fakeLink noBorder" style="width: 100%"
+                               onfocus="this.className='';"
+                               onblur=" this.className='fakeLink noBorder';"
+                               onclick="if(isWorkingURL(this.value))  window.open(this.value, '_blank');"/>
+                    </td>
+                </tr>
+                -->
+                
                 
             </table>
 

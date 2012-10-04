@@ -1,11 +1,5 @@
-/*
-Colors
-------
-<a>: #7ACE11 (zelena)
-text: #404040
+/*  Colors:  <a>: #7ACE11 (green)   text: #404040
 */
-
-
 
 body {
 	margin: 0;
@@ -213,8 +207,13 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .post table tr.header th { text-align: left; padding-top: 0.3ex; }
 
+    .releases table.data tr.internal th,
+    .releases table.data tr.internal td { font-style: italic; }
+    
     .post.releases table td.state.planned { color: gray; }
     .post.releases table td.state.in_progress { color: goldenrod; }
+    .post.releases table td.state.tagged   { color: #fffaa0; }
+    .post.releases table td.state.staged   { color: dodgerblue; }
     .post.releases table td.state.released { color: green; }
 
     .releases table .links a { margin-right: 1em; }
@@ -229,6 +228,13 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .post .traits table td { vertical-align: top; }
     .post .traits table td.name { white-space: nowrap; }
 
+    .post table.traits tr.notNeeded th,
+    .post table.traits tr.notNeeded td { }
+    .post table.traits tr.shouldBe th,
+    .post table.traits tr.shouldBe td { background-color: #fffaa0; }
+    .post table.traits tr.mustBe th,
+    .post table.traits tr.mustBe td { background-color: #ffb9a0; }
+    
 
     .post .meta {
             text-align: left;

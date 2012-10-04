@@ -7,6 +7,7 @@ import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
@@ -15,6 +16,8 @@ import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 import org.jboss.essc.wicket.UrlSimpleValidator;
+
+import static org.jboss.essc.web.model.Release.Status;
 
 
 /**
@@ -65,13 +68,21 @@ public class ReleaseTraitsPanel extends Panel {
         
         // Traits
         ReleaseTraits traits = this.release.getTraits();
+
         
-        //this.add( new TextField("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ).add(val).add(val2) );
-        this.add( new MyAjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ));
-        this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
+        Model<IHasTraits> rm = new Model(release);
+        
+        //this.add( new MyAjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ));
+        this.add( new ReleaseTraitRowPanel("releasedBinaries", rm, "Released binaries", "linkReleasedBinaries", Status.RELEASED, this, feedbackPanel));
+        
+        //this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
+        this.add( new ReleaseTraitRowPanel("stagedBinaries", rm, "Staged binaries", "linkStagedBinaries", Status.STAGED, this, feedbackPanel));
+        
         this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
         this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
-        this.add( new MyAjaxEditableLabel("linkJavadoc",      new PropertyModel( traits, "linkJavadoc") ) );
+        //this.add( new MyAjaxEditableLabel("linkJavadoc",      new PropertyModel( traits, "linkJavadoc") ) );
+        this.add( new ReleaseTraitRowPanel("linkJavadoc", rm, "Public API Javadoc", "linkJavadoc", Status.RELEASED, this, feedbackPanel));
+
 
         this.add( new MyAjaxEditableLabel("issuesFixed",      new PropertyModel( traits, "linkIssuesFixed") ) );
         this.add( new MyAjaxEditableLabel("issuesFound",      new PropertyModel( traits, "linkIssuesFound") ) );
@@ -101,7 +112,7 @@ public class ReleaseTraitsPanel extends Panel {
     /**
      *  Adds the feedback panel to AJAX target.
      */
-    class MyAjaxEditableLabel extends AjaxEditableLabel<String>{
+    public class MyAjaxEditableLabel extends AjaxEditableLabel<String>{
 
         public MyAjaxEditableLabel( String id, IModel<String> model ) {
             super( id, model );
