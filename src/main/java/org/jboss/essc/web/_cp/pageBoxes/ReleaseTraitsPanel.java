@@ -73,15 +73,15 @@ public class ReleaseTraitsPanel extends Panel {
         Model<IHasTraits> rm = new Model(release);
         
         //this.add( new MyAjaxEditableLabel("releasedBinaries", new PropertyModel( traits, "linkReleasedBinaries") ));
-        this.add( new ReleaseTraitRowPanel("releasedBinaries", rm, "Released binaries", "linkReleasedBinaries", Status.RELEASED, this, feedbackPanel));
-        
+        this.add( new ReleaseTraitRowPanel("releasedBinaries", rm, "Released binaries",   "linkReleasedBinaries", Status.RELEASED, this, feedbackPanel));
         //this.add( new MyAjaxEditableLabel("stagedBinaries",   new PropertyModel( traits, "linkStagedBinaries") ) );
-        this.add( new ReleaseTraitRowPanel("stagedBinaries", rm, "Staged binaries", "linkStagedBinaries", Status.STAGED, this, feedbackPanel));
-        
-        this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
-        this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
+        this.add( new ReleaseTraitRowPanel("stagedBinaries",   rm, "Staged binaries",     "linkStagedBinaries",   Status.STAGED, this, feedbackPanel));
+        //this.add( new MyAjaxEditableLabel("releasedDocs",     new PropertyModel( traits, "linkReleasedDocs") ) );
+        this.add( new ReleaseTraitRowPanel("releasedDocs",     rm, "Released docs",      "linkReleasedDocs",      Status.RELEASED, this, feedbackPanel));
+        //this.add( new MyAjaxEditableLabel("stagedDocs",       new PropertyModel( traits, "linkStagedDocs") ) );
+        this.add( new ReleaseTraitRowPanel("stagedDocs",       rm, "Staged docs",        "linkStagedDocs",        Status.STAGED, this, feedbackPanel));
         //this.add( new MyAjaxEditableLabel("linkJavadoc",      new PropertyModel( traits, "linkJavadoc") ) );
-        this.add( new ReleaseTraitRowPanel("linkJavadoc", rm, "Public API Javadoc", "linkJavadoc", Status.RELEASED, this, feedbackPanel));
+        this.add( new ReleaseTraitRowPanel("linkJavadoc",      rm, "Public API Javadoc", "linkJavadoc",           Status.RELEASED, this, feedbackPanel));
 
 
         this.add( new MyAjaxEditableLabel("issuesFixed",      new PropertyModel( traits, "linkIssuesFixed") ) );

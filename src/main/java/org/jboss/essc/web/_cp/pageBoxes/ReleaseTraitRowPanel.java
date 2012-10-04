@@ -71,6 +71,9 @@ class ReleaseTraitRowPanel extends Panel {
 /**
  *  Class attribute modifier which colorizes rows according to release state and property represented by that row.
  *  The purpose is to highlight which rows should be filled at what stage.
+ * 
+ *  Should be == the stage at which the link should better be in place.
+ *  Must be   == the stage at which the link must be in place.
  */
 class RowColorByStatusClassModifier extends AttributeAppender {
     
@@ -102,6 +105,9 @@ class RowColorByStatusClassModifier extends AttributeAppender {
         if( relStatus.ordinal() < shouldBe.ordinal() )
             return "notNeeded";
         
+        if( relStatus == Release.Status.RELEASED && mustBe == Release.Status.STAGED )
+            return "shouldHaveBeen";
+
         if( relStatus.ordinal() < mustBe.ordinal() )
             return "shouldBe";
         

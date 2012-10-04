@@ -230,10 +230,12 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .post table.traits tr.notNeeded th,
     .post table.traits tr.notNeeded td { }
+    .post table.traits tr.shouldHaveBeen th,
+    .post table.traits tr.shouldHaveBeen td { background-color: #F2F2F2; /* Subtle gray */ }
     .post table.traits tr.shouldBe th,
-    .post table.traits tr.shouldBe td { background-color: #fffaa0; }
+    .post table.traits tr.shouldBe td { background-color: #fdfbd2; /* Subtle yellow */ }
     .post table.traits tr.mustBe th,
-    .post table.traits tr.mustBe td { background-color: #ffb9a0; }
+    .post table.traits tr.mustBe td { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
     
 
     .post .meta {
