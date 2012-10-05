@@ -2,6 +2,7 @@ package org.jboss.essc.web.pages;
 
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.jboss.essc.web._cp.pageBoxes.AboutSmallBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentChangesBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentReleasesBox;
 
@@ -20,6 +21,8 @@ public class HomePage extends BaseLayoutPage {
     
     public HomePage() {
 
+        add( new AboutSmallBox("aboutBox") );
+        
         add( new RecentReleasesBox("recentReleases", RECENT_RELEASES_ROWS) );
         
         add( new RecentChangesBox("recentChanges", RECENT_CHANGES_ROWS) );

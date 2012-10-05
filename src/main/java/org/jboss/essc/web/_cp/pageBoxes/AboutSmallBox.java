@@ -4,17 +4,16 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 
 /**
- *  Application status - basic stats etc. Not used now.
+ * About box for the HomePage.
  * 
  * @author Ondrej Zizka
  */
-public class AppStatusBox extends Panel {
+public class AboutSmallBox extends Panel {
 
-
-    public AppStatusBox( String id ) {
+    
+    public AboutSmallBox( String id ) {
         super(id);
         
     }// const
-    
 
 }
