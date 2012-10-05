@@ -21,8 +21,8 @@ public class RecentReleasesBox extends ReleasesBox {
     }
 
     
-    protected List<Release> getReleases(){
-        return this.dao.getReleases_orderDateDesc(this.numReleases);
+    protected List<Release> getReleases(boolean showInternal){
+        return this.dao.getReleases_orderDateDesc(this.numReleases, showInternal );
     }
     
 }// class

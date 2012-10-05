@@ -3,6 +3,7 @@ package org.jboss.essc.web._cp.pageBoxes;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -16,11 +17,9 @@ import org.jboss.essc.web._cp.links.ReleaseLink;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
-
-
-
-
+import org.jboss.essc.web.security.EsscAuthSession;
 
 
 /**
@@ -50,11 +49,13 @@ public class ReleasesBox extends Panel {
         this.forProduct = forProduct;
         this.numReleases = numReleases;
         
-        List<Release> releases = getReleases();
-        final boolean showProd = this.forProduct == null;
+        final boolean showProductCol = this.forProduct == null;
+        final boolean showInternalReleases = isShowInternalStuff();
 
-        add( new Label("heading", "Releases" + (showProd ? "" : " of " + this.forProduct.getName() ) ) );
-        add( new WebMarkupContainer("productTH").setVisible( showProd ) );
+        List<Release> releases = getReleases( showInternalReleases );
+        
+        add( new Label("heading", "Releases" + (showProductCol ? "" : " of " + this.forProduct.getName() ) ) );
+        add( new WebMarkupContainer("productTH").setVisible( showProductCol ) );
         
         //if( releases.size() == 0 )
         add( new ListView<Release>("rows", releases)
@@ -63,10 +64,14 @@ public class ReleasesBox extends Panel {
             @Override
             protected void populateItem( final ListItem<Release> item) {
                 Release rel = item.getModelObject();
+                
+                if( rel.isInternal() )
+                    item.add( new AttributeAppender("class", "internal") );
+                
                 //item.add( new Label("product", pr.getProduct().getName()).setVisible(ReleasesBox.this.forProduct == null) );
                 item.add( new WebMarkupContainer("productTD")
                         .add( new ProductLink("productLink", rel.getProduct()) )
-                        .setVisible(showProd)
+                        .setVisible(showProductCol)
                 );
                 item.add( new ReleaseLink("versionLink", rel));
                 
@@ -101,11 +106,11 @@ public class ReleasesBox extends Panel {
     }// const
     
     
-    protected List<Release> getReleases(){
+    protected List<Release> getReleases( boolean showInternal ){
         if( this.forProduct == null )
-            return dao.getReleases_orderDateDesc(this.numReleases);
+            return dao.getReleases_orderDateDesc(this.numReleases, showInternal);
         else
-            return dao.getReleasesOfProduct( forProduct );
+            return dao.getReleasesOfProduct( forProduct, showInternal );
     }
     
     
@@ -125,11 +130,14 @@ public class ReleasesBox extends Panel {
             links.add( new LabelAndLink(label, link) );
     }
 
+    // TODO: Could be handled by CSS only.
+    private boolean isShowInternalStuff() {
+        User user = ((EsscAuthSession)getSession()).getUser();
+        return user == null ? false : user.isShowProd();
+    }
+
 
 }// class
-
-
-
 class LabelAndLink {
     
     public final String label;

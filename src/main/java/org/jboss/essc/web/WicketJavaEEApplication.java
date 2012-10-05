@@ -1,26 +1,34 @@
 package org.jboss.essc.web;
 
-import org.jboss.essc.web.pages.user.LoginPage;
-import org.jboss.essc.web.pages.rel.ReleasePage;
-import org.jboss.essc.web.pages.rel.AddReleasePage;
-import org.jboss.essc.web.pages.prod.AddProductPage;
-import org.jboss.essc.web.pages.prod.ProductPage;
+import org.jboss.essc.web.qualifiers.ShowInternals;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import net.ftlines.wicket.cdi.CdiConfiguration;
 import net.ftlines.wicket.cdi.ConversationPropagation;
-import org.apache.wicket.*;
+import org.apache.wicket.Component;
+import org.apache.wicket.Page;
+import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.apache.wicket.Session;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
-import org.jboss.essc.web.pages.*;
+import org.jboss.essc.web.model.User;
+import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.prod.AddProductPage;
+import org.jboss.essc.web.pages.prod.ProductPage;
+import org.jboss.essc.web.pages.rel.AddReleasePage;
+import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
+import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
+import org.jboss.essc.web.qualifiers.CurrentSession;
+import org.jboss.essc.web.qualifiers.LoggedIn;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
 
@@ -83,6 +91,20 @@ public class WicketJavaEEApplication extends WebApplication {
     @Override
     public Session newSession( Request request, Response response ) {
         return new EsscAuthSession( request );
+    }
+    
+    // CDI beans producers.
+    @Produces @LoggedIn User getCurrentUser(){
+        return ((EsscAuthSession) Session.get()).getUser();
+    }
+
+    @Produces @CurrentSession EsscAuthSession getCurrentSession(){
+        return (EsscAuthSession) Session.get();
+    }
+
+    @Produces @ShowInternals Boolean isShowInternals(){
+        User user = ((EsscAuthSession) Session.get()).getUser();
+        return user != null && user.isShowProd();
     }
 
 }// class

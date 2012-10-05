@@ -1,12 +1,15 @@
 package org.jboss.essc.web.dao;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 
@@ -20,24 +23,33 @@ public class ReleaseDaoBean {
     private EntityManager em;
 
 
-    @SuppressWarnings("unchecked")
-    @Deprecated // Non-sense.
-    public List<Release> getReleases_orderName(int limit) {
-        //return this.em.createQuery("SELECT rel FROM Release rel ORDER BY rel.product.name").getResultList();
-        //return this.em.createQuery("SELECT rel FROM Release rel LEFT JOIN Product prod ORDER BY prod.name").getResultList();
-        return this.em.createQuery("SELECT rel FROM Release rel LEFT JOIN rel.product prod ORDER BY prod.name").getResultList();
+    public List<Release> getReleases_orderDateDesc(int limit, boolean showInternal) {
+        /* Criteria query equivalent.
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Release> cq = cb.createQuery(Release.class);
+        Root<Release> relRoot = cq.from( Release.class );
+        if(!showInternal){
+            Predicate condition = cb.isFalse( relRoot.<Boolean>get("internal") );
+            cq.where(condition);
+        }
+        cq.orderBy( cb.desc( relRoot.get("plannedFor") ) );
+        TypedQuery<Release> tq = em.createQuery(cq); 
+        List<Release> result = tq.getResultList();
+        */
+        
+        String cond = showInternal ? "AND false = rel.internal": "";
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE 1=1 " + cond + " ORDER BY rel.plannedFor DESC").getResultList();
     }
 
-    public List<Release> getReleases_orderDateDesc(int limit) {
-        return this.em.createQuery("SELECT rel FROM Release rel ORDER BY rel.plannedFor DESC").getResultList();
+//SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ? AND NOT rel.internal ORDER BY rel.version DESC
+    public List<Release> getReleasesOfProduct(Product prod, boolean showInternal) {
+        String cond = showInternal ? "" : "AND false = rel.internal";
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ? " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
     }
 
-    public List<Release> getReleasesOfProduct(Product prod) {
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ? ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
-    }
-
-    public List<Release> getReleasesOfProduct(String prodName) {
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ? ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
+    public List<Release> getReleasesOfProduct(String prodName, boolean showInternal) {
+        String cond = showInternal ? "" : "AND false = rel.internal";
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ? " + cond + " ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
     }
 
     
@@ -101,5 +113,5 @@ public class ReleaseDaoBean {
         this.em.flush();
     }
 
-    
-}
+
+}// class

@@ -44,7 +44,7 @@ public class ReleaseInfoRest {
             @Context SecurityContext sc ) 
     {
         System.out.println("Releases of: " + product);
-        List<Release> rel = daoRel.getReleasesOfProduct(product);
+        List<Release> rel = daoRel.getReleasesOfProduct(product, true);
         return rel;
     }
     
