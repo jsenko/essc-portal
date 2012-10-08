@@ -1,16 +1,12 @@
 package org.jboss.essc.web;
 
-import org.jboss.essc.web.qualifiers.ShowInternals;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import net.ftlines.wicket.cdi.CdiConfiguration;
 import net.ftlines.wicket.cdi.ConversationPropagation;
-import org.apache.wicket.Component;
-import org.apache.wicket.Page;
-import org.apache.wicket.RestartResponseAtInterceptPageException;
-import org.apache.wicket.Session;
+import org.apache.wicket.*;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -29,6 +25,7 @@ import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
 import org.jboss.essc.web.qualifiers.CurrentSession;
 import org.jboss.essc.web.qualifiers.LoggedIn;
+import org.jboss.essc.web.qualifiers.ShowInternals;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
 
@@ -66,7 +63,7 @@ public class WicketJavaEEApplication extends WebApplication {
         
         this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
         this.getMarkupSettings().setStripWicketTags(true);
-        
+        this.getResourceSettings().setThrowExceptionOnMissingResource( false ); // Fix: http://localhost:8080/essc-portal/release/EAP/HomePage.html?0
         
         
         // Mounts
