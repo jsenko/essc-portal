@@ -33,11 +33,14 @@ public class AboutSmallBox extends Panel {
             @Override public void onClick( AjaxRequestTarget target ) {
                 target.add( AboutSmallBox.this );
                 AboutSmallBox.this.setVisible( false );
-                ((WebResponse)getRequestCycle().getResponse()).addCookie(new Cookie(COOKIE_HIDE_ABOUT_BOX, "true"));
+                Cookie cookie = new Cookie(COOKIE_HIDE_ABOUT_BOX, "true");
+                cookie.setPath("/");
+                cookie.setMaxAge(Integer.MAX_VALUE);
+                ((WebResponse)getRequestCycle().getResponse()).addCookie(cookie);
             }
             
         });
         
     }// const
-
-}
+    
+}// class
