@@ -4,6 +4,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
@@ -104,6 +105,10 @@ public class ReleaseTraitsPanel extends Panel {
         this.add( new MyAjaxEditableLabel("linkJavaEE",       new PropertyModel( traits, "linkJavaEE") ) );
         
         //this.add( new MyAjaxEditableLabel("",            new PropertyModel( traits, "link") ) );
+        
+        
+        // Only show legend for Releases; not for Products.
+        this.add( new WebMarkupContainer("legend").setVisible(release instanceof Release) );
 
     }// const
 
