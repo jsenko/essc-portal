@@ -77,7 +77,7 @@ public class ReleasesBox extends Panel {
                 
                 // Status
                 String plannedFor = rel.getPlannedFor() == null ? "" : " "+ rel.formatPlannedFor() + " ("+ rel.formatPlannedForRelative()+")";
-                String status = rel.getStatus() == null ? "" : plannedFor;
+                String status = rel.getStatus() == null ? "" : rel.getStatus().getStatusString() + " " + plannedFor;
                 item.add( new Label("status", status));
                 
                 // Links
