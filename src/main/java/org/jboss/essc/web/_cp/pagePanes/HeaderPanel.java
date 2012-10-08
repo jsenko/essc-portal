@@ -20,6 +20,9 @@ public class HeaderPanel extends Panel {
         super(id);
         this.setRenderBodyOnly(true);
         
+        add( new BookmarkablePageLink("link1", HomePage.class) );
+        add( new BookmarkablePageLink("link2", HomePage.class) );
+        
         add( new WebMarkupContainer("menuProducts").add( new BookmarkablePageLink("link", HomePage.class) ).add( new ActiveMenuItemBehavior() ) );
         add( new WebMarkupContainer("menuAbout").add( new BookmarkablePageLink("link", AboutPage.class) ).add( new ActiveMenuItemBehavior() ) );
     }// const
