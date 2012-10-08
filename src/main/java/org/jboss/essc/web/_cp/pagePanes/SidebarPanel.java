@@ -3,6 +3,8 @@ package org.jboss.essc.web._cp.pagePanes;
 import javax.inject.Inject;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -14,6 +16,7 @@ import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
 import org.jboss.essc.web.security.EsscAuthSession;
+import org.jboss.essc.web.util.MailSender;
 
 
 /**
@@ -22,6 +25,7 @@ import org.jboss.essc.web.security.EsscAuthSession;
 public class SidebarPanel extends Panel {
 
     @Inject private ProductDaoBean dao;
+    @Inject private MailSender mailSender;
     
     
     public SidebarPanel( String id ) {
@@ -47,12 +51,28 @@ public class SidebarPanel extends Panel {
                 .add( new Label("label", "Logout " + sess.getUser().getName()) )
             );
         }
-                
+        
+        // Product links
         add( new ListView<Product>("projects", dao.getProducts_orderName(0) ) {
             @Override protected void populateItem( ListItem<Product> item ) {
                 item.add(new ProductLink("link", item.getModelObject()) );
             }
         } );
-    }
+        
+        // Quick message
+        final TextArea ta = new TextArea("text");
+        add( new Form("quickMessageForm"){
+            @Override protected void onSubmit() {
+                try {
+                    mailSender.sendMail( "essc-list@redhat.com", "ESSC portal feedback", ta.getValue() );
+                }
+                catch( Exception ex ) {
+                    error( "Can't send: " + ex.toString() );
+                }
+            }
+        }.add( ta ));
+        
+    }// const
 
+    
 }// class
