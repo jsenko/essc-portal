@@ -207,8 +207,10 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .post table tr.header th { text-align: left; padding-top: 0.3ex; }
 
+    .releases table.data tr.public th,
+    .releases table.data tr.public td { font-weight: bold; }
     .releases table.data tr.internal th,
-    .releases table.data tr.internal td { font-style: italic; }
+    .releases table.data tr.internal td {  }
     
     .post.releases table td.state.planned { color: gray; }
     .post.releases table td.state.in_progress { color: goldenrod; }
