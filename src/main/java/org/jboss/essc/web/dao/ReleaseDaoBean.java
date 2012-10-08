@@ -37,7 +37,7 @@ public class ReleaseDaoBean {
         List<Release> result = tq.getResultList();
         */
         
-        String cond = showInternal ? "AND false = rel.internal": "";
+        String cond = showInternal ? "" : "AND false = rel.internal";
         return this.em.createQuery("SELECT rel FROM Release rel WHERE 1=1 " + cond + " ORDER BY rel.plannedFor DESC").getResultList();
     }
 

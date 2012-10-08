@@ -65,8 +65,9 @@ public class ReleasesBox extends Panel {
             protected void populateItem( final ListItem<Release> item) {
                 Release rel = item.getModelObject();
                 
-                // CSS for release row.
-                item.add( new AttributeAppender("class", rel.isInternal() ? "internal" : "public") );
+                // CSS for releases row - differentiate internal from public.
+                if( showInternalReleases )  // Only if necessary.
+                    item.add( new AttributeAppender("class", rel.isInternal() ? "internal" : "public") );
                 
                 //item.add( new Label("product", pr.getProduct().getName()).setVisible(ReleasesBox.this.forProduct == null) );
                 item.add( new WebMarkupContainer("productTD")
