@@ -10,7 +10,7 @@
                 <!-- Files -->
                 <tr class="header"> <th colspan="2">Files</th></tr>
                 
-                <tr wicket:id="releasedBinaries"> <td class="name">Released binaries:</td> <td><span xwicket:id="releasedBinaries"/></td></tr>
+                <tr wicket:id="releasedBinaries"/>
                 <!--
                 <tr> <td class="name">Staged binaries:</td> <td><span wicket:id="stagedBinaries" class="fakeLink" style="width: 100%"/></td></tr>
                 -->
@@ -21,27 +21,24 @@
 
                 <!-- Build-->
                 <tr class="header"> <th colspan="2">Build logs</th></tr>
-                <tr> <td class="name">Build HOWTO:</td>   <td><span wicket:id="linkBuildHowto"/></td></tr>
-                <tr> <td class="name">Git hash:</td>      <td><span wicket:id="gitHash"/></td></tr>
-                <tr> <td class="name">Git tag:</td>       <td><span wicket:id="gitRepo"/></td></tr>
-                <tr> <td class="name">Fixed issues:</td>  <td><span wicket:id="issuesFixed"/></td></tr>
-                <tr> <td class="name">Found issues:</td>  <td><span wicket:id="issuesFound"/></td></tr>
-                <tr> <td class="name">Mead:</td>          <td><span wicket:id="mead"/></td></tr>
-                <tr> <td class="name">Brew:</td>          <td><span wicket:id="brew"/></td></tr>
+                <tr wicket:id="linkBuildHowto"/>
+                <tr wicket:id="gitHash"/>
+                <tr wicket:id="gitRepo"/>
+                <tr wicket:id="issuesFixed"/>
+                <tr wicket:id="issuesFound"/>
+                <tr wicket:id="mead"/>
+                <tr wicket:id="brew"/>
                     
                 <!-- Tests and reports -->
                 <tr class="header"> <th colspan="2">Tests and reports</th></tr>
-                <tr> <td class="name">Jenkins MEAD job:</td>            <td><span wicket:id="linkMeadJob"/></td></tr>
-                <tr> <td class="name">TattleTale:</td>                  <td><span wicket:id="linkTattleTale"/></td></tr>
-                <tr> <td class="name">Code coverage:</td>               <td><span wicket:id="linkCodeCoverage"/></td></tr>
-                <tr> <td class="name">TCK tests:</td>                   <td><span wicket:id="linkTck"/></td></tr>
-                <tr> <td class="name">Java EE compliance tests:</td>    <td><span wicket:id="linkJavaEE"/></td></tr>
-                <tr> <td class="name">508 compliance tests:</td>        <td><span wicket:id="link508"/></td></tr>
-                <tr> <td class="name">Common Criteria tests:</td>       <td><span wicket:id="linkCC"/></td></tr>
+                <tr wicket:id="linkMeadJob"/>
+                <tr wicket:id="linkTattleTale"/>
+                <tr wicket:id="linkCodeCoverage"/>
+                <tr wicket:id="linkTck"/>
+                <tr wicket:id="linkJavaEE"/>
+                <tr wicket:id="link508"/>
+                <tr wicket:id="linkCC"/>
 
-                <!--
-                <tr> <td class="name">:</td>          <td><span wicket:id=""/></td></tr>
-                -->
                 <!-- Different text field approach tryout. 
                 <tr>
                     <td class="name">JS test:</td>

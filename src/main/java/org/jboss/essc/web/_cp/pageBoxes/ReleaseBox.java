@@ -59,12 +59,12 @@ public class ReleaseBox extends Panel {
         add(feedbackPanel);
         
         // Form
-        this.form = new StatelessForm("form") {
+        this.form = new Form("form") {
             @Override protected void onSubmit() {
                 ReleaseBox.this.release = daoRelease.update( (Release) release );
             }
         };
-        this.form.setVersioned(false);
+        //this.form.setVersioned(false);
         add( this.form );
         
         // Status
