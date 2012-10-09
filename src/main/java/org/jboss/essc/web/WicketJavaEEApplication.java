@@ -20,6 +20,7 @@ import org.jboss.essc.web.pages.prod.ProductPage;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
+import org.jboss.essc.web.pages.statics.ErrorPage;
 import org.jboss.essc.web.pages.statics.Http404;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
@@ -59,11 +60,12 @@ public class WicketJavaEEApplication extends WebApplication {
         new CdiConfiguration(bm).setPropagation(ConversationPropagation.NONE).configure(this);
 
         // This would prevent Ajax components throwing an exception after session expiration.
-        this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
+        //this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
         
-        //this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
+        //this.getApplicationSettings().setPageExpiredErrorPage(ErrorPage.class);
         this.getMarkupSettings().setStripWicketTags(true);
         //this.getResourceSettings().setThrowExceptionOnMissingResource( false ); // Fix: http://localhost:8080/essc-portal/release/EAP/HomePage.html?0
+        //this.getPageSettings().setVersionPagesByDefault(false);
         
         
         // Mounts
