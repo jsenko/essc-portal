@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
+import org.jboss.essc.wicket.BPLinkWithBody;
 
 
 /**
@@ -20,8 +21,8 @@ public class HeaderPanel extends Panel {
         super(id);
         this.setRenderBodyOnly(true);
         
-        add( new BookmarkablePageLink("link1", HomePage.class) );
-        add( new BookmarkablePageLink("link2", HomePage.class) );
+        add( new BPLinkWithBody("link1", HomePage.class) );
+        add( new BPLinkWithBody("link2", HomePage.class) );
         
         add( new WebMarkupContainer("menuProducts").add( new BookmarkablePageLink("link", HomePage.class) ).add( new ActiveMenuItemBehavior() ) );
         add( new WebMarkupContainer("menuAbout").add( new BookmarkablePageLink("link", AboutPage.class) ).add( new ActiveMenuItemBehavior() ) );
