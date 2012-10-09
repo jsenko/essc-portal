@@ -61,9 +61,9 @@ public class WicketJavaEEApplication extends WebApplication {
         // This would prevent Ajax components throwing an exception after session expiration.
         this.getPageSettings().setRecreateMountedPagesAfterExpiry(false);
         
-        this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
+        //this.getApplicationSettings().setPageExpiredErrorPage(HomePage.class);
         this.getMarkupSettings().setStripWicketTags(true);
-        this.getResourceSettings().setThrowExceptionOnMissingResource( false ); // Fix: http://localhost:8080/essc-portal/release/EAP/HomePage.html?0
+        //this.getResourceSettings().setThrowExceptionOnMissingResource( false ); // Fix: http://localhost:8080/essc-portal/release/EAP/HomePage.html?0
         
         
         // Mounts
