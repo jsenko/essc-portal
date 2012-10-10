@@ -24,8 +24,8 @@ import org.jboss.essc.web.util.MailSender;
  */
 public class SidebarPanel extends Panel {
 
-    @Inject private ProductDaoBean dao;
-    @Inject private MailSender mailSender;
+    @Inject private transient ProductDaoBean dao;
+    @Inject private transient MailSender mailSender;
     
     
     public SidebarPanel( String id ) {
