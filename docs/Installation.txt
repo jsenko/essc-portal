@@ -1,5 +1,27 @@
 
 
+
+Datasource in AS:
+
+        <subsystem xmlns="urn:jboss:domain:datasources:1.1">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/MysqlDS" pool-name="essc-ds-pool" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:mysql://localhost:3306/essc?characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull</connection-url>
+                    <driver>mysql</driver>
+                    <security>
+                        <user-name>essc</user-name>
+                        <password>essc</password>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="mysql" module="com.mysql.jdbc">
+                        <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>
+
+
 Mail config in AS:
 Set SMTP host, user and pass.
 
