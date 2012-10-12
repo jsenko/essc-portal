@@ -15,6 +15,10 @@ import org.jboss.serial.io.JBossObjectOutputStream;
  */
 public class JBossSerializationSerializer implements ISerializer {
 
+    
+    /**
+     * 
+     */
     @Override
     public Object deserialize( byte[] serializedBytes ) {
         Object result = null;
@@ -40,6 +44,9 @@ public class JBossSerializationSerializer implements ISerializer {
     }
 
 
+    /**
+     * 
+     */
     @Override
     public byte[] serialize( Object obj ) {
         byte[] serializedResult = null;
