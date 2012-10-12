@@ -1,5 +1,6 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -139,7 +140,10 @@ public class ReleasesBox extends Panel {
 
 
 }// class
-class LabelAndLink {
+
+
+
+class LabelAndLink implements Serializable {
     
     public final String label;
     public final String link;

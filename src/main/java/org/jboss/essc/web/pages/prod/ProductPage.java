@@ -41,6 +41,7 @@ public class ProductPage extends BaseLayoutPage {
 
     @Inject private ProductDaoBean productDao;
     
+    
     // Components
     private Form<Product> form;
 
