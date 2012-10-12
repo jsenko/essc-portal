@@ -291,7 +291,12 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.6</version>
-            <type>jar</type>
+        </dependency>
+        <!-- For JBossSerializationSerializer -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
         </dependency>
         
         
@@ -394,6 +399,13 @@
             <version>1.0</version>
         </dependency>
         
+        <!-- For JBossSerializationSerializer -->
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-serialization</artifactId>
+            <version>1.0.4.FINAL</version>
+        </dependency>
+
     </dependencies>
     
     <!-- For PicketBox. -->
