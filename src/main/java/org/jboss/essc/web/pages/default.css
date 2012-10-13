@@ -142,32 +142,32 @@ a:hover { color: #7ACE11; text-decoration: none; }
 }
 
 
-/* --- Post --- */
+/* --- Content box --- */
 
-.post {
+.box {
     padding: 20px 20px;
     background: url("images/box-bg-w740.png") no-repeat top left;
 }
 
-    .post.hledani {
+    .box.hledani {
         background: url("images/box-bg-w740-h80.png") no-repeat top left;
     }
 
 
 
-    .post .title,
-    .post h2 {
+    .box .title,
+    .box h2 {
         margin: 0;
         border-bottom: 2px solid #484848;
         color: #484848;
     }
 
-    .post .byline {
+    .box .byline {
         margin: 0;
         color: #D79B00;
     }
 
-    .post .byline small {
+    .box .byline small {
         margin: 0;
         color: black;
         font-size: 90%;
@@ -175,7 +175,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
 
     /* --- Table --- */
-    .post table {
+    .box table {
         margin: 2ex 0ex 0ex;
         width: 100%;
         x-background: url("images/box-bg-w740.png") no-repeat top left;
@@ -183,61 +183,61 @@ a:hover { color: #7ACE11; text-decoration: none; }
         border-spacing: 0px;
         empty-cells: show;
     }
-    .post table.data a { color: #6ABE01; text-decoration: none; }
-    .post table th { font-weight: bold; background-color: #E3E3E3; }
-    .post table th,
-    .post table td {
+    .box table.data a { color: #6ABE01; text-decoration: none; }
+    .box table th { font-weight: bold; background-color: #E3E3E3; }
+    .box table th,
+    .box table td {
             text-align: left;
             padding: 0px 0.1ex 0px 0.2ex;
             margin: 0;
     }
-    .post table.data td {
+    .box table.data td {
             x-background: url("images/box-bg-w740.png") no-repeat bottom left;
     }
-    .post table.data td,
-    .post table.data th {
+    .box table.data td,
+    .box table.data th {
             border-width: 2px;
             border-style: groove;
             border-color: white;
     }
-    .post.stav table th,
-    .post.stav table td {
+    .box.stav table th,
+    .box.stav table td {
             padding: 0.2ex 1ex 0.2ex 2ex;
     }
 
-    .post table tr.header th { text-align: left; padding-top: 0.3ex; }
+    .box table tr.header th { text-align: left; padding-top: 0.3ex; }
 
     .releases table.data tr.public th,
     .releases table.data tr.public td { font-weight: bold; }
     .releases table.data tr.internal th,
     .releases table.data tr.internal td {  }
     
-    .post.releases table td.state.planned { color: gray; }
-    .post.releases table td.state.in_progress { color: goldenrod; }
-    .post.releases table td.state.tagged   { color: #fffaa0; }
-    .post.releases table td.state.staged   { color: dodgerblue; }
-    .post.releases table td.state.released { color: green; }
+    .box.releases table td.state.planned { color: gray; }
+    .box.releases table td.state.in_progress { color: goldenrod; }
+    .box.releases table td.state.tagged   { color: #fffaa0; }
+    .box.releases table td.state.staged   { color: dodgerblue; }
+    .box.releases table td.state.released { color: green; }
 
     .releases table .links a { margin-right: 1em; }
     .releases table .links a:hover { color: green; }
 
     /* Traits */
     .fakeLink { color: blue; text-decoration: underline; }
-    .post .traits span.fakeLink span {
+    .box .traits span.fakeLink span {
         font-size: 90%;
         display: block; max-width: 560px; overflow: hidden;  /* Don't allow long links to break to leak. */
     }  
-    .post .traits table td { vertical-align: top; }
-    .post .traits table td.name { white-space: nowrap; }
+    .box .traits table td { vertical-align: top; }
+    .box .traits table td.name { white-space: nowrap; }
 
-    .post table.traits tr.notNeeded th,
-    .post table.traits tr.notNeeded td { }
-    .post table.traits tr.shouldHaveBeen th,
-    .post table.traits tr.shouldHaveBeen td { background-color: #F2F2F2; /* Subtle gray */ }
-    .post table.traits tr.shouldBe th,
-    .post table.traits tr.shouldBe td { background-color: #fdfbd2; /* Subtle yellow */ }
-    .post table.traits tr.mustBe th,
-    .post table.traits tr.mustBe td { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
+    .box table.traits tr.notNeeded th,
+    .box table.traits tr.notNeeded td { }
+    .box table.traits tr.shouldHaveBeen th,
+    .box table.traits tr.shouldHaveBeen td { background-color: #F2F2F2; /* Subtle gray */ }
+    .box table.traits tr.shouldBe th,
+    .box table.traits tr.shouldBe td { background-color: #fdfbd2; /* Subtle yellow */ }
+    .box table.traits tr.mustBe th,
+    .box table.traits tr.mustBe td { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
     
     .legend                            { padding: 2ex 0  ; }                
     .legend .item                      { float: left; padding: 1ex 1em; }                
@@ -247,23 +247,23 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .legend .shouldBe       span.sample { background-color: #fdfbd2; /* Subtle yellow */ }
     .legend .mustBe         span.sample { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
 
-    .post .meta {
+    .box .meta {
             text-align: left;
             color: #646464;
     }
 
-    .post .meta .more {
+    .box .meta .more {
             padding-left: 20px;
             background: url(images/ico/icon-sheet.gif) no-repeat left center;
     }
 
-    .post .meta .comments {
+    .box .meta .comments {
             padding-left: 20px;
             background: url(images/ico/icon-buubles.gif) no-repeat left center;
     }
 
-.post .dangerousButton      {  }
-.post .dangerousButton.very { background-color: #E00000; color: white; font-weight: bold; text-decoration: blink; }
+.box .dangerousButton      {  }
+.box .dangerousButton.very { background-color: #E00000; color: white; font-weight: bold; text-decoration: blink; }
 
 
 

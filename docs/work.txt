@@ -1,0 +1,6 @@
+- Design
+  - Releases table
+
+- Hide user stuff
+- Add Product button in menu
+- Settings box in menu
