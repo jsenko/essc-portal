@@ -178,7 +178,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .post table {
         margin: 2ex 0ex 0ex;
         width: 100%;
-        x-background: url("images/bg04-w740.png") no-repeat top left;
+        x-background: url("images/box-bg-w740.png") no-repeat top left;
         x-border-collapse: collapse;
         border-spacing: 0px;
         empty-cells: show;
@@ -192,7 +192,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
             margin: 0;
     }
     .post table.data td {
-            x-background: url("images/bg04-w740.png") no-repeat bottom left;
+            x-background: url("images/box-bg-w740.png") no-repeat bottom left;
     }
     .post table.data td,
     .post table.data th {
@@ -254,12 +254,12 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .post .meta .more {
             padding-left: 20px;
-            background: url(images/icon-sheet.gif) no-repeat left center;
+            background: url(images/ico/icon-sheet.gif) no-repeat left center;
     }
 
     .post .meta .comments {
             padding-left: 20px;
-            background: url(images/icon-buubles.gif) no-repeat left center;
+            background: url(images/ico/icon-buubles.gif) no-repeat left center;
     }
 
 .post .dangerousButton      {  }
@@ -291,7 +291,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
 #sidebar h2 {
     margin: 0;
     padding: 5px 0 0 20px;
-    background: url(images/icon-ok.jpg) no-repeat left 80%;
+    background: url(images/ico/icon-ok.jpg) no-repeat left 80%;
 }
 #sidebar .linkNextToSectionHeader {
     font-size: 75%;
