@@ -2,7 +2,6 @@ package org.jboss.essc.web.pages.rel;
 
 import java.util.List;
 import javax.inject.Inject;
-
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -46,7 +45,7 @@ public class AddReleasePage extends BaseLayoutPage {
     
     public AddReleasePage(PageParameters params) {
         String prodName = params.get("product").toOptionalString();
-        this.product = prodDao.getProductByName(prodName);
+        this.product = prodDao.findProductByName(prodName);
         init(prodName);
     }
     
@@ -66,7 +65,9 @@ public class AddReleasePage extends BaseLayoutPage {
 
         // Product select
         this.form.add( new DropDownChoice("productSelect", new PropertyModel(this, "product"), new ProductsLDM() )
-                .setChoiceRenderer( new ChoiceRenderer("name", "id") )   );
+                .setChoiceRenderer( new ChoiceRenderer("name", "id") )
+                .setRequired( true ) 
+        );
 
         // Version
         this.form.add( new RequiredTextField<String>("version", new PropertyModel<String>(this, "version")));

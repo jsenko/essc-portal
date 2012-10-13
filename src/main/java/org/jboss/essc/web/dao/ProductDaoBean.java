@@ -30,9 +30,19 @@ public class ProductDaoBean {
 
     /**
      * Get ProductLine by name.
+     * @throws  NoResultException if no such product found.
      */
     public Product getProductByName( String name ) {
         return this.em.createQuery("SELECT p FROM Product p WHERE p.name = ?", Product.class).setParameter(1, name).getSingleResult();
+    }
+    /**
+     * Find ProductLine by name.
+     * @returns null if not found.
+     */
+    public Product findProductByName( String name ) {
+        List<Product> list = this.em.createQuery("SELECT p FROM Product p WHERE p.name = ?", Product.class).setParameter(1, name).getResultList();
+        if( list.isEmpty() )  return null;
+        return list.get(0);
     }
 
     /**
