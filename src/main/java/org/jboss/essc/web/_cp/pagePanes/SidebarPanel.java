@@ -1,20 +1,22 @@
 package org.jboss.essc.web._cp.pagePanes;
 
 import javax.inject.Inject;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
+import javax.servlet.http.Cookie;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.http.WebResponse;
+import org.jboss.essc.web.CookieNames;
 import org.jboss.essc.web._cp.links.ProductLink;
+import org.jboss.essc.web._cp.pageBoxes.AboutSmallBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
-import org.jboss.essc.web.pages.user.LoginPage;
-import org.jboss.essc.web.pages.user.UserPage;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.util.MailSender;
 
@@ -32,30 +34,29 @@ public class SidebarPanel extends Panel {
         super(id);
         this.setRenderBodyOnly( true );
         
-        EsscAuthSession sess = (EsscAuthSession)getSession();
-        
-        // User menu "box". Later it could be a real box.
-        if( ! sess.isSignedIn()  ){
-            // Login link
-            add( new WebMarkupContainer("accountSettings").add( new Label("label", "").setVisible(false) ));
-            add( new BookmarkablePageLink("loginLink", LoginPage.class)
-                .add( new Label("label", "Login / Register") ) );
-        } else {
-            // Logout link
-            add( new BookmarkablePageLink("accountSettings", UserPage.class).add( new Label("label", "Account Settings") ) );
-            add( new Link("loginLink") {
-                    @Override public void onClick() {
-                        getSession().invalidate();
-                    }
-                }
-                .add( new Label("label", "Logout " + sess.getUser().getName()) )
-            );
-        }
+        add( new UserMenuBox("userBox") );
         
         // Product links
-        add( new ListView<Product>("projects", dao.getProducts_orderName(0) ) {
+        add( new ListView<Product>("products", dao.getProducts_orderName(0) ) {
             @Override protected void populateItem( ListItem<Product> item ) {
                 item.add(new ProductLink("link", item.getModelObject()) );
+            }
+        } );
+        
+        // Settings
+        add( new AjaxCheckBox("showInternalReleases") {
+            @Override protected void onUpdate( AjaxRequestTarget target ) {
+                target.add( getPage() );
+                
+                boolean val = StringUtils.isBlank( this.getValue() );
+                
+                EsscAuthSession sess = (EsscAuthSession)getSession();
+                sess.getSettings().setShowInternalReleases( val );
+                
+                Cookie cookie = new Cookie(CookieNames.COOKIE_SHOW_INTERNAL_RELEASES, val ? "true" : "false");
+                cookie.setPath("/");
+                cookie.setMaxAge(Integer.MAX_VALUE);
+                ((WebResponse)getRequestCycle().getResponse()).addCookie(cookie);
             }
         } );
         

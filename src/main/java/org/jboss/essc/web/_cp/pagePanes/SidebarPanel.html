@@ -1,14 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <wicket:panel>
 
 	<!-- Sidebar -->
 	<div id="sidebar">
             <ul>
-                <li>
-                    <h2>User</h2>
-                    <ul> <li> <a wicket:id="accountSettings"><span wicket:id="label">Account settings</span></a>
-                    </li><li> <a wicket:id="loginLink"><span wicket:id="label">Login / Register</span></a>
-                    </li></ul>
-                </li>
+                <li wicket:id="userBox"/>
+
                 <li>
                     <h2>Administration</h2>
                     <ul>
@@ -17,9 +15,22 @@
                     </ul>
                 </li>
                 <li>
-                    <h2>Projects</h2>
+                    <h2>Products
+                        <div class="linkNextToSectionHeader" style="float: right">
+                            <wicket:link><a href="AddProductPage.html">Add product</a></wicket:link>
+                        </div>
+                    </h2>
                     <ul>
-                        <li wicket:id="projects"><a wicket:id="link">EAP</a></li>
+                        <li wicket:id="products"><a wicket:id="link">EAP</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Settings</h2>
+                    <ul>
+                        <li>
+                            <input type="checkbox" wicket:id="showInternalReleases" id="showInternalReleases"/>
+                            <label for="showInternalReleases">Show internal releases</label>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -62,3 +73,4 @@
         
 
 </wicket:panel>
+</html>

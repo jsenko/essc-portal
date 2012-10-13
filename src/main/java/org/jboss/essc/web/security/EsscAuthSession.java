@@ -17,10 +17,12 @@ import org.jboss.essc.web.model.User;
  */
 public class EsscAuthSession extends AuthenticatedWebSession {
     
-    
     @Inject private UserDaoBean userDao;
     
+    
     private User user;
+    
+    private EsscSettings settings;
     
     
 
@@ -64,13 +66,9 @@ public class EsscAuthSession extends AuthenticatedWebSession {
         return new Roles( Roles.ADMIN );
     }
 
-    
-    
-    
+    public EsscSettings getSettings() { return settings; }
     
     public User getUser() { return user; }
     public void setUser( User user ) { this.user = user; }
-    
-    
 
-}
+}// class

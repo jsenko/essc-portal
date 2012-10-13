@@ -4,7 +4,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background:  #FFFFFF url("images/bg01.jpg") repeat-x top left;
+	background:  #FFFFFF url("images/page-header-bg.jpg") repeat-x top left;
 	font-size: 13px;
 	color:  #404040; /*#7F7F7F;*/
 }
@@ -146,11 +146,11 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
 .post {
     padding: 20px 20px;
-    background: url("images/bg04-w740.png") no-repeat top left;
+    background: url("images/box-bg-w740.png") no-repeat top left;
 }
 
     .post.hledani {
-        background: url("images/bg04-w740-h80.png") no-repeat top left;
+        background: url("images/box-bg-w740-h80.png") no-repeat top left;
     }
 
 
@@ -254,12 +254,12 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .post .meta .more {
             padding-left: 20px;
-            background: url(images/img03.gif) no-repeat left center;
+            background: url(images/icon-sheet.gif) no-repeat left center;
     }
 
     .post .meta .comments {
             padding-left: 20px;
-            background: url(images/img04.gif) no-repeat left center;
+            background: url(images/icon-buubles.gif) no-repeat left center;
     }
 
 .post .dangerousButton      {  }
@@ -281,13 +281,8 @@ a:hover { color: #7ACE11; text-decoration: none; }
     list-style: none;
 }
 
-#sidebar li {
-}
-
-#sidebar li ul {
-    padding: 15px 0;
-}
-
+#sidebar li { }
+#sidebar li ul { padding: 15px 0; }
 #sidebar li li {
     padding-left: 20px;
     border-bottom: 1px dotted #7B9418;
@@ -296,21 +291,16 @@ a:hover { color: #7ACE11; text-decoration: none; }
 #sidebar h2 {
     margin: 0;
     padding: 5px 0 0 20px;
-    background: url(images/img06.jpg) no-repeat left 80%;
+    background: url(images/icon-ok.jpg) no-repeat left 80%;
+}
+#sidebar .linkNextToSectionHeader {
+    font-size: 75%;
+    vertical-align: bottom;
 }
 
-#sidebar .ext {
-    color: gray;
-}
-
-#sidebar a {
-    text-decoration: none;
-}
-
-#sidebar a:hover {
-}
-
-
+#sidebar .ext { color: gray; }
+#sidebar a { text-decoration: none; }
+#sidebar a:hover { }
 
 
 
@@ -322,7 +312,7 @@ a:hover { color: #7ACE11; text-decoration: none; }
     clear: both;
     margin: 0px;
     height: 80px;
-    background: #F2F2F2 url(images/bg02.jpg) repeat-x left top;
+    background: #F2F2F2; /* url(images/bg02.jpg) repeat-x left top;  Lost the picture. */
 }
 
 #footer p {
