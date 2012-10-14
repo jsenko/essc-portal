@@ -7,17 +7,17 @@
             <ul>
                 <li wicket:id="userBox"/>
 
-                <li>
+                <li wicket:id="adminBox">
                     <h2>Administration</h2>
                     <ul>
-                        <li><wicket:link><a href="AddProductPage.html">Add product</a></wicket:link></li>
-                        <li><wicket:link><a href="AddReleasePage.html">Add release</a></wicket:link></li>
+                        <li><a wicket:id="addProductLink">Add product</a></li>
+                        <li><a wicket:id="addReleaseLink">Add release</a></li>
                     </ul>
                 </li>
                 <li>
                     <h2>Products
                         <div class="linkNextToSectionHeader" style="float: right">
-                            <wicket:link><a href="AddProductPage.html">Add product</a></wicket:link>
+                            <a wicket:id="addProductLink"><img wicket:id="btn" width="100" height="16"/></a>
                         </div>
                     </h2>
                     <ul>

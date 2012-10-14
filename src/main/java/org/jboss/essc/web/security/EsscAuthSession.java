@@ -22,7 +22,7 @@ public class EsscAuthSession extends AuthenticatedWebSession {
     
     private User user;
     
-    private EsscSettings settings;
+    private EsscSettings settings = new EsscSettings();
     
     
 

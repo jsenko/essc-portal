@@ -1,5 +1,6 @@
 package org.jboss.essc.web;
 
+import java.awt.Color;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
@@ -9,11 +10,17 @@ import net.ftlines.wicket.cdi.ConversationPropagation;
 import org.apache.wicket.*;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
+import org.apache.wicket.markup.html.IPackageResourceGuard;
+import org.apache.wicket.markup.html.PackageResourceGuard;
+import org.apache.wicket.markup.html.image.resource.DefaultButtonImageResource;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.essc.web.model.User;
+import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.pages.prod.ProductPage;
@@ -80,13 +87,37 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/product/${name}",               ProductPage.class);
         mountPage("/release/${product}/${version}", ReleasePage.class);
      
+        initResources();
         
         // Register the authorization strategy
         getSecuritySettings().setAuthorizationStrategy( new EsscAuthStrategy() );
         
     }// init()
     
-
+    
+    void initResources(){
+        ResourceReference ref1 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddProduct.png");
+        ResourceReference ref2 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddProduct.png");
+        ResourceReference ref3 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddResource.png");
+        getSharedResources().add("btn.AddProduct", ref1.getResource() );
+        getSharedResources().add("btn.AddResource", ref3.getResource() );
+        
+        IPackageResourceGuard guard = 
+        new IPackageResourceGuard() {
+            private final IPackageResourceGuard DEFAULT = new PackageResourceGuard();
+            @Override public boolean accept( Class<?> scope, String path ) {
+                if( path.endsWith(".png") ) return true;
+                if( path.endsWith(".jpg") ) return true;
+                if( path.endsWith(".gif") ) return true;
+                return DEFAULT.accept( scope, path );
+            }
+        };
+        getResourceSettings().setPackageResourceGuard( guard );
+    }
+    
+    
+    
+    
     @Override
     public Session newSession( Request request, Response response ) {
         return new EsscAuthSession( request );
@@ -101,16 +132,27 @@ public class WicketJavaEEApplication extends WebApplication {
         return (EsscAuthSession) Session.get();
     }
 
+    // Show internal releases?
     @Produces @ShowInternals Boolean isShowInternals(){
-        User user = ((EsscAuthSession) Session.get()).getUser();
-        return user != null && user.isShowProd();
+        EsscAuthSession sess = (EsscAuthSession) Session.get();
+        User user = sess.getUser();
+        if( user != null )   return user.isShowProd();
+        
+        return sess.getSettings().isShowInternalReleases();
     }
+    
+    
+    
+    
 
 }// class
 
 
 
-
+/**
+ *  Authorize instantiation of SecuredPage-marked only for logged users.
+ *  @author ondra
+ */
 class EsscAuthStrategy implements IAuthorizationStrategy {
 
     public boolean isActionAuthorized( Component component, Action action ) {
