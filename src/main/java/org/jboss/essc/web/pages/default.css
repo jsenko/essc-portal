@@ -183,34 +183,38 @@ a:hover { color: #7ACE11; text-decoration: none; }
         border-spacing: 0px; /* Keep cells together */
         empty-cells: show;
     }
-    .box table.data a { color: #6ABE01; text-decoration: none; }
+
     .box table th { font-weight: bold; }
     .box table th,
     .box table td {
+            padding: 0.5ex 0.1ex 0.2ex 0.2ex;
             text-align: left;
             vertical-align: top;
-            padding: 0.4ex 0.1ex 0.2ex 0.2ex;
             margin: 0;
             border: none;
     }
-    .box table.data th {
-            border-bottom: 2px solid black;
+    
+    /** Tables with bottom lines only */
+    .box table.lines a { color: #6ABE01; text-decoration: none; }
+    .box table.lines th {
+            border-bottom: 1px solid black;
+            padding-top: 2ex;
     }
-    .box table.data td {
+    .box table.lines td {
             border-bottom: 1px solid silver;
+            padding-left: 2ex;
     }
-    .box.stav table th,
-    .box.stav table td {
-            padding: 0.4ex 1ex 0.3ex 2ex;
+    
+    
+    .box table tr.header th {
+        xborder-bottom: 2px solid black;
     }
-
-    .box table tr.header th { text-align: left; padding-top: 0.3ex; }
 
     /** Public releases are bold. */
-    .releases table.data tr.public th,
-    .releases table.data tr.public td { font-weight: bold; }
-    .releases table.data tr.internal th,
-    .releases table.data tr.internal td {  }
+    .box.releases table tr.public th,
+    .box.releases table tr.public td { font-weight: bold; }
+    .box.releases table tr.internal th,
+    .box.releases table tr.internal td {  }
     
     .box.releases table td.state.planned { color: gray; }
     .box.releases table td.state.in_progress { color: goldenrod; }
@@ -218,8 +222,8 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .box.releases table td.state.staged   { color: dodgerblue; }
     .box.releases table td.state.released { color: green; }
 
-    .releases table .links a { margin-right: 1em; }
-    .releases table .links a:hover { color: green; }
+    .box.releases table .links a { margin-right: 1em; }
+    .box.releases table .links a:hover { color: green; }
 
     /* Traits */
     .fakeLink { color: blue; text-decoration: underline; }
