@@ -179,34 +179,34 @@ a:hover { color: #7ACE11; text-decoration: none; }
         margin: 2ex 0ex 0ex;
         width: 100%;
         x-background: url("images/box-bg-w740.png") no-repeat top left;
-        border-collapse: separate;
-        border-spacing: 0px; /* Keep cells together */
+        x-border-collapse: collapse;
+        border-spacing: 0px;
         empty-cells: show;
     }
     .box table.data a { color: #6ABE01; text-decoration: none; }
-    .box table th { font-weight: bold; }
+    .box table th { font-weight: bold; background-color: #E3E3E3; }
     .box table th,
     .box table td {
             text-align: left;
-            vertical-align: top;
-            padding: 0.4ex 0.1ex 0.2ex 0.2ex;
+            padding: 0px 0.1ex 0px 0.2ex;
             margin: 0;
-            border: none;
-    }
-    .box table.data th {
-            border-bottom: 2px solid black;
     }
     .box table.data td {
-            border-bottom: 1px solid silver;
+            x-background: url("images/box-bg-w740.png") no-repeat bottom left;
+    }
+    .box table.data td,
+    .box table.data th {
+            border-width: 2px;
+            border-style: groove;
+            border-color: white;
     }
     .box.stav table th,
     .box.stav table td {
-            padding: 0.4ex 1ex 0.3ex 2ex;
+            padding: 0.2ex 1ex 0.2ex 2ex;
     }
 
     .box table tr.header th { text-align: left; padding-top: 0.3ex; }
 
-    /** Public releases are bold. */
     .releases table.data tr.public th,
     .releases table.data tr.public td { font-weight: bold; }
     .releases table.data tr.internal th,

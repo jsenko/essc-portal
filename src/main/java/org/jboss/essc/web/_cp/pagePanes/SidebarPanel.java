@@ -42,7 +42,7 @@ public class SidebarPanel extends Panel {
         this.setRenderBodyOnly( true );
         
         // User box
-        add( new UserMenuBox("userBox") );
+        add( new UserMenuBox("userBox").setVisibilityAllowed( false ) );
         
         // Administration
         add( new WebMarkupContainer("adminBox")
