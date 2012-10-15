@@ -229,7 +229,8 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .fakeLink { color: blue; text-decoration: underline; }
     .box .traits span.fakeLink span {
         font-size: 90%;
-        display: block; max-width: 560px; overflow: hidden;  /* Don't allow long links to break to leak. */
+        display: inline-block;
+        max-width: 560px; overflow: hidden;  /* Don't allow long links to break to leak. */
     }  
     .box .traits table td { vertical-align: top; }
     .box .traits table td.name { white-space: nowrap; }

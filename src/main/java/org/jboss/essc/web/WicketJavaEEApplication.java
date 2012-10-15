@@ -95,12 +95,16 @@ public class WicketJavaEEApplication extends WebApplication {
     }// init()
     
     
+    /**
+     *  Initialize resources. Mostly registers images as shared resources.
+     */
     void initResources(){
         ResourceReference ref1 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddProduct.png");
-        ResourceReference ref2 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddProduct.png");
         ResourceReference ref3 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddResource.png");
         getSharedResources().add("btn.AddProduct", ref1.getResource() );
         getSharedResources().add("btn.AddResource", ref3.getResource() );
+        
+        getSharedResources().add("ico.ExternalLink", new PackageResourceReference( BaseLayoutPage.class, "images/ico/ExternalLink.png").getResource() );
         
         IPackageResourceGuard guard = 
         new IPackageResourceGuard() {

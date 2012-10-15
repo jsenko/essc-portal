@@ -2,13 +2,17 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.Release;
 
@@ -50,6 +54,14 @@ class ReleaseTraitRowPanel extends Panel {
         super(id, relModel);
         this.relModel = relModel;
         
+        // Go link
+        this.add( new AjaxLink("goLink") {
+                @Override public void onClick( AjaxRequestTarget target ) {
+                }
+            }.add( new Image("goIcon", new SharedResourceReference("ico.ExternalLink") ) )
+        );
+        
+        // AjaxEditableLabel. TODO: Make my own, better.
         PropertyModel<String> traitModel = new PropertyModel( relModel.getObject().getTraits(), prop);
         this.add( rp.new MyAjaxEditableLabel("link", traitModel) );
         

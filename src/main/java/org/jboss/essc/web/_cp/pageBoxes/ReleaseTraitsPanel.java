@@ -130,6 +130,8 @@ public class ReleaseTraitsPanel extends Panel {
     
     /**
      *  Adds the feedback panel to AJAX target.
+     *  
+     *  TODO: Make standalone class. Pass the ReleaseTraitsPanel ref to the constructor.
      */
     public class MyAjaxEditableLabel extends AjaxEditableLabel<String>{
 
