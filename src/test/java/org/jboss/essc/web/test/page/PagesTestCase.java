@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Ondrej Zizka
  */
 public class PagesTestCase {
-    
+    /*
     @Test
     public void testBaseLayoutPage(){
         WicketTester wt = new WicketTester(BaseLayoutPage.class);
@@ -39,5 +39,5 @@ public class PagesTestCase {
         wt.startPage( new AboutPage() );
         wt.assertRenderedPage(AboutPage.class);
     }
-
+*/
 }// class
