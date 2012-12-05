@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,17 +17,18 @@ import org.jboss.essc.web.model.JiraVersion;
 
 @Stateless
 public class JiraDaoBean
-{	
+{
+    // delay between database (cache) updates
 	private final long delay = 1000 * 10;// * 60 * 60 * 24;
 	
 	@PersistenceContext
 	private EntityManager em;
 	
 	
-	private final ObjectMapper mapper;
+	private ObjectMapper mapper;
 	
-	
-	public JiraDaoBean()
+	@PostConstruct
+	public void init()
 	{
 		mapper = new ObjectMapper();
 		mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -84,18 +86,40 @@ public class JiraDaoBean
 		
 		return p;
 	}
+	
+	
+	/**
+	 * Get list of ids of versions of the specified project that are marked as released
+	 * @param key key of the project
+	 * @return list of ids or null when there are no versions or an error occured
+	 */
+	public List<Long> getReleasedIds(String key)
+	{
+	    JiraProject p = getProject(key);
+	    if(p == null) return null;
+	    @SuppressWarnings("unchecked")
+        List<Long> ids = em.createQuery("select v.jiraId from JiraVersion v where v.project = :project and v.released = true")
+	        .setParameter("project", p)
+	        .getResultList();
+	    
+	    return ids;
+	}
 
 	
-	
-	public List<String> getVersionStrings(String key)
+	/**
+	 * Get list of version names for the given project.
+	 * @param key
+	 * @return list of version strings or null on failure
+	 */
+	public List<String> getVersionNames(String key)
 	{
 		JiraProject p = getProject(key);
 		if(p == null) return null;
-		List<String> strings = new ArrayList<String>();
-		for(JiraVersion v: p.getVersions())
-		{
-			strings.add(v.getName());
-		}
-		return strings;
+        @SuppressWarnings("unchecked")
+        List<String> versionNames = em.createQuery("select v.name from JiraVersion v where v.project = :project")
+            .setParameter("project", p)
+            .getResultList();
+        
+        return versionNames;
 	}
 }
