@@ -25,17 +25,6 @@ public class HomePage extends BaseLayoutPage {
     
     @Inject JiraDaoBean jdb;
     public HomePage() {
-
-    	//* for testing, TODO remove
-    	add(new Label("debug", new Model<String>()
-    	{
-    		@Override
-    		public String getObject()
-    		{
-    			return "" + jdb.getProject("AS7") + " " + jdb.getReleasedIds("AS7");
-    		}
-    	}));
-    	//*/
     
         add( new AboutSmallBox("aboutBox") );
         

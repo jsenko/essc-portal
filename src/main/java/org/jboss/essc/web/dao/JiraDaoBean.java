@@ -19,7 +19,7 @@ import org.jboss.essc.web.model.JiraVersion;
 public class JiraDaoBean
 {
     // delay between database (cache) updates
-	private final long delay = 1000 * 10;// * 60 * 60 * 24;
+	private final long delay = 1000 * 10 * 60 * 60 * 24; // a day
 	
 	@PersistenceContext
 	private EntityManager em;
